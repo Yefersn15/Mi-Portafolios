@@ -423,7 +423,7 @@ const Proyectos = () => {
                 Desarrollada con HTML, CSS, JavaScript y almacenamiento local (localStorage).
                 Incluye módulos de autenticación, gestión de usuarios, editoriales, autores, categorías y préstamos.
               </p>
-              <a href="/" className="btn primary" target="_blank" rel="noopener noreferrer">
+              <a href="https://yefersonmoreno-miportafoliotecnico.vercel.app/Biblioteca%20Digital%20Local/index.html" className="btn primary" target="_blank" rel="noopener noreferrer">
                 Ver proyecto →
               </a>
             </div>
