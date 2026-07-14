@@ -79,7 +79,7 @@ const proyectosSena = [
   }
 ];
 
-const mediaTecnicaBaseUrl = 'https://yefersn15.github.io/Mi-Portafolios-Tecnico/';
+const mediaTecnicaBaseUrl = 'https://yefersonmoreno-miportafoliotecnico.vercel.app/';
 
 const buildMediaTecnicaHref = (ruta) => `${mediaTecnicaBaseUrl}${encodeURI(ruta)}`;
 
