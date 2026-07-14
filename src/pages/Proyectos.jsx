@@ -28,16 +28,11 @@ const proyectosSena = [
   },
   { titulo: 'Proyecto Three', enlace: 'https://github.com/Yefersn15/Proyecto_Three', tag: 'Frontend' },
   {
-    titulo: 'Flutter consumo',
-    enlace: 'https://github.com/Yefersn15/Flutter_consumo',
-    tag: 'Flutter',
-    branches: [
-      { label: 'Main', enlace: 'https://github.com/Yefersn15/Flutter_consumo' },
-      { label: 'Actividad', enlace: 'https://github.com/Yefersn15/Flutter_consumo/tree/master/Actividad_Flutter' },
-      { label: 'mi-api', enlace: 'https://github.com/Yefersn15/Flutter_consumo/tree/master/mi-api' }
-    ]
+    titulo: 'Proyecto Five',
+    enlace: 'https://github.com/Yefersn15/Proyecto_Five',
+    demo: 'https://yefersn15.github.io/Proyecto_Five/',
+    tag: 'React · Vite'
   },
-  { titulo: 'Proyecto Four', enlace: 'https://github.com/Yefersn15/Proyecto_Four', tag: 'Proyecto' },
   {
     titulo: 'Proyecto Six',
     enlace: 'https://github.com/Yefersn15/Proyecto_Six',
@@ -63,8 +58,19 @@ const proyectosSena = [
       { label: 'Taller 3', enlace: 'https://github.com/Yefersn15/.Net/tree/main/taller_3' }
     ]
   },
-  { titulo: 'Parking Lot', enlace: 'https://github.com/Yefersn15/Parking_Lot', tag: 'C# · Aplicación' },
+  { titulo: 'Proyecto One', enlace: 'https://github.com/Yefersn15/Proyect_One', tag: 'React' },
+  { titulo: 'Proyecto Two Vite', enlace: 'https://github.com/Yefersn15/proyecto_two_vite', tag: 'React · Vite' },
+  {
+    titulo: 'Parking Lot',
+    enlace: 'https://github.com/Yefersn15/Parking_Lot',
+    demo: 'https://yefersn15.github.io/Parking_Lot/',
+    tag: 'React · Vite'
+  },
+  { titulo: 'Registro Login Perfil', enlace: 'https://github.com/Yefersn15/RegistorLoginPerfil', tag: 'Node · Django · React' },
+  { titulo: 'Biblioteca Digital', enlace: 'https://github.com/Yefersn15/Biblioteca_Digital', tag: 'Django · Python' },
+  { titulo: 'Parking Terminal', enlace: 'https://github.com/Yefersn15/Parking_Terminal', tag: 'Node.js' },
   { titulo: 'Streamlit App', enlace: 'https://github.com/Yefersn15/mi_app_streamlit', tag: 'Python · Streamlit' },
+  { titulo: 'Práctica Objetos', enlace: 'https://github.com/Yefersn15/Practica_objetos', tag: 'JavaScript · POO' },
   {
     titulo: 'Repaso JS',
     enlace: 'https://github.com/Yefersn15/repaso-js',
@@ -76,6 +82,23 @@ const proyectosSena = [
       { label: 'Arrow', enlace: 'https://github.com/Yefersn15/repaso-js/tree/main/Funciones_Arrows' },
       { label: 'Promesas', enlace: 'https://github.com/Yefersn15/repaso-js/tree/main/Promesas' }
     ]
+  },
+  {
+    titulo: 'Landing Equipo 1',
+    enlace: 'https://github.com/Yefersn15/landing-equipo1/',
+    demo: 'https://yefersn15.github.io/landing-equipo1/',
+    tag: 'HTML · CSS'
+  },
+  {
+    titulo: 'Proyecto Django',
+    enlace: 'https://github.com/Yefersn15/ProyectoDJango',
+    tag: 'Django · Python'
+  },
+  {
+    titulo: 'Mi Página con CSS',
+    enlace: 'https://github.com/Yefersn15/Mi-Pagna-con-CSS',
+    demo: 'https://yefersn15.github.io/Mi-Pagna-con-CSS/',
+    tag: 'HTML · CSS'
   }
 ];
 
