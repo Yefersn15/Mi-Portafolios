@@ -26,7 +26,7 @@ const Contact = () => {
             <span className="social-label">LinkedIn</span>
           </a>
 
-          <a href="../public/cv/hoja-de-vidaV2.pdf" target="_blank" rel="noopener noreferrer" className="social-card">
+          <a href="/cv/hoja-de-vidaV2.pdf" target="_blank" rel="noopener noreferrer" className="social-card">
             <span className="social-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M7 3h7l4 4v14H7z" />
