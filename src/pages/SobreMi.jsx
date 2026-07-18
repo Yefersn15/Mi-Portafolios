@@ -19,7 +19,10 @@ const SobreMi = () => {
                 <strong>Soy Yeferson Andres Moreno Granda</strong>, actualmente curso una Tecnología en Análisis y Desarrollo de Software. Originalmente quería estudiar Programación de videojuegos/Multimedia, pero terminé en Desarrollo de Software, que era lo más parecido a lo que buscaba: programar.
               </p>
               <p className="reveal">
-                Empecé aprendiendo poco a poco, haciendo pequeñas actividades de repaso que no se veían muy atractivas pero que me ayudaron a construir las bases de lo que quería estudiar. Mi primer proyecto grande fue una página para una biblioteca, que aunque no logré terminar del todo, me sirvió como base para desarrollar proyectos más complejos después.
+                Empecé aprendiendo poco a poco, haciendo pequeñas actividades de repaso que me ayudaron a construir las bases de lo que quería estudiar. Mi primer proyecto grande fue una página para una biblioteca, que aunque no logré terminar del todo, me sirvió como base para desarrollar proyectos más complejos después.
+              </p>
+              <p className="reveal">
+                Hoy me interesa crear productos web claros, funcionales y bien pensados, desde la interfaz hasta la lógica de negocio y la base de datos. He trabajado con HTML, CSS, JavaScript, React, Node.js, Express, Django, C#/.NET y bases de datos como PostgreSQL, MongoDB y SQLite.
               </p>
               <p style={{ color: 'var(--text)', fontWeight: 500, marginBottom: 4 }} className="reveal">
                 Stack
@@ -29,8 +32,12 @@ const SobreMi = () => {
                 <span className="tag">CSS</span>
                 <span className="tag">JavaScript</span>
                 <span className="tag">React</span>
+                <span className="tag">Vite</span>
                 <span className="tag">Node.js</span>
+                <span className="tag">Express</span>
                 <span className="tag">PostgreSQL</span>
+                <span className="tag">MongoDB</span>
+                <span className="tag">Django</span>
               </div>
             </div>
           </div>
@@ -49,7 +56,7 @@ const SobreMi = () => {
               <div>
                 <h3>SENA — Tecnología en Análisis y Desarrollo de Software</h3>
                 <p>
-                  Aprendí a programar con lenguajes más modernos, a trabajar con bases de datos, conectar y desplegar proyectos en la web, además de desarrollar aplicaciones móviles y generar APKs. Mi proyecto más importante fue SISGEM, una página de venta web pensada como híbrido entre tienda online y cajero de PC, construida desde cero a partir de lo aprendido con el proyecto de la biblioteca. Logré completar cerca del 90% de su contenido antes de pasarme a otro equipo con el proyecto EncomiExpress, donde aprendí a usar herramientas de trabajo colaborativo.
+                  Aprendí a programar con lenguajes más modernos, a trabajar con bases de datos, conectar y desplegar proyectos en la web, además de desarrollar aplicaciones móviles y generar APKs. Mi proyecto más importante fue SISGEM, una plataforma web pensada como híbrido entre tienda online y cajero de PC, construida desde cero a partir de lo aprendido con el proyecto de la biblioteca. También trabajé en EncomiExpress, donde aprendí a usar herramientas de trabajo colaborativo y a organizarme mejor con equipos.
                 </p>
               </div>
             </div>
@@ -58,7 +65,7 @@ const SobreMi = () => {
               <div>
                 <h3>I.E. Kennedy — Técnica en Desarrollo de Software</h3>
                 <p>
-                  Mis primeros pasos en programación, aprendiendo a usar Visual Studio Code y construyendo actividades pequeñas como práctica. Aquí desarrollé mi primer proyecto grande: una página para una biblioteca.
+                  Mis primeros pasos en programación, aprendiendo a usar Visual Studio Code y construyendo actividades pequeñas como práctica. Aquí desarrollé mi primer proyecto grande: una página para una biblioteca, que me ayudó a entender mejor la estructura, el diseño y la organización de un proyecto web.
                 </p>
               </div>
             </div>
