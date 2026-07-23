@@ -962,3 +962,50 @@ a.email:hover {
 .featured-branches {
   margin-top: 16px;
 }
+
+/* ===== Ejercicios (talleres) ===== */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.ex-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  transition: background .25s, transform .2s;
+}
+
+.ex-card:hover {
+  background: var(--surface-1, var(--surface-2));
+  transform: translateY(-3px);
+}
+
+.ex-card a {
+  text-decoration: none;
+  display: block;
+}
+
+.ex-card .ex-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.ex-card .ex-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  display: block;
+}
+
+.ex-card .ex-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+}

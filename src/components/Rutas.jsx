@@ -3,6 +3,8 @@ import Home from '../pages/Home';
 import SobreMi from '../pages/SobreMi';
 import Proyectos from '../pages/Proyectos';
 import Contacto from '../pages/Contact';
+import BaseDatosHtml from '../pages/talleres/BaseDatosHtml';
+import TallerEvaluativo from '../pages/talleres/TallerEvaluativo';
 
 function Rutas() {
   return (
@@ -12,6 +14,8 @@ function Rutas() {
       <Route path="sobre-mi" element={<SobreMi />} />
       <Route path="proyectos" element={<Proyectos />} />
       <Route path="contacto" element={<Contacto />} />
+      <Route path="talleres/base-datos-html" element={<BaseDatosHtml />} />
+      <Route path="talleres/taller-evaluativo" element={<TallerEvaluativo />} />
     </Routes>
   );
 }
