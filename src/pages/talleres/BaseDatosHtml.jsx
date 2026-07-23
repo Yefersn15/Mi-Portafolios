@@ -2,7 +2,7 @@ import React from 'react';
 
 // Los ejercicios individuales siguen siendo HTML estático servido desde /public/MediaTecnica
 const BASE = `${import.meta.env.BASE_URL}MediaTecnica/`;
-const href = (rel) => `${BASE}${encodeURI(`Base De Datos HTML/${rel}`)}`;
+const href = (rel) => `${BASE}${encodeURI(`Base_DatosHTML/${rel}`)}`;
 
 const secciones = [
   {
