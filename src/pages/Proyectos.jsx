@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const proyectosSena = [
   {
@@ -142,12 +143,12 @@ const proyectosMediaTecnica = [
     ]
   },
   { titulo: 'Evaluación maquetación', tag: 'CSS', enlace: buildMediaTecnicaHref('Evaluacion_maquetacion/Evaluacion.html') },
-  { titulo: 'Taller evaluativo HTML', tag: 'HTML', enlace: '/talleres/taller-evaluativo' },
+  { titulo: 'Taller evaluativo HTML', tag: 'HTML', enlace: '/talleres/taller-evaluativo', interno: true },
   { titulo: 'Práctica de Frames', tag: 'Frames', enlace: buildMediaTecnicaHref('HTML/Frame.html') },
   { titulo: 'Índice de Frames', tag: 'Frames', enlace: buildMediaTecnicaHref('Frames/Index_Frames.html') },
-  { titulo: 'Evaluación de estilos CSS', tag: 'HTML/CSS', enlace: '/talleres/evaluacion-style' },
+  { titulo: 'Evaluación de estilos CSS', tag: 'HTML/CSS', enlace: '/talleres/evaluacion-style', interno: true },
   { titulo: 'Biblioteca Digital Local', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('BibliotecaDigitaLocal/index.html') },
-  { titulo: 'Base de Datos HTML', tag: 'HTML', enlace: '/talleres/base-datos-html' },
+  { titulo: 'Base de Datos HTML', tag: 'HTML', enlace: '/talleres/base-datos-html', interno: true },
   { titulo: 'Prototipo página', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Prototipo_Pagina/Prototipo.html') },
   { titulo: 'TransMarimba', tag: 'HTML', enlace: buildMediaTecnicaHref('Transmarimba/transmarimba-protopagina.html') },
   { titulo: 'Lista desplegable', tag: 'HTML', enlace: buildMediaTecnicaHref('Listas/Lista desplegable.html') },
@@ -174,6 +175,7 @@ const getProjectHref = (proyecto) => {
 
 const ProjectCard = ({ proyecto }) => {
   const href = getProjectHref(proyecto);
+  const esInterno = Boolean(proyecto.interno);
   const branches = Array.isArray(proyecto.branches) ? proyecto.branches.filter(Boolean) : [];
   const hasBranches = branches.length > 1;
   const hasDemo = Boolean(proyecto.demo);
@@ -199,7 +201,15 @@ const ProjectCard = ({ proyecto }) => {
   if (hasBranches || hasDemo) {
     return (
       <div className="project-card branchable" role="group" aria-label={`${proyecto.titulo} opciones`}>
-        {clickableMain && href ? (
+        {clickableMain && href && esInterno && !mainBranch ? (
+          <Link
+            className="card-main card-main-link"
+            to={href}
+            aria-label={proyecto.titulo}
+          >
+            {cardContent}
+          </Link>
+        ) : clickableMain && href ? (
           <a
             className="card-main card-main-link"
             href={mainBranch ? mainBranch.enlace : href}
@@ -241,6 +251,14 @@ const ProjectCard = ({ proyecto }) => {
       <div className="project-card disabled" role="img" aria-label={`${proyecto.titulo} (enlace pendiente)`}>
         {cardContent}
       </div>
+    );
+  }
+
+  if (esInterno) {
+    return (
+      <Link className="project-card" to={href}>
+        {cardContent}
+      </Link>
     );
   }
 
