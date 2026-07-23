@@ -122,7 +122,15 @@ const mediaTecnicaPathMap = {
   'Evaluacion style/INDEX_EVSTYLE.html': 'Evaluacion_Style/INDEX_EVSTYLE.html',
   'Biblioteca Digital Local/index.html': 'BibliotecaDigitaLocal/index.html',
   'Prototipo De Pagina/Prototipo.html': 'Prototipo_Pagina/Prototipo.html',
-  'Tienda Deportiva/INDEX1.HTML': 'Tienda_Deportiva/INDEX1.HTML'
+  'Tienda Deportiva/INDEX1.HTML': 'Tienda_Deportiva/INDEX1.HTML',
+  'Listas/Lista desplegable.html': 'Listas/ListaDesplegable.html',
+  'Listas/Lista Despegable De Estudiantes.html': 'Listas/ListaDesplegable_Estudiantes.html',
+  'Base De Datos HTML/Propuestas/5.1ejercicio.html': 'Base_DatosHTML/Propuestas/5.1ejercicio.html',
+  'Base De Datos HTML/Propuestas/cultura.html': 'Base_DatosHTML/Propuestas/cultura.html',
+  'Base De Datos HTML/Propuestas/deportes.html': 'Base_DatosHTML/Propuestas/deportes.html',
+  'Base De Datos HTML/Propuestas/Ejercicio 2.html': 'Base_DatosHTML/Propuestas/Ejercicio 2.html',
+  'Base De Datos HTML/Propuestas/Promociones.html': 'Base_DatosHTML/Propuestas/Promociones.html',
+  'Base De Datos HTML/Propuestas/comentarios.html': 'Base_DatosHTML/Propuestas/comentarios.html'
 };
 
 const buildMediaTecnicaHref = (ruta) => {
