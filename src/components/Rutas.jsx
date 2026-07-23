@@ -5,6 +5,7 @@ import Proyectos from '../pages/Proyectos';
 import Contacto from '../pages/Contact';
 import BaseDatosHtml from '../pages/talleres/BaseDatosHtml';
 import TallerEvaluativo from '../pages/talleres/TallerEvaluativo';
+import EvaluacionStyle from '../pages/talleres/EvaluacionStyle';
 
 function Rutas() {
   return (
@@ -16,6 +17,7 @@ function Rutas() {
       <Route path="contacto" element={<Contacto />} />
       <Route path="talleres/base-datos-html" element={<BaseDatosHtml />} />
       <Route path="talleres/taller-evaluativo" element={<TallerEvaluativo />} />
+     <Route path="talleres/evaluacion-style" element={<EvaluacionStyle />} />
     </Routes>
   );
 }

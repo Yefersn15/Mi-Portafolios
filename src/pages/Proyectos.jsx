@@ -145,7 +145,7 @@ const proyectosMediaTecnica = [
   { titulo: 'Taller evaluativo HTML', tag: 'HTML', enlace: '/talleres/taller-evaluativo' },
   { titulo: 'Práctica de Frames', tag: 'Frames', enlace: buildMediaTecnicaHref('HTML/Frame.html') },
   { titulo: 'Índice de Frames', tag: 'Frames', enlace: buildMediaTecnicaHref('Frames/Index_Frames.html') },
-  { titulo: 'Evaluación de estilos CSS', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Evaluacion_Style/INDEX_EVSTYLE.html') },
+  { titulo: 'Evaluación de estilos CSS', tag: 'HTML/CSS', enlace: '/talleres/evaluacion-style' },
   { titulo: 'Biblioteca Digital Local', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('BibliotecaDigitaLocal/index.html') },
   { titulo: 'Base de Datos HTML', tag: 'HTML', enlace: '/talleres/base-datos-html' },
   { titulo: 'Prototipo página', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Prototipo_Pagina/Prototipo.html') },
