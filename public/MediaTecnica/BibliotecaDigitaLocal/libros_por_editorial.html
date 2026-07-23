@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libros por Editorial</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .book {
+            width: 200px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .book:hover {
+            transform: scale(1.05);
+        }
+
+        .book img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            padding: 10px 20px;
+            margin: 0;
+        }
+
+        .breadcrumb a {
+            color: #3377FF;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Libros por Editorial</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="index.html">Inicio</a>
+                        <a href="mostrar_libros.html">Libros</a>
+                        <a href="mostrar_categorias.html">Categorías</a>
+                        <a href="mostrar_autores.html">Autores</a>
+                        <a href="mostrar_editoriales.html">Editoriales</a>
+                        <a href="perfil.html">Mi cuenta</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="mostrar_libros.html">Libros</a></li>
+                <li class="breadcrumb-item"><a href="mostrar_editoriales.html">Editoriales</a></li>
+                <li class="breadcrumb-item active" id="editorialNombre">Editorial</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div id="bookGallery" class="gallery"></div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy. Todos los derechos reservados.</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = 'index.html'; }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const editorialId = parseInt(urlParams.get('id'));
+
+        function cargarLibrosPorEditorial() {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+            const editorial = editoriales.find(e => e.id === editorialId);
+            if (editorial) {
+                document.getElementById('editorialNombre').textContent = editorial.nombre;
+            } else {
+                document.getElementById('editorialNombre').textContent = 'Editorial no encontrada';
+            }
+
+            let librosFiltrados = libros.filter(lib => lib.editorialId === editorialId);
+
+            const gallery = document.getElementById('bookGallery');
+            gallery.innerHTML = '';
+
+            if (librosFiltrados.length === 0) {
+                gallery.innerHTML = '<p style="text-align:center; width:100%;">No hay libros de esta editorial.</p>';
+                return;
+            }
+
+            librosFiltrados.forEach(libro => {
+                const bookDiv = document.createElement('div');
+                bookDiv.className = 'book';
+                bookDiv.innerHTML = `
+                    <img src="${libro.portada || 'img/perfil.png'}" alt="${libro.titulo_libro}">
+                    <h3>${libro.titulo_libro}</h3>
+                    <p>${libro.autor_primario || 'Autor desconocido'}</p>
+                `;
+                bookDiv.onclick = () => {
+                    Swal.fire({
+                        title: libro.titulo_libro,
+                        html: `
+                            <p><strong>Autor:</strong> ${libro.autor_primario || 'Desconocido'}</p>
+                            <p><strong>Género:</strong> ${libro.genero || 'No especificado'}</p>
+                            <p><strong>Editorial:</strong> ${editorial ? editorial.nombre : 'No especificada'}</p>
+                            <p><strong>Descripción:</strong> ${libro.descrpcion_libro || 'Sin descripción'}</p>
+                            <p><strong>Ejemplares disponibles:</strong> ${libro.ejemplares}</p>
+                        `,
+                        imageUrl: libro.portada || 'img/perfil.png',
+                        imageWidth: 200,
+                        imageAlt: libro.titulo_libro,
+                        confirmButtonText: 'Cerrar'
+                    });
+                };
+                gallery.appendChild(bookDiv);
+            });
+        }
+
+        function cerrarSesion() {
+            sessionStorage.removeItem('usuario_actual');
+            window.location.href = 'index.html';
+        }
+
+        cargarLibrosPorEditorial();
+    </script>
+
+</body>
+
+</html>

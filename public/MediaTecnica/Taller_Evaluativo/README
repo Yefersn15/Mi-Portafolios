@@ -1,0 +1,140 @@
+<<<<<<< HEAD
+# 📚 Ejercicios Básicos de HTML
+
+Esta carpeta contiene una colección de ejercicios prácticos de **HTML** que cubren desde la estructura básica hasta formularios con validación JavaScript. Cada archivo es autocontenido y muestra un concepto diferente.
+
+---
+
+## 📁 Archivos incluidos
+
+| Archivo               | Descripción |
+|-----------------------|-------------|
+| **Index1.html**       | Listas ordenadas (`<ol>`) con frutas y verduras (ejemplo básico). |
+| **Index2.html**       | Encabezados desde `<h1>` hasta `<h6>`. |
+| **Index3.html**       | Enlaces internos y anclas (`<a name>`), y enlaces a Index1 e Index2. |
+| **Index4.html**       | Imágenes como enlaces (thumbnail) a Index1 e Index2. |
+| **index5.html**       | Formulario con campos (nombre, edad, fecha, género, selección de color) y validación con JavaScript (alerta condicional). |
+| **404 Not Found.html**| Página de error 404 simulada (plantilla simple). |
+
+---
+
+## 🎯 ¿Qué aprendí en cada ejercicio?
+
+### 1. Index1.html – Listas ordenadas
+- Uso de `<ol>` para crear listas numeradas.
+- Inserción de elementos `<li>` con contenido.
+- Práctica de anidación de encabezados dentro de listas (aunque no es semántico, se usa con fines educativos).
+
+### 2. Index2.html – Jerarquía de encabezados
+- Uso de todos los niveles de encabezado (`<h1>` a `<h6>`).
+- Entendimiento de la importancia visual y semántica de cada nivel.
+
+### 3. Index3.html – Enlaces y anclas internas
+- Creación de enlaces a otras páginas locales (`<a href="Index1.html">`).
+- Uso de anclas con el atributo `name` para saltar a secciones dentro de la misma página.
+- Organización de un índice de contenidos.
+
+### 4. Index4.html – Imágenes como enlaces
+- Uso de la etiqueta `<img>` dentro de un enlace (`<a>`).
+- Control de tamaño de imagen con `width`.
+- Centrado de contenido con `<center>` (aunque obsoleto, se usa como práctica histórica).
+
+### 5. index5.html – Formulario con validación JavaScript
+- Creación de un formulario con diferentes tipos de input: texto, número, fecha, select, y campo oculto para "otros" géneros.
+- Uso de eventos `change` para mostrar/ocultar campos condicionalmente.
+- Función JavaScript que evalúa edad y género para mostrar un mensaje personalizado (simula una concesionaria de autos Kia).
+- Práctica de manipulación del DOM y validación básica.
+
+### 6. 404 Not Found.html – Página de error
+- Estructura de una página de error HTTP 404.
+- Uso de metadatos y título informativo.
+
+---
+
+## 🚀 Cómo usar
+
+1. Abre `INDEX_EVALUATIVO.html` en tu navegador para ver el listado completo.
+2. Haz clic en cualquier tarjeta para abrir el ejercicio correspondiente en una nueva pestaña.
+3. Explora el código fuente de cada archivo para ver cómo se implementan los conceptos.
+
+---
+
+## 🧪 Tecnologías
+
+- HTML5 (estructura y semántica)
+- CSS3 (estilos básicos en algunos ejercicios)
+- JavaScript (en el ejercicio 5 para validación)
+
+---
+
+=======
+# 📚 Ejercicios Básicos de HTML
+
+Esta carpeta contiene una colección de ejercicios prácticos de **HTML** que cubren desde la estructura básica hasta formularios con validación JavaScript. Cada archivo es autocontenido y muestra un concepto diferente.
+
+---
+
+## 📁 Archivos incluidos
+
+| Archivo               | Descripción |
+|-----------------------|-------------|
+| **Index1.html**       | Listas ordenadas (`<ol>`) con frutas y verduras (ejemplo básico). |
+| **Index2.html**       | Encabezados desde `<h1>` hasta `<h6>`. |
+| **Index3.html**       | Enlaces internos y anclas (`<a name>`), y enlaces a Index1 e Index2. |
+| **Index4.html**       | Imágenes como enlaces (thumbnail) a Index1 e Index2. |
+| **index5.html**       | Formulario con campos (nombre, edad, fecha, género, selección de color) y validación con JavaScript (alerta condicional). |
+| **404 Not Found.html**| Página de error 404 simulada (plantilla simple). |
+
+---
+
+## 🎯 ¿Qué aprendí en cada ejercicio?
+
+### 1. Index1.html – Listas ordenadas
+- Uso de `<ol>` para crear listas numeradas.
+- Inserción de elementos `<li>` con contenido.
+- Práctica de anidación de encabezados dentro de listas (aunque no es semántico, se usa con fines educativos).
+
+### 2. Index2.html – Jerarquía de encabezados
+- Uso de todos los niveles de encabezado (`<h1>` a `<h6>`).
+- Entendimiento de la importancia visual y semántica de cada nivel.
+
+### 3. Index3.html – Enlaces y anclas internas
+- Creación de enlaces a otras páginas locales (`<a href="Index1.html">`).
+- Uso de anclas con el atributo `name` para saltar a secciones dentro de la misma página.
+- Organización de un índice de contenidos.
+
+### 4. Index4.html – Imágenes como enlaces
+- Uso de la etiqueta `<img>` dentro de un enlace (`<a>`).
+- Control de tamaño de imagen con `width`.
+- Centrado de contenido con `<center>` (aunque obsoleto, se usa como práctica histórica).
+
+### 5. index5.html – Formulario con validación JavaScript
+- Creación de un formulario con diferentes tipos de input: texto, número, fecha, select, y campo oculto para "otros" géneros.
+- Uso de eventos `change` para mostrar/ocultar campos condicionalmente.
+- Función JavaScript que evalúa edad y género para mostrar un mensaje personalizado (simula una concesionaria de autos Kia).
+- Práctica de manipulación del DOM y validación básica.
+
+### 6. 404 Not Found.html – Página de error
+- Estructura de una página de error HTTP 404.
+- Uso de metadatos y título informativo.
+
+---
+
+## 🚀 Cómo usar
+
+1. Abre `INDEX_EVALUATIVO.html` en tu navegador para ver el listado completo.
+2. Haz clic en cualquier tarjeta para abrir el ejercicio correspondiente en una nueva pestaña.
+3. Explora el código fuente de cada archivo para ver cómo se implementan los conceptos.
+
+---
+
+## 🧪 Tecnologías
+
+- HTML5 (estructura y semántica)
+- CSS3 (estilos básicos en algunos ejercicios)
+- JavaScript (en el ejercicio 5 para validación)
+
+---
+
+>>>>>>> ede6029599d2f5409989a42b7f2fa58e66e92a67
+*Creado como parte del aprendizaje de fundamentos de HTML, enlaces, imágenes y formularios interactivos.*

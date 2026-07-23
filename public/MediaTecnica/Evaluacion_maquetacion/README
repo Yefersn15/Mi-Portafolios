@@ -1,0 +1,67 @@
+# Evaluación de Maquetación
+
+Este archivo HTML (`index.html`) es una **maqueta básica** de una página web, creada como ejercicio de evaluación para practicar la estructuración de layouts con **HTML5 y CSS3**.
+
+## Descripción
+
+La página simula la distribución de un sitio web típico, con las siguientes secciones:
+
+- **Header** (amarillo): contiene un logotipo (gris) y un banner (rojo).
+- **Nav** (azul): barra de navegación.
+- **Main** (verde): área principal dividida en dos columnas laterales (`aside`):
+  - Izquierda (púrpura)
+  - Derecha (celeste)
+- **Footer** (naranja): pie de página.
+
+Cada bloque tiene un color de fondo distintivo para facilitar la identificación visual de las áreas.
+
+## Tecnologías
+
+- **HTML5** – estructura semántica.
+- **CSS3** – estilos (anchos fijos, flotantes, colores).
+
+## Cómo usar
+
+1. Guarda el código en un archivo `index.html`.
+2. Ábrelo directamente en tu navegador web.
+3. Verás la maqueta con los colores y dimensiones definidas.
+
+## Estructura del layout
+
+```
++--------------------------------------------------+
+| HEADER (750x200, yellow)                          |
+| +--------+  +----------------------------------+  |
+| | Logo   |  | Banner                           |  |
+| | 250x200|  | 500x200 (red)                    |  |
+| | (grey) |  |                                  |  |
+| +--------+  +----------------------------------+  |
++--------------------------------------------------+
+| NAV (750x30, blue)                                |
++--------------------------------------------------+
+| MAIN (750x440, green)                             |
+| +------------------+  +------------------------+  |
+| | Left (375x440)   |  | Right (375x440)        |  |
+| | (purple)         |  | (lightblue)            |  |
+| +------------------+  +------------------------+  |
++--------------------------------------------------+
+| FOOTER (750x30, orange)                           |
++--------------------------------------------------+
+```
+
+## Notas
+
+- El diseño usa **float** para posicionar los elementos, lo cual es una técnica clásica de CSS.
+- Las dimensiones son fijas (750px de ancho), adecuadas para prácticas de maquetación.
+- Es un punto de partida para agregar contenido real y estilos más avanzados.
+
+## Posibles mejoras
+
+- Sustituir `float` por **Flexbox** o **CSS Grid** para un diseño más moderno y responsivo.
+- Agregar etiquetas semánticas HTML5 (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`).
+- Incluir contenido textual e imágenes reales.
+- Hacer la página **responsiva** con media queries.
+
+---
+
+*Ejercicio de evaluación – Maquetación básica con HTML y CSS.*  

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca - Mostrar Libros</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .search-container {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .search-container input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: #444;
+        }
+
+        .gallery-container {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .gallery-container select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .book {
+            width: 200px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .book:hover {
+            transform: scale(1.05);
+        }
+
+        .book img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        /* Modal de detalle */
+        .modal-detalle {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-detalle-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .modal-detalle-content .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-detalle-content .close:hover {
+            color: #000;
+        }
+
+        .modal-detalle-content .modal-left {
+            flex: 1;
+            min-width: 250px;
+            padding-right: 20px;
+        }
+
+        .modal-detalle-content .modal-right {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .modal-detalle-content .modal-right img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .loan-button,
+        .rate-button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .loan-button:hover,
+        .rate-button:hover {
+            background-color: #444;
+        }
+
+        .edit-button {
+            padding: 10px;
+            border: none;
+            background-color: #ff9900;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .edit-button:hover {
+            background-color: #e68a00;
+        }
+
+        /* Estilos para selects dentro de SweetAlert2 */
+        .swal2-container .swal2-html-container select[multiple] {
+            height: auto;
+            min-height: 80px;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Libros de la Biblioteca Escolar</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="index.html">Inicio</a>
+                        <a href="#" onclick="buscarLibros()">Buscar libros</a>
+                        <a href="mostrar_categorias.html">Categorías</a>
+                        <a href="mostrar_autores.html">Autores</a>
+                        <a href="mostrar_editoriales.html">Editoriales</a>
+                        <a href="perfil.html">Mi cuenta</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Buscar libros por título o autor...">
+        <button onclick="searchBooks()">Buscar</button>
+    </div>
+
+    <div class="gallery-container">
+        <label for="sortBooks">Ordenar por:</label>
+        <select id="sortBooks" onchange="sortBooks()">
+            <option value="titulo_libro">Título</option>
+            <option value="autor_primario">Autor</option>
+            <option value="editorial">Editorial</option>
+        </select>
+    </div>
+
+    <div id="bookGallery" class="gallery"></div>
+
+    <!-- Modal de detalle -->
+    <div id="modalDetalle" class="modal-detalle">
+        <div class="modal-detalle-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <div class="modal-left">
+                <h2 id="modalTitle"></h2>
+                <p><strong>Autores:</strong> <span id="modalAutores"></span></p>
+                <p><strong>Categorías:</strong> <span id="modalCategorias"></span></p>
+                <p><strong>Editorial:</strong> <span id="modalEditorial"></span></p>
+                <p><strong>Género:</strong> <span id="modalGenero"></span></p>
+                <p><strong>Descripción:</strong> <span id="modalDescripcion"></span></p>
+                <p><strong>Ejemplares disponibles:</strong> <span id="modalCopies"></span></p>
+                <button class="loan-button" onclick="showLoanForm()">Solicitar préstamo</button>
+                <button class="edit-button" id="editButton" onclick="editBook()" style="display: none;">Editar
+                    libro</button>
+                <button class="rate-button" id="rateButton" onclick="rateBook()" style="display: none;">Calificar
+                    libro</button>
+            </div>
+            <div class="modal-right">
+                <img id="modalImage" src="" alt="Portada del libro">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy. Todos los derechos reservados.</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script>
+        // ============================================================
+        // 1. SEGURIDAD: Usuario logueado
+        // ============================================================
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) {
+            window.location.href = 'index.html';
+        }
+        const userRole = usuarioActual.tipo || 'estudiante';
+        let currentBookId = null;
+
+        // ============================================================
+        // 2. FUNCIONES PARA OBTENER OPCIONES DE SELECTS
+        // ============================================================
+        function obtenerOpcionesAutores(selectedIds = []) {
+            const autores = JSON.parse(localStorage.getItem('autores')) || [];
+            let options = '';
+            autores.forEach(a => {
+                const sel = selectedIds.includes(a.id_autor) ? 'selected' : '';
+                options += `<option value="${a.id_autor}" ${sel}>${a.nombre}</option>`;
+            });
+            return options;
+        }
+
+        function obtenerOpcionesCategorias(selectedIds = []) {
+            const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            let options = '';
+            categorias.forEach(c => {
+                const sel = selectedIds.includes(c.id) ? 'selected' : '';
+                options += `<option value="${c.id}" ${sel}>${c.nombre}</option>`;
+            });
+            return options;
+        }
+
+        function obtenerOpcionesEditoriales(selectedId = null) {
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+            let options = '<option value="">Seleccione editorial</option>';
+            editoriales.forEach(e => {
+                const sel = (selectedId && e.id === selectedId) ? 'selected' : '';
+                options += `<option value="${e.id}" ${sel}>${e.nombre}</option>`;
+            });
+            return options;
+        }
+
+        // ============================================================
+        // 3. CARGAR Y MOSTRAR LIBROS EN GALERÍA
+        // ============================================================
+        function cargarLibros(filtro = '') {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const autores = JSON.parse(localStorage.getItem('autores')) || [];
+            const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+
+            let librosFiltrados = libros;
+            if (filtro) {
+                const f = filtro.toLowerCase();
+                librosFiltrados = libros.filter(lib =>
+                    lib.titulo_libro.toLowerCase().includes(f) ||
+                    (lib.autores || []).some(id => {
+                        const a = autores.find(aut => aut.id_autor === id);
+                        return a && a.nombre.toLowerCase().includes(f);
+                    })
+                );
+            }
+
+            const gallery = document.getElementById('bookGallery');
+            gallery.innerHTML = '';
+            if (librosFiltrados.length === 0) {
+                gallery.innerHTML = '<p style="text-align:center; width:100%;">No se encontraron libros.</p>';
+                return;
+            }
+
+            librosFiltrados.forEach(libro => {
+                const editorial = editoriales.find(e => e.id === libro.editorialId);
+                const editorialNombre = editorial ? editorial.nombre : 'Sin editorial';
+                const nombresAutores = (libro.autores || []).map(id => {
+                    const a = autores.find(aut => aut.id_autor === id);
+                    return a ? a.nombre : 'Desconocido';
+                }).join(', ');
+                const nombresCategorias = (libro.categorias || []).map(id => {
+                    const c = categorias.find(cat => cat.id === id);
+                    return c ? c.nombre : 'Sin categoría';
+                }).join(', ');
+
+                const bookDiv = document.createElement('div');
+                bookDiv.className = 'book';
+                bookDiv.setAttribute('data-id', libro.id_libro);
+                bookDiv.setAttribute('data-titulo_libro', libro.titulo_libro);
+                bookDiv.setAttribute('data-autor_primario', nombresAutores);
+                bookDiv.setAttribute('data-editorial', editorialNombre);
+                bookDiv.setAttribute('data-ejemplares', libro.ejemplares);
+                bookDiv.innerHTML = `
+                    <img src="${libro.portada || 'img/perfil.png'}" alt="${libro.titulo_libro}">
+                    <h3>${libro.titulo_libro}</h3>
+                    <p>${nombresAutores || 'Sin autor'}</p>
+                    <p><small>${editorialNombre}</small></p>
+                `;
+                bookDiv.onclick = () => verDetalle(libro.id_libro);
+                gallery.appendChild(bookDiv);
+            });
+        }
+
+        // ============================================================
+        // 4. DETALLE DEL LIBRO (MODAL INFORMATIVO)
+        // ============================================================
+        function verDetalle(id) {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const libro = libros.find(l => l.id_libro === id);
+            if (!libro) return;
+            currentBookId = id;
+
+            const autores = JSON.parse(localStorage.getItem('autores')) || [];
+            const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+
+            const nombresAutores = (libro.autores || []).map(id => {
+                const a = autores.find(aut => aut.id_autor === id);
+                return a ? a.nombre : 'Desconocido';
+            }).join(', ');
+            const nombresCategorias = (libro.categorias || []).map(id => {
+                const c = categorias.find(cat => cat.id === id);
+                return c ? c.nombre : 'Sin categoría';
+            }).join(', ');
+            const editorial = editoriales.find(e => e.id === libro.editorialId);
+            const editorialNombre = editorial ? editorial.nombre : 'Sin editorial';
+
+            document.getElementById('modalTitle').textContent = libro.titulo_libro;
+            document.getElementById('modalAutores').textContent = nombresAutores || 'Sin autor';
+            document.getElementById('modalCategorias').textContent = nombresCategorias || 'Sin categoría';
+            document.getElementById('modalEditorial').textContent = editorialNombre;
+            document.getElementById('modalGenero').textContent = libro.genero || 'No especificado';
+            document.getElementById('modalDescripcion').textContent = libro.descrpcion_libro || 'Sin descripción';
+            document.getElementById('modalCopies').textContent = libro.ejemplares;
+            document.getElementById('modalImage').src = libro.portada || 'img/perfil.png';
+
+            // Mostrar botones según rol
+            const editBtn = document.getElementById('editButton');
+            const rateBtn = document.getElementById('rateButton');
+            if (userRole === 'Bibliotecario/ria' || userRole === 'Directivo') {
+                editBtn.style.display = 'block';
+                rateBtn.style.display = 'none';
+            } else {
+                editBtn.style.display = 'none';
+                rateBtn.style.display = 'block';
+            }
+
+            document.getElementById('modalDetalle').style.display = 'block';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalDetalle').style.display = 'none';
+        }
+        window.onclick = function (event) {
+            if (event.target === document.getElementById('modalDetalle')) cerrarModal();
+        }
+
+        // ============================================================
+        // 5. BÚSQUEDA Y ORDENAMIENTO
+        // ============================================================
+        function searchBooks() {
+            const input = document.getElementById('searchInput').value.trim();
+            cargarLibros(input);
+        }
+
+        function sortBooks() {
+            const sortOption = document.getElementById('sortBooks').value;
+            const gallery = document.getElementById('bookGallery');
+            const books = Array.from(gallery.getElementsByClassName('book'));
+            books.sort((a, b) => {
+                const aVal = a.getAttribute(`data-${sortOption}`)?.toLowerCase() || '';
+                const bVal = b.getAttribute(`data-${sortOption}`)?.toLowerCase() || '';
+                return aVal.localeCompare(bVal);
+            });
+            gallery.innerHTML = '';
+            books.forEach(book => gallery.appendChild(book));
+        }
+
+        // ============================================================
+        // 6. FUNCIONES DE ACCIÓN (PRÉSTAMO, CALIFICACIÓN, EDICIÓN)
+        // ============================================================
+
+        // 6.1 Solicitar préstamo (sin cambios)
+        function showLoanForm() {
+            const title = document.getElementById('modalTitle').textContent;
+            Swal.fire({
+                title: `Agendar Préstamo para "${title}"`,
+                html: `<form id="loanForm">
+                    <label>Nombre: <input type="text" id="nombre" required></label><br>
+                    <label>Apellido: <input type="text" id="apellido" required></label><br>
+                    <label>ID / DNI: <input type="text" id="dni" required></label><br>
+                    <label>Email: <input type="email" id="email" required></label><br>
+                    <label>Libro: <input type="text" id="libro" value="${title}" readonly></label>
+                </form>`,
+                focusConfirm: false,
+                preConfirm: () => {
+                    const nombre = document.getElementById('nombre').value;
+                    const apellido = document.getElementById('apellido').value;
+                    const dni = document.getElementById('dni').value;
+                    const email = document.getElementById('email').value;
+                    if (!nombre || !apellido || !dni || !email) {
+                        Swal.showValidationMessage('Por favor completa todos los campos');
+                        return false;
+                    }
+                    const prestamos = JSON.parse(localStorage.getItem('prestamos')) || [];
+                    prestamos.push({
+                        id_prestamo: prestamos.length + 1,
+                        id_estudiante: dni,
+                        id_usuario: usuarioActual.Id || dni,
+                        id_libro: currentBookId,
+                        fechaprestamo: new Date().toISOString().slice(0, 10),
+                        fechadevolucion: '',
+                        ejemplares: 1,
+                        observacionprestamo: `Solicitado por ${nombre} ${apellido}`
+                    });
+                    localStorage.setItem('prestamos', JSON.stringify(prestamos));
+                    const libros = JSON.parse(localStorage.getItem('libros'));
+                    const idx = libros.findIndex(l => l.id_libro === currentBookId);
+                    if (idx !== -1 && libros[idx].ejemplares > 0) {
+                        libros[idx].ejemplares--;
+                        localStorage.setItem('libros', JSON.stringify(libros));
+                        document.getElementById('modalCopies').textContent = libros[idx].ejemplares;
+                        cargarLibros(document.getElementById('searchInput').value.trim());
+                    }
+                    Swal.fire({ icon: 'success', title: 'Solicitud enviada', text: 'Tu solicitud de préstamo ha sido registrada.' });
+                }
+            });
+        }
+
+        // 6.2 Calificar libro (sin cambios)
+        function rateBook() {
+            Swal.fire({
+                title: 'Calificar Libro',
+                html: `
+                    <label>Calificación (1-5): <input type="number" id="rating" min="1" max="5" required></label><br>
+                    <label>Comentarios: <textarea id="comments" required></textarea></label>
+                `,
+                preConfirm: () => {
+                    const rating = parseInt(document.getElementById('rating').value);
+                    const comments = document.getElementById('comments').value;
+                    if (isNaN(rating) || rating < 1 || rating > 5 || !comments) {
+                        Swal.showValidationMessage('Ingresa una calificación y comentario.');
+                        return false;
+                    }
+                    const calif = JSON.parse(localStorage.getItem('calificaciones')) || [];
+                    calif.push({
+                        id_libro: currentBookId,
+                        usuario: usuarioActual.Email || usuarioActual.Id,
+                        rating,
+                        comments,
+                        fecha: new Date().toISOString()
+                    });
+                    localStorage.setItem('calificaciones', JSON.stringify(calif));
+                    Swal.fire({ icon: 'success', title: 'Calificación enviada' });
+                }
+            });
+        }
+
+        // 6.3 EDITAR LIBRO (AHORA CON SELECTS DINÁMICOS)
+        function editBook() {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const libro = libros.find(l => l.id_libro === currentBookId);
+            if (!libro) return;
+
+            // Obtener IDs actuales
+            const autoresSeleccionados = libro.autores || [];
+            const categoriasSeleccionadas = libro.categorias || [];
+            const editorialSeleccionada = libro.editorialId || null;
+
+            Swal.fire({
+                title: 'Editar Libro',
+                html: `
+                    <input id="editTitulo" class="swal2-input" value="${libro.titulo_libro}" placeholder="Título *" required>
+                    <label style="display:block; text-align:left; padding-left:20px;">Autores (Ctrl+clic para múltiple)</label>
+                    <select id="editAutores" class="swal2-input" multiple style="height:100px;">
+                        ${obtenerOpcionesAutores(autoresSeleccionados)}
+                    </select>
+                    <label style="display:block; text-align:left; padding-left:20px;">Categorías (Ctrl+clic para múltiple)</label>
+                    <select id="editCategorias" class="swal2-input" multiple style="height:100px;">
+                        ${obtenerOpcionesCategorias(categoriasSeleccionadas)}
+                    </select>
+                    <label style="display:block; text-align:left; padding-left:20px;">Editorial</label>
+                    <select id="editEditorial" class="swal2-input">
+                        ${obtenerOpcionesEditoriales(editorialSeleccionada)}
+                    </select>
+                    <input id="editGenero" class="swal2-input" value="${libro.genero || ''}" placeholder="Género">
+                    <textarea id="editDescripcion" class="swal2-textarea" placeholder="Descripción">${libro.descrpcion_libro || ''}</textarea>
+                    <input id="editEjemplares" class="swal2-input" value="${libro.ejemplares}" type="number" placeholder="Ejemplares *" required>
+                    <input id="editPortada" class="swal2-input" value="${libro.portada || ''}" placeholder="URL de la portada">
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: () => {
+                    const titulo = document.getElementById('editTitulo').value.trim();
+                    const autoresSelect = document.getElementById('editAutores');
+                    const categoriasSelect = document.getElementById('editCategorias');
+                    const editorial = document.getElementById('editEditorial').value;
+                    const genero = document.getElementById('editGenero').value.trim();
+                    const descripcion = document.getElementById('editDescripcion').value.trim();
+                    const ejemplares = parseInt(document.getElementById('editEjemplares').value);
+                    const portada = document.getElementById('editPortada').value.trim();
+
+                    const autoresIds = Array.from(autoresSelect.selectedOptions).map(opt => parseInt(opt.value));
+                    const categoriasIds = Array.from(categoriasSelect.selectedOptions).map(opt => parseInt(opt.value));
+
+                    if (!titulo || isNaN(ejemplares) || ejemplares < 0) {
+                        Swal.showValidationMessage('Título y ejemplares (número >=0) son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        titulo_libro: titulo,
+                        autores: autoresIds,
+                        categorias: categoriasIds,
+                        editorialId: parseInt(editorial) || null,
+                        genero: genero,
+                        descrpcion_libro: descripcion,
+                        ejemplares: ejemplares,
+                        portada: portada
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = libros.findIndex(l => l.id_libro === currentBookId);
+                    if (idx !== -1) {
+                        const data = result.value;
+                        libros[idx].titulo_libro = data.titulo_libro;
+                        libros[idx].autores = data.autores;
+                        libros[idx].categorias = data.categorias;
+                        libros[idx].editorialId = data.editorialId;
+                        libros[idx].genero = data.genero;
+                        libros[idx].descrpcion_libro = data.descrpcion_libro;
+                        libros[idx].ejemplares = data.ejemplares;
+                        libros[idx].portada = data.portada;
+
+                        localStorage.setItem('libros', JSON.stringify(libros));
+
+                        // Refrescar vista
+                        cargarLibros(document.getElementById('searchInput').value.trim());
+                        cerrarModal();
+                        Swal.fire('Actualizado', 'El libro se ha actualizado correctamente.', 'success');
+                    }
+                }
+            });
+        }
+
+        // ============================================================
+        // 7. CERRAR SESIÓN
+        // ============================================================
+        function cerrarSesion() {
+            sessionStorage.removeItem('usuario_actual');
+            window.location.href = 'index.html';
+        }
+
+        // ============================================================
+        // 8. INICIALIZAR
+        // ============================================================
+        cargarLibros();
+    </script>
+
+</body>
+
+</html>

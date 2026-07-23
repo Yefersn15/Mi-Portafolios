@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Libros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .sidebar {
+            background-color: #222;
+            min-height: 100vh;
+            padding: 20px;
+            color: #ccc;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3377FF;
+            color: #fff;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .contenedor {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .input__text {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn__nuevo {
+            background-color: #007bff;
+        }
+
+        .btn__update {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn__delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn__ver {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-primary {
+            background-color: #3377FF;
+            border-color: #3377FF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        select[multiple] {
+            height: auto;
+            min-height: 80px;
+        }
+
+        .portada-thumb {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .portada-thumb:hover {
+            opacity: 0.7;
+        }
+
+        .modal-detalle {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-detalle-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .modal-detalle-content .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-detalle-content .close:hover {
+            color: #000;
+        }
+
+        .modal-detalle-content .modal-left {
+            flex: 1;
+            min-width: 250px;
+            padding-right: 20px;
+        }
+
+        .modal-detalle-content .modal-right {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .modal-detalle-content .modal-right img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Biblioteca Admin</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="../index.html">Inicio</a>
+                        <a href="../mostrar_libros.html">Ver Biblioteca</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="../perfil.html">Mi perfil</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h6 class="text-uppercase text-muted mb-3">Menú Admin</h6>
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="libros.html" class="active"><i class="fas fa-book"></i> Libros</a>
+                <a href="autores.html"><i class="fas fa-user-edit"></i> Autores</a>
+                <a href="categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+                <a href="editoriales.html"><i class="fas fa-building"></i> Editoriales</a>
+                <a href="prestamos.html"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+                <a href="devoluciones.html"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+                <a href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a>
+                <hr class="bg-secondary">
+                <a href="../mostrar_libros.html"><i class="fas fa-eye"></i> Ver Biblioteca</a>
+            </div>
+
+            <div class="col-md-10 main-content">
+                <div class="contenedor">
+                    <h1>Gestión de Libros</h1>
+                    <form class="formulario" method="post" onsubmit="return buscarLibro()">
+                        <input type="text" name="buscar" id="buscar" placeholder="Buscar por ID, título, autor..."
+                            class="input__text">
+                        <input type="submit" class="btn" value="Buscar">
+                        <a href="#" class="btn btn__nuevo" onclick="mostrarFormularioAgregar()">Nuevo</a>
+                        <a href="dashboard.html" class="btn btn__nuevo">Volver</a>
+                    </form>
+                    <div id="tablaLibros"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de detalle -->
+    <div id="modalDetalle" class="modal-detalle">
+        <div class="modal-detalle-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <div class="modal-left">
+                <h2 id="detalleTitulo"></h2>
+                <p><strong>Autores:</strong> <span id="detalleAutores"></span></p>
+                <p><strong>Categorías:</strong> <span id="detalleCategorias"></span></p>
+                <p><strong>Editorial:</strong> <span id="detalleEditorial"></span></p>
+                <p><strong>Género:</strong> <span id="detalleGenero"></span></p>
+                <p><strong>Descripción:</strong> <span id="detalleDescripcion"></span></p>
+                <p><strong>Ejemplares disponibles:</strong> <span id="detalleEjemplares"></span></p>
+            </div>
+            <div class="modal-right">
+                <img id="detallePortada" src="" alt="Portada">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy — Panel de Administración</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = '../index.html'; }
+        if (usuarioActual.tipo !== 'Bibliotecario/ria' && usuarioActual.tipo !== 'Directivo') {
+            Swal.fire({ icon: 'error', title: 'Acceso denegado' }).then(() => { window.location.href = '../mostrar_libros.html'; });
+        }
+
+        function cerrarSesion() { sessionStorage.removeItem('usuario_actual'); window.location.href = '../index.html'; }
+
+        function obtenerRutaImagen(ruta) {
+            if (!ruta) return '';
+            if (ruta.startsWith('http://') || ruta.startsWith('https://') || ruta.startsWith('data:') || ruta.startsWith('../')) {
+                return ruta;
+            }
+            if (ruta.startsWith('img/')) {
+                return '../' + ruta;
+            }
+            return '../' + ruta;
+        }
+
+        function obtenerOpcionesEditoriales(selectedId = null) {
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+            let options = '<option value="">Seleccione editorial</option>';
+            editoriales.forEach(e => {
+                const sel = (selectedId && e.id === selectedId) ? 'selected' : '';
+                options += `<option value="${e.id}" ${sel}>${e.nombre}</option>`;
+            });
+            return options;
+        }
+
+        function obtenerOpcionesAutores(selectedIds = []) {
+            const autores = JSON.parse(localStorage.getItem('autores')) || [];
+            let options = '';
+            autores.forEach(a => {
+                const sel = selectedIds.includes(a.id_autor) ? 'selected' : '';
+                options += `<option value="${a.id_autor}" ${sel}>${a.nombre}</option>`;
+            });
+            return options;
+        }
+
+        function obtenerOpcionesCategorias(selectedIds = []) {
+            const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            let options = '';
+            categorias.forEach(c => {
+                const sel = selectedIds.includes(c.id) ? 'selected' : '';
+                options += `<option value="${c.id}" ${sel}>${c.nombre}</option>`;
+            });
+            return options;
+        }
+
+        function cargarLibros(filtro = '') {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const autores = JSON.parse(localStorage.getItem('autores')) || [];
+            const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+
+            let lista = libros;
+            if (filtro) {
+                const f = filtro.toLowerCase();
+                lista = lista.filter(l =>
+                    l.id_libro.toString().includes(f) ||
+                    l.titulo_libro.toLowerCase().includes(f) ||
+                    (l.autores || []).some(id => {
+                        const a = autores.find(aut => aut.id_autor === id);
+                        return a && a.nombre.toLowerCase().includes(f);
+                    })
+                );
+            }
+
+            let html = `<table>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autores</th>
+                <th>Categorías</th>
+                <th>Editorial</th>
+                <th>Portada</th>
+                <th>Ejemplares</th>
+                <th>Acciones</th>
+            </tr>`;
+            if (lista.length === 0) html += '<tr><td colspan="8" class="text-center">No hay libros</td></tr>';
+            else {
+                lista.forEach(l => {
+                    const nombresAutores = (l.autores || []).map(id => {
+                        const a = autores.find(aut => aut.id_autor === id);
+                        return a ? a.nombre : 'Desconocido';
+                    }).join(', ');
+                    const nombresCategorias = (l.categorias || []).map(id => {
+                        const c = categorias.find(cat => cat.id === id);
+                        return c ? c.nombre : 'Sin categoría';
+                    }).join(', ');
+                    const editorial = editoriales.find(e => e.id === l.editorialId);
+                    const editorialNombre = editorial ? editorial.nombre : 'Sin editorial';
+                    const portadaSrc = l.portada ? obtenerRutaImagen(l.portada) : '';
+                    const portadaHtml = portadaSrc ? `<img src="${portadaSrc}" alt="Portada" class="portada-thumb" onclick="verDetalle(${l.id_libro})">` : 'Sin portada';
+                    html += `<tr>
+                    <td>${l.id_libro}</td>
+                    <td>${l.titulo_libro}</td>
+                    <td>${nombresAutores || 'Sin autor'}</td>
+                    <td>${nombresCategorias || 'Sin categoría'}</td>
+                    <td>${editorialNombre}</td>
+                    <td>${portadaHtml}</td>
+                    <td>${l.ejemplares}</td>
+                    <td>
+                        <a href="#" class="btn__update" onclick="editarLibro(${l.id_libro})">Editar</a>
+                        <a href="#" class="btn__delete" onclick="eliminarLibro(${l.id_libro})">Eliminar</a>
+                        <a href="#" class="btn__ver" onclick="verDetalle(${l.id_libro})">Ver</a>
+                    </td>
+                </tr>`;
+                });
+            }
+            html += '</table>';
+            document.getElementById('tablaLibros').innerHTML = html;
+        }
+
+        function buscarLibro() { const f = document.getElementById('buscar').value.trim(); cargarLibros(f); return false; }
+
+        function verDetalle(id) {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const libro = libros.find(l => l.id_libro === id);
+            if (!libro) return;
+
+            const autores = JSON.parse(localStorage.getItem('autores')) || [];
+            const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            const editoriales = JSON.parse(localStorage.getItem('editoriales')) || [];
+
+            const nombresAutores = (libro.autores || []).map(id => {
+                const a = autores.find(aut => aut.id_autor === id);
+                return a ? a.nombre : 'Desconocido';
+            }).join(', ');
+            const nombresCategorias = (libro.categorias || []).map(id => {
+                const c = categorias.find(cat => cat.id === id);
+                return c ? c.nombre : 'Sin categoría';
+            }).join(', ');
+            const editorial = editoriales.find(e => e.id === libro.editorialId);
+            const editorialNombre = editorial ? editorial.nombre : 'Sin editorial';
+
+            document.getElementById('detalleTitulo').textContent = libro.titulo_libro;
+            document.getElementById('detalleAutores').textContent = nombresAutores || 'Sin autor';
+            document.getElementById('detalleCategorias').textContent = nombresCategorias || 'Sin categoría';
+            document.getElementById('detalleEditorial').textContent = editorialNombre;
+            document.getElementById('detalleGenero').textContent = libro.genero || 'No especificado';
+            document.getElementById('detalleDescripcion').textContent = libro.descrpcion_libro || 'Sin descripción';
+            document.getElementById('detalleEjemplares').textContent = libro.ejemplares;
+            const portadaSrc = libro.portada ? obtenerRutaImagen(libro.portada) : '';
+            document.getElementById('detallePortada').src = portadaSrc || 'https://via.placeholder.com/300x400?text=Sin+Portada';
+
+            document.getElementById('modalDetalle').style.display = 'block';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalDetalle').style.display = 'none';
+        }
+        window.onclick = function (event) {
+            if (event.target === document.getElementById('modalDetalle')) { cerrarModal(); }
+        }
+
+        function mostrarFormularioAgregar() {
+            Swal.fire({
+                title: 'Agregar Libro',
+                html: `
+                <input id="id_libro" class="swal2-input" placeholder="ID del Libro" type="number">
+                <input id="titulo_libro" class="swal2-input" placeholder="Título">
+                <label style="display:block; text-align:left; padding-left:20px;">Autores (Ctrl+clic para múltiple)</label>
+                <select id="autores" class="swal2-input" multiple style="height:100px;">
+                    ${obtenerOpcionesAutores()}
+                </select>
+                <label style="display:block; text-align:left; padding-left:20px;">Categorías (Ctrl+clic para múltiple)</label>
+                <select id="categorias" class="swal2-input" multiple style="height:100px;">
+                    ${obtenerOpcionesCategorias()}
+                </select>
+                <label style="display:block; text-align:left; padding-left:20px;">Editorial</label>
+                <select id="editorial" class="swal2-input">
+                    ${obtenerOpcionesEditoriales()}
+                </select>
+                <input id="genero" class="swal2-input" placeholder="Género">
+                <input id="portada" class="swal2-input" placeholder="URL de la portada">
+                <input id="ejemplares" class="swal2-input" placeholder="Ejemplares" type="number">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                preConfirm: () => {
+                    const id = document.getElementById('id_libro').value;
+                    const titulo = document.getElementById('titulo_libro').value;
+                    const autoresSelect = document.getElementById('autores');
+                    const categoriasSelect = document.getElementById('categorias');
+                    const editorial = document.getElementById('editorial').value;
+                    const genero = document.getElementById('genero').value;
+                    const portada = document.getElementById('portada').value;
+                    const ejemplares = document.getElementById('ejemplares').value;
+
+                    const autoresIds = Array.from(autoresSelect.selectedOptions).map(opt => parseInt(opt.value));
+                    const categoriasIds = Array.from(categoriasSelect.selectedOptions).map(opt => parseInt(opt.value));
+
+                    if (!id || !titulo || !ejemplares) {
+                        Swal.showValidationMessage('ID, Título y Ejemplares son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        id_libro: parseInt(id),
+                        titulo_libro: titulo,
+                        autores: autoresIds,
+                        categorias: categoriasIds,
+                        editorialId: parseInt(editorial) || null,
+                        genero: genero,
+                        portada: portada,
+                        ejemplares: parseInt(ejemplares)
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let libros = JSON.parse(localStorage.getItem('libros'));
+                    if (libros.some(l => l.id_libro === result.value.id_libro)) {
+                        Swal.fire('Error', 'El ID ya existe.', 'error');
+                        return;
+                    }
+                    libros.push(result.value);
+                    localStorage.setItem('libros', JSON.stringify(libros));
+                    cargarLibros();
+                    Swal.fire('Guardado', 'Libro agregado correctamente.', 'success');
+                }
+            });
+        }
+
+        function editarLibro(id) {
+            let libros = JSON.parse(localStorage.getItem('libros'));
+            const libro = libros.find(l => l.id_libro === id);
+            if (!libro) return;
+
+            const autoresIds = libro.autores || [];
+            const categoriasIds = libro.categorias || [];
+
+            Swal.fire({
+                title: 'Editar Libro',
+                html: `
+                <input id="edit_id" class="swal2-input" value="${libro.id_libro}" type="number" readonly>
+                <input id="edit_titulo" class="swal2-input" value="${libro.titulo_libro}" placeholder="Título">
+                <label style="display:block; text-align:left; padding-left:20px;">Autores (Ctrl+clic para múltiple)</label>
+                <select id="edit_autores" class="swal2-input" multiple style="height:100px;">
+                    ${obtenerOpcionesAutores(autoresIds)}
+                </select>
+                <label style="display:block; text-align:left; padding-left:20px;">Categorías (Ctrl+clic para múltiple)</label>
+                <select id="edit_categorias" class="swal2-input" multiple style="height:100px;">
+                    ${obtenerOpcionesCategorias(categoriasIds)}
+                </select>
+                <label style="display:block; text-align:left; padding-left:20px;">Editorial</label>
+                <select id="edit_editorial" class="swal2-input">
+                    ${obtenerOpcionesEditoriales(libro.editorialId)}
+                </select>
+                <input id="edit_genero" class="swal2-input" value="${libro.genero || ''}" placeholder="Género">
+                <input id="edit_portada" class="swal2-input" value="${libro.portada || ''}" placeholder="URL de la portada">
+                <input id="edit_ejemplares" class="swal2-input" value="${libro.ejemplares}" placeholder="Ejemplares" type="number">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: () => {
+                    const titulo = document.getElementById('edit_titulo').value;
+                    const autoresSelect = document.getElementById('edit_autores');
+                    const categoriasSelect = document.getElementById('edit_categorias');
+                    const editorial = document.getElementById('edit_editorial').value;
+                    const genero = document.getElementById('edit_genero').value;
+                    const portada = document.getElementById('edit_portada').value;
+                    const ejemplares = document.getElementById('edit_ejemplares').value;
+
+                    const autoresIds = Array.from(autoresSelect.selectedOptions).map(opt => parseInt(opt.value));
+                    const categoriasIds = Array.from(categoriasSelect.selectedOptions).map(opt => parseInt(opt.value));
+
+                    if (!titulo || !ejemplares) {
+                        Swal.showValidationMessage('Título y Ejemplares son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        titulo_libro: titulo,
+                        autores: autoresIds,
+                        categorias: categoriasIds,
+                        editorialId: parseInt(editorial) || null,
+                        genero: genero,
+                        portada: portada,
+                        ejemplares: parseInt(ejemplares)
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = libros.findIndex(l => l.id_libro === id);
+                    if (idx !== -1) {
+                        const data = result.value;
+                        libros[idx].titulo_libro = data.titulo_libro;
+                        libros[idx].autores = data.autores;
+                        libros[idx].categorias = data.categorias;
+                        libros[idx].editorialId = data.editorialId;
+                        libros[idx].genero = data.genero;
+                        libros[idx].portada = data.portada;
+                        libros[idx].ejemplares = data.ejemplares;
+                        localStorage.setItem('libros', JSON.stringify(libros));
+                        cargarLibros();
+                        Swal.fire('Actualizado', 'Libro actualizado.', 'success');
+                    }
+                }
+            });
+        }
+
+        function eliminarLibro(id) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let libros = JSON.parse(localStorage.getItem('libros'));
+                    libros = libros.filter(l => l.id_libro !== id);
+                    localStorage.setItem('libros', JSON.stringify(libros));
+                    cargarLibros();
+                    Swal.fire('Eliminado', 'Libro eliminado.', 'success');
+                }
+            });
+        }
+
+        cargarLibros();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Administración</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* Estilos igual que antes, no se modifican */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .sidebar {
+            background-color: #222;
+            min-height: 100vh;
+            padding: 20px;
+            color: #ccc;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3377FF;
+            color: #fff;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .stat-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card .icon {
+            font-size: 2.5rem;
+            color: #3377FF;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .stat-card .label {
+            color: #666;
+        }
+
+        .table-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .table-container h5 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-primary {
+            background-color: #3377FF;
+            border-color: #3377FF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Biblioteca Admin</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="../index.html">Inicio</a>
+                        <a href="../mostrar_libros.html">Ver Biblioteca</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="../perfil.html">Mi perfil</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h6 class="text-uppercase text-muted mb-3">Menú Admin</h6>
+                <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="libros.html"><i class="fas fa-book"></i> Libros</a>
+                <a href="autores.html"><i class="fas fa-user-edit"></i> Autores</a>
+                <a href="categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+                <a href="editoriales.html"><i class="fas fa-building"></i> Editoriales</a>
+                <a href="prestamos.html"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+                <a href="devoluciones.html"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+                <a href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a>
+                <hr class="bg-secondary">
+                <a href="../mostrar_libros.html"><i class="fas fa-eye"></i> Ver Biblioteca</a>
+            </div>
+
+            <!-- Contenido -->
+            <div class="col-md-10 main-content">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <p class="text-muted">Bienvenido, <strong id="adminName"></strong> — Resumen general del sistema.</p>
+
+                <!-- Estadísticas -->
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="icon"><i class="fas fa-book"></i></div>
+                            <div class="number" id="totalLibros">0</div>
+                            <div class="label">Libros</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="icon"><i class="fas fa-users"></i></div>
+                            <div class="number" id="totalUsuarios">0</div>
+                            <div class="label">Usuarios</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+                            <div class="number" id="totalPrestamos">0</div>
+                            <div class="label">Préstamos</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="icon"><i class="fas fa-undo-alt"></i></div>
+                            <div class="number" id="totalDevoluciones">0</div>
+                            <div class="label">Devoluciones</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad reciente -->
+                <div class="table-container">
+                    <h5><i class="fas fa-clock"></i> Actividad Reciente</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Usuario</th>
+                                    <th>Acción</th>
+                                    <th>Libro</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="actividadTable">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Cargando actividad...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Acciones rápidas -->
+                <div class="row mt-3">
+                    <div class="col-md-4 mb-2">
+                        <a href="libros.html" class="btn btn-primary btn-block"><i class="fas fa-plus"></i> Agregar
+                            Libro</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="categorias.html" class="btn btn-success btn-block"><i class="fas fa-tags"></i>
+                            Gestionar Categorías</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="autores.html" class="btn btn-info btn-block"><i class="fas fa-user-edit"></i> Gestionar
+                            Autores</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy — Panel de Administración</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = '../index.html'; }
+        if (usuarioActual.tipo !== 'Bibliotecario/ria' && usuarioActual.tipo !== 'Directivo') {
+            Swal.fire({ icon: 'error', title: 'Acceso denegado' }).then(() => { window.location.href = '../mostrar_libros.html'; });
+        }
+        document.getElementById('adminName').textContent = usuarioActual.Nombres + ' ' + usuarioActual.Apellidos;
+
+        function cargarEstadisticas() {
+            const libros = JSON.parse(localStorage.getItem('libros')) || [];
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const prestamos = JSON.parse(localStorage.getItem('prestamos')) || [];
+            const devoluciones = JSON.parse(localStorage.getItem('devoluciones')) || [];
+            document.getElementById('totalLibros').textContent = libros.length;
+            document.getElementById('totalUsuarios').textContent = usuarios.length;
+            document.getElementById('totalPrestamos').textContent = prestamos.length;
+            document.getElementById('totalDevoluciones').textContent = devoluciones.length;
+
+            const actividades = [];
+            prestamos.forEach(p => {
+                const libro = libros.find(l => l.id_libro === p.id_libro);
+                const usuario = usuarios.find(u => u.Id === p.id_estudiante);
+                actividades.push({ usuario: usuario ? usuario.Nombres + ' ' + usuario.Apellidos : p.id_estudiante, accion: 'Préstamo', libro: libro ? libro.titulo_libro : 'ID: ' + p.id_libro, fecha: p.fechaprestamo || 'N/D' });
+            });
+            devoluciones.forEach(d => {
+                actividades.push({ usuario: d.Nombres_estudiante || d.id_estudiante, accion: 'Devolución', libro: d.Titulo_libro || 'ID: ' + d.Id_libro, fecha: d.Fecha_devolucion || 'N/D' });
+            });
+            actividades.sort((a, b) => {
+                if (a.fecha === 'N/D' && b.fecha !== 'N/D') return 1;
+                if (a.fecha !== 'N/D' && b.fecha === 'N/D') return -1;
+                return b.fecha.localeCompare(a.fecha);
+            });
+            const tbody = document.getElementById('actividadTable');
+            if (actividades.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No hay actividad reciente.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = '';
+            actividades.slice(0, 10).forEach((act, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${idx + 1}</td><td>${act.usuario}</td><td><span class="badge badge-${act.accion === 'Préstamo' ? 'primary' : 'success'}">${act.accion}</span></td><td>${act.libro}</td><td>${act.fecha}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function cerrarSesion() { sessionStorage.removeItem('usuario_actual'); window.location.href = '../index.html'; }
+        cargarEstadisticas();
+    </script>
+</body>
+
+</html>

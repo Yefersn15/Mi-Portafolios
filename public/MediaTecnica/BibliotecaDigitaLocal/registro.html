@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            padding: 10px;
+            height: 100px;
+            background-color: #3377FF;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .nav {
+            width: auto;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            background-color: #0088ff;
+        }
+
+        article {
+            width: auto;
+            min-height: 570px;
+            margin-top: 120px;
+            background-color: lightblue;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            position: absolute;
+            left: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .nav a:hover {
+            background-color: #495057;
+        }
+
+        footer {
+            width: auto;
+            background-color: #3377FF;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="date"] {
+            width: calc(100% - 22px);
+        }
+
+        button[type="submit"] {
+            background-color: #3377FF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <section id="Logo">
+            <a href="index.html"><img src="img/IEKennedy.jpg" alt="Escudo La IEKennedy"
+                    style="width: 190px; height: 125px"></a>
+        </section>
+        <a href="registro.html">
+            <h1>Registro De La Biblioteca I.E.Kennedy</h1>
+        </a>
+    </header>
+    <main>
+        <article>
+            <br>
+            <label for="asunto1">Seleccione un asunto:</label><br>
+            <select name="asunto" id="asunto1" class="form-control" style="border: 2px solid #3883cc;"
+                onchange="mostrarFormulario()">
+                <option value="">Seleccionar</option>
+                <option value="profesor">Profesor</option>
+                <option value="estudiante">Estudiante</option>
+            </select>
+
+            <div id="registroProfesor" style="display: none;">
+                <h1>Registro de Profesores</h1>
+                <form id="formProfesor" onsubmit="return validarFormulario('formProfesor')">
+                    <h2>Profesores</h2>
+                    <div class="form-group">
+                        <label for="nombresProfesor">Nombres:</label><br>
+                        <input type="text" id="nombresProfesor" name="nombresProfesor"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidosProfesor">Apellidos:</label><br>
+                        <input type="text" id="apellidosProfesor" name="apellidosProfesor"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailProfesor">Email del profesor:</label><br>
+                        <input type="text" id="emailProfesor" name="emailProfesor"
+                            onblur="validarEmail('emailProfesor')" required><br>
+                        <span id="emailProfesorError" style="color: red;"></span><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="generoProfesor">Género:</label><br>
+                        <select id="generoProfesor" name="generoProfesor" required>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="cedulaProfesor">Número de cédula:</label><br>
+                        <input type="text" id="cedulaProfesor" name="cedulaProfesor"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="celularProfesor">Número de celular:</label><br>
+                        <input type="text" id="celularProfesor" name="celularProfesor"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordProfesor">Contraseña:</label><br>
+                        <input type="password" id="passwordProfesor" name="passwordProfesor" required><br><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileImageProfesor">Foto de Perfil (URL):</label><br>
+                        <input type="text" id="profileImageProfesor" name="profileImageProfesor"
+                            placeholder="URL de la foto"><br><br>
+                    </div>
+                    <button type="submit">Registrar</button>
+                </form>
+            </div>
+
+            <div id="registroEstudiante" style="display: none;">
+                <h1>Registro de Estudiantes</h1>
+                <form id="registroEstudiante" onsubmit="return validarFormulario('registroEstudiante')">
+                    <h2>Estudiantes</h2>
+                    <div class="form-group">
+                        <label for="Nombres_Estudiante">Nombres:</label><br>
+                        <input type="text" id="Nombres_Estudiante" name="Nombres_Estudiante"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Apellidos_Estudiante">Apellidos:</label><br>
+                        <input type="text" id="Apellidos_Estudiante" name="Apellidos_Estudiante"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Genero_Estudiante">Género:</label><br>
+                        <select id="Genero_Estudiante" name="Genero_Estudiante" required>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email_Estudiante">Email del estudiante:</label><br>
+                        <input type="text" id="Email_Estudiante" name="Email_Estudiante"
+                            onblur="validarEmail('Email_Estudiante')" required><br>
+                        <span id="Email_Estudiante_Error" style="color: red;"></span><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="ID_Estudiante">Número de identificación:</label><br>
+                        <input type="text" id="ID_Estudiante" name="ID_Estudiante"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Celular_Estudiante">Número de celular:</label><br>
+                        <input type="text" id="Celular_Estudiante" name="Celular_Estudiante"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Password_Estudiante">Contraseña:</label><br>
+                        <input type="password" id="Password_Estudiante" name="Password_Estudiante" required><br><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileImageEstudiante">Foto de Perfil (URL):</label><br>
+                        <input type="text" id="profileImageEstudiante" name="profileImageEstudiante"
+                            placeholder="URL de la foto"><br><br>
+                    </div>
+                    <button type="submit">Registrar</button>
+                </form>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy. Todos los derechos reservados.</p>
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/tupagina"><img src="img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/tupagina"><img src="img/twitter.png" alt="Twitter"></a></li>
+            <li><a href=""><img src="img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Inicializar datos si no existen
+        if (!localStorage.getItem('usuarios')) {
+            localStorage.setItem('usuarios', JSON.stringify([]));
+        }
+
+        function mostrarFormulario() {
+            var asunto = document.getElementById('asunto1').value;
+            document.getElementById('registroProfesor').style.display = 'none';
+            document.getElementById('registroEstudiante').style.display = 'none';
+            if (asunto === 'profesor') {
+                document.getElementById('registroProfesor').style.display = 'block';
+            } else if (asunto === 'estudiante') {
+                document.getElementById('registroEstudiante').style.display = 'block';
+            }
+        }
+
+        function validarEmail(emailId) {
+            var emailField = document.getElementById(emailId);
+            var email = emailField.value;
+            var errorSpan = document.getElementById(emailId + 'Error');
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                errorSpan.textContent = 'Por favor, ingrese un correo electrónico válido.';
+            } else {
+                errorSpan.textContent = '';
+            }
+        }
+
+        function validarFormulario(formId) {
+            var form = document.getElementById(formId);
+            var inputs = form.querySelectorAll('input[required], select[required]');
+            var isValid = true;
+
+            inputs.forEach(function (input) {
+                if (input.value.trim() === '') {
+                    isValid = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor, complete todos los campos obligatorios.',
+                    });
+                    return false;
+                }
+            });
+
+            if (isValid) {
+                // Obtener datos según el formulario
+                var tipo, Nombres, Apellidos, Genero, Email, Id, Celular, Password, Foto;
+                if (formId === 'formProfesor') {
+                    tipo = 'Profesor/a';
+                    Nombres = document.getElementById('nombresProfesor').value;
+                    Apellidos = document.getElementById('apellidosProfesor').value;
+                    Genero = document.getElementById('generoProfesor').value;
+                    Email = document.getElementById('emailProfesor').value;
+                    Id = document.getElementById('cedulaProfesor').value;
+                    Celular = document.getElementById('celularProfesor').value;
+                    Password = document.getElementById('passwordProfesor').value;
+                    Foto = document.getElementById('profileImageProfesor').value || '';
+                } else {
+                    tipo = 'Estudiante';
+                    Nombres = document.getElementById('Nombres_Estudiante').value;
+                    Apellidos = document.getElementById('Apellidos_Estudiante').value;
+                    Genero = document.getElementById('Genero_Estudiante').value;
+                    Email = document.getElementById('Email_Estudiante').value;
+                    Id = document.getElementById('ID_Estudiante').value;
+                    Celular = document.getElementById('Celular_Estudiante').value;
+                    Password = document.getElementById('Password_Estudiante').value;
+                    Foto = document.getElementById('profileImageEstudiante').value || '';
+                }
+
+                var usuarios = JSON.parse(localStorage.getItem('usuarios'));
+                if (usuarios.some(u => u.Id === Id || u.Email === Email || u.Celular === Celular)) {
+                    Swal.fire('Error', 'El ID, Email o Celular ya están en uso.', 'error');
+                    return false;
+                }
+                usuarios.push({ tipo, Nombres, Apellidos, Genero, Grado: '', Email, Id, Celular, Password, Foto });
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Formulario válido',
+                    text: 'Formulario completado correctamente. Redirigiendo...',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                }).then(() => {
+                    window.location.href = 'index.html';
+                });
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>

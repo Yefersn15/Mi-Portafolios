@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: #0088ff;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .form-control-file {
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: #3377FF;
+            border-color: #3377FF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .fixed-size-container {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">
+            <img src="https://img.icons8.com/ios/50/ffffff/home-page.png" alt="Inicio" width="30" height="30">
+            Inicio
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="Admin/libros.html">Libros</a></li>
+                <li class="nav-item"><a class="nav-link" href="Admin/autores.html">Autores</a></li>
+                <li class="nav-item"><a class="nav-link" href="Admin/categorias.html">Categorías</a></li>
+                <li class="nav-item"><a class="nav-link" href="Admin/prestamos.html">Préstamos</a></li>
+                <li class="nav-item"><a class="nav-link" href="Admin/devoluciones.html">Devoluciones</a></li>
+                <li class="nav-item"><a class="nav-link" href="usuarios.html">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container fixed-size-container">
+        <div class="profile-info">
+            <div class="profile-details">
+                <h1>Perfil de Usuario</h1>
+                <h2>Información del Perfil</h2>
+                <div>
+                    <p><strong>Nombres:</strong> <span id="profile-name"></span></p>
+                    <p><strong>ID identificación:</strong> <span id="profile-id"></span></p>
+                    <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                    <p><strong>Tipo de Perfil:</strong> <span id="profile-type"></span></p>
+                </div>
+            </div>
+            <img id="profile-image" src="img/perfil.png" alt="Imagen de perfil" class="profile-image">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Actualizar Información
+        </div>
+        <div class="card-body">
+            <form id="updateForm" onsubmit="return confirmarActualizacion()">
+                <div class="form-group">
+                    <label for="newName">Nuevo Nombre:</label>
+                    <input type="text" class="form-control" id="newName" name="newName"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="newSurname">Nuevo Apellido:</label>
+                    <input type="text" class="form-control" id="newSurname" name="newSurname"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="newEmail">Nuevo Email:</label>
+                    <input type="email" class="form-control" id="newEmail" name="newEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Nueva Contraseña:</label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Contraseña:</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Número de Teléfono:</label>
+                    <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="profileImageInput">Foto de Perfil (URL):</label>
+                    <input type="text" class="form-control" id="profileImageInput" name="profileImageInput"
+                        placeholder="URL de la imagen">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar Información</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-functions" style="display: container fixed-size-container;">
+        <h2>Funciones Administrativas</h2>
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Registrar Libro/Revista
+            </div>
+            <div class="card-body">
+                <form id="bookForm" onsubmit="return registrarLibro()">
+                    <div class="form-group">
+                        <label for="Id_libro">Id Libro:</label>
+                        <input type="number" class="form-control" id="Id_libro" name="Id_libro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Titulo_libro">Título:</label>
+                        <input type="text" class="form-control" id="Titulo_libro" name="Titulo_libro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Id_autor">Id Autor:</label>
+                        <input type="number" class="form-control" id="Id_autor" name="Id_autor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre_autor">Nombre Autor:</label>
+                        <input type="text" class="form-control" id="Nombre_autor" name="Nombre_autor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Generos_libro">Género Literario:</label>
+                        <select class="form-control" id="Generos_libro" name="Generos_libro[]" multiple required>
+                            <option value="Aventura">Aventura</option>
+                            <option value="Biografía">Biografía</option>
+                            <option value="Ciencia Ficción">Ciencia Ficción</option>
+                            <option value="Cuento">Cuento</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Ensayo">Ensayo</option>
+                            <option value="Fantasía">Fantasía</option>
+                            <option value="Ficción">Ficción</option>
+                            <option value="Historia">Historia</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Misterio">Misterio</option>
+                            <option value="Novela">Novela</option>
+                            <option value="Poesía">Poesía</option>
+                            <option value="Policíaco">Policíaco</option>
+                            <option value="Realismo Mágico">Realismo Mágico</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Sátira">Sátira</option>
+                            <option value="Suspenso">Suspenso</option>
+                            <option value="Teatro">Teatro</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Viajes">Viajes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo">Tipo:</label>
+                        <select class="form-control" id="Tipo" name="Tipo" required>
+                            <option value="Libro">Libro</option>
+                            <option value="Revista">Revista</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Descripcion_libro">Descripción:</label>
+                        <textarea class="form-control" id="Descripcion_libro" name="Descripcion_libro" rows="3"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Numero_copias">Número de Copias:</label>
+                        <input type="number" class="form-control" id="Numero_copias" name="Numero_copias" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Portada_Libro_URL">Portada (URL):</label>
+                        <input type="text" class="form-control" id="Portada_Libro_URL" name="Portada_Libro_URL"
+                            placeholder="URL de la imagen">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loan-details">
+        <h2>Detalles de Préstamos</h2>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Préstamos Actuales
+            </div>
+            <div class="card-body">
+                <div id="current-loans"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loan-messages" style="display: none;">
+        <h2>Mensajes de Préstamo</h2>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Libros Prestados
+            </div>
+            <div class="card-body">
+                <p>Aquí se mostrarán los libros prestados con sus respectivos mensajes.</p>
+                <div id="loaned-books"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // Cargar datos del usuario logueado
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) {
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('profile-name').textContent = usuarioActual.Nombres + ' ' + usuarioActual.Apellidos;
+        document.getElementById('profile-id').textContent = usuarioActual.Id;
+        document.getElementById('profile-email').textContent = usuarioActual.Email;
+        document.getElementById('profile-type').textContent = usuarioActual.tipo;
+        document.getElementById('profile-image').src = usuarioActual.Foto || 'img/perfil.png';
+
+        // Mostrar funciones administrativas si es Bibliotecario o Directivo
+        if (usuarioActual.tipo === 'Bibliotecario/ria' || usuarioActual.tipo === 'Directivo') {
+            document.getElementById('admin-functions').style.display = 'block';
+            mostrarDetallesPrestamos();
+        } else {
+            document.getElementById('loan-messages').style.display = 'block';
+            mostrarLibrosPrestados();
+        }
+
+        function cerrarSesion() {
+            sessionStorage.removeItem('usuario_actual');
+            window.location.href = 'index.html';
+        }
+
+        function confirmarActualizacion() {
+            var newName = document.getElementById('newName').value;
+            var newSurname = document.getElementById('newSurname').value;
+            var newEmail = document.getElementById('newEmail').value;
+            var newPassword = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var profileImage = document.getElementById('profileImageInput').value;
+
+            if (!/^[a-zA-Z]+$/.test(newName) || !/^[a-zA-Z]+$/.test(newSurname)) {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'El nombre y el apellido solo pueden contener letras.' });
+                return false;
+            }
+            if (newPassword !== confirmPassword) {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'Las contraseñas no coinciden.' });
+                return false;
+            }
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail|hotmail|outlook)\.com$/;
+            if (!emailPattern.test(newEmail)) {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'El correo electrónico debe ser @gmail.com, @hotmail.com o @outlook.com.' });
+                return false;
+            }
+            if (!/(?=.*[0-9])(?=.*[A-Z])(?=.*[.,-])/.test(newPassword)) {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'La contraseña debe contener al menos un número, una letra mayúscula y un símbolo (.,-).' });
+                return false;
+            }
+
+            // Actualizar en localStorage
+            var usuarios = JSON.parse(localStorage.getItem('usuarios'));
+            var idx = usuarios.findIndex(u => u.Id === usuarioActual.Id);
+            if (idx !== -1) {
+                usuarios[idx].Nombres = newName;
+                usuarios[idx].Apellidos = newSurname;
+                usuarios[idx].Email = newEmail;
+                usuarios[idx].Password = newPassword;
+                usuarios[idx].Celular = phoneNumber;
+                usuarios[idx].Foto = profileImage || usuarios[idx].Foto;
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                // Actualizar sesión
+                sessionStorage.setItem('usuario_actual', JSON.stringify(usuarios[idx]));
+                Swal.fire({ icon: 'success', title: '¡Actualización Exitosa!', text: 'Los datos del perfil han sido actualizados correctamente.' });
+                location.reload();
+            }
+            return false;
+        }
+
+        function registrarLibro() {
+            var id_libro = document.getElementById('Id_libro').value;
+            var titulo = document.getElementById('Titulo_libro').value;
+            var id_autor = document.getElementById('Id_autor').value;
+            var nombre_autor = document.getElementById('Nombre_autor').value;
+            var generos = Array.from(document.getElementById('Generos_libro').selectedOptions).map(o => o.value);
+            var tipo = document.getElementById('Tipo').value;
+            var descripcion = document.getElementById('Descripcion_libro').value;
+            var copias = document.getElementById('Numero_copias').value;
+            var portada = document.getElementById('Portada_Libro_URL').value;
+
+            if (!id_libro || !titulo || !id_autor || !nombre_autor || !descripcion || !copias || !portada) {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'Todos los campos son obligatorios.' });
+                return false;
+            }
+
+            var libros = JSON.parse(localStorage.getItem('libros'));
+            if (libros.some(l => l.id_libro == id_libro)) {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'El ID del libro ya existe.' });
+                return false;
+            }
+            var nuevoLibro = {
+                id_libro: parseInt(id_libro),
+                titulo_libro: titulo,
+                descrpcion_libro: descripcion,
+                ejemplares: parseInt(copias),
+                portada: portada,
+                generos: generos,
+                tipo: tipo
+            };
+            libros.push(nuevoLibro);
+            localStorage.setItem('libros', JSON.stringify(libros));
+
+            // Guardar también en autores
+            var autores = JSON.parse(localStorage.getItem('autores'));
+            autores.push({
+                id_autor: parseInt(id_autor),
+                id_libro: parseInt(id_libro),
+                autor_primario: nombre_autor,
+                autor_secundario: ''
+            });
+            localStorage.setItem('autores', JSON.stringify(autores));
+
+            Swal.fire({ icon: 'success', title: '¡Registro Exitoso!', text: 'El libro/revista ha sido registrado correctamente.' });
+            document.getElementById('bookForm').reset();
+            return false;
+        }
+
+        function mostrarLibrosPrestados() {
+            // Simular libros prestados
+            var loanedBooks = [
+                { title: 'Libro 1', message: 'Debe ser devuelto el 20 de julio' },
+                { title: 'Libro 2', message: 'Debe ser devuelto el 25 de julio' }
+            ];
+            var container = document.getElementById('loaned-books');
+            container.innerHTML = '';
+            loanedBooks.forEach(function (book) {
+                var p = document.createElement('p');
+                p.textContent = book.title + ': ' + book.message;
+                container.appendChild(p);
+            });
+        }
+
+        function mostrarDetallesPrestamos() {
+            var prestamos = JSON.parse(localStorage.getItem('prestamos')) || [];
+            var container = document.getElementById('current-loans');
+            container.innerHTML = '';
+            if (prestamos.length === 0) {
+                container.innerHTML = '<p>No hay préstamos activos.</p>';
+                return;
+            }
+            prestamos.forEach(function (p) {
+                var div = document.createElement('div');
+                div.textContent = 'Préstamo ID: ' + p.id_prestamo + ' - Libro: ' + p.id_libro + ' - Estudiante: ' + p.id_estudiante;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</body>
+
+</html>

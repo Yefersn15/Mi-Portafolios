@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Devoluciones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Mismo estilo que dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .sidebar {
+            background-color: #222;
+            min-height: 100vh;
+            padding: 20px;
+            color: #ccc;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3377FF;
+            color: #fff;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .contenedor {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .input__text {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn__nuevo {
+            background-color: #007bff;
+        }
+
+        .btn__update {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn__delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Biblioteca Admin</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="../index.html">Inicio</a>
+                        <a href="../mostrar_libros.html">Ver Biblioteca</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="../perfil.html">Mi perfil</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h6 class="text-uppercase text-muted mb-3">Menú Admin</h6>
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="libros.html"><i class="fas fa-book"></i> Libros</a>
+                <a href="autores.html"><i class="fas fa-user-edit"></i> Autores</a>
+                <a href="categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+                <a href="editoriales.html"><i class="fas fa-building"></i> Editoriales</a>
+                <a href="prestamos.html"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+                <a href="devoluciones.html" class="active"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+                <a href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a>
+                <hr class="bg-secondary">
+                <a href="../mostrar_libros.html"><i class="fas fa-eye"></i> Ver Biblioteca</a>
+            </div>
+
+            <div class="col-md-10 main-content">
+                <div class="contenedor">
+                    <h1>Gestión de Devoluciones</h1>
+                    <form class="formulario" method="post" onsubmit="return buscarDevolucion()">
+                        <input type="text" name="buscar" id="buscar"
+                            placeholder="Buscar por ID estudiante, nombre, libro..." class="input__text">
+                        <input type="submit" class="btn" value="Buscar">
+                        <a href="#" class="btn btn__nuevo" onclick="mostrarFormularioAgregar()">Nuevo</a>
+                        <a href="dashboard.html" class="btn btn__nuevo">Volver</a>
+                    </form>
+                    <div id="tablaDevoluciones"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy — Panel de Administración</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = '../index.html'; }
+        if (usuarioActual.tipo !== 'Bibliotecario/ria' && usuarioActual.tipo !== 'Directivo') {
+            Swal.fire({ icon: 'error', title: 'Acceso denegado' }).then(() => { window.location.href = '../mostrar_libros.html'; });
+        }
+
+        function cerrarSesion() { sessionStorage.removeItem('usuario_actual'); window.location.href = '../index.html'; }
+
+        function cargarDevoluciones(filtro = '') {
+            let devoluciones = JSON.parse(localStorage.getItem('devoluciones')) || [];
+            if (filtro) {
+                filtro = filtro.toLowerCase();
+                devoluciones = devoluciones.filter(d =>
+                    d.id_estudiante.toString().includes(filtro) ||
+                    d.Nombres_estudiante.toLowerCase().includes(filtro) ||
+                    d.Titulo_libro.toLowerCase().includes(filtro)
+                );
+            }
+            let html = `<table><tr><th>ID Estudiante</th><th>Nombre</th><th>ID Libro</th><th>Título</th><th>Fec. Préstamo</th><th>Fec. Devolución</th><th>Obs. Estudiante</th><th>Obs. Bibliotecario</th><th>Restringir</th><th>Comentario</th><th>Acciones</th></tr>`;
+            if (devoluciones.length === 0) html += `<tr><td colspan="11" class="text-center">No hay devoluciones</td></tr>`;
+            else {
+                devoluciones.forEach(d => {
+                    html += `<tr>
+                    <td>${d.id_estudiante}</td>
+                    <td>${d.Nombres_estudiante}</td>
+                    <td>${d.Id_libro}</td>
+                    <td>${d.Titulo_libro}</td>
+                    <td>${d.Fecha_prestamo}</td>
+                    <td>${d.Fecha_devolucion}</td>
+                    <td>${d.Observacion_Estudiante || ''}</td>
+                    <td>${d.Observacion_Bibliotecario || ''}</td>
+                    <td>${d.Restringir_Prestamo || 'No'}</td>
+                    <td>${d.Comentario_Restriccion || ''}</td>
+                    <td>
+                        <a href="#" class="btn__update" onclick="editarDevolucion(${d.id_estudiante})">Editar</a>
+                        <a href="#" class="btn__delete" onclick="eliminarDevolucion(${d.id_estudiante})">Eliminar</a>
+                    </td>
+                </tr>`;
+                });
+            }
+            html += '</table>';
+            document.getElementById('tablaDevoluciones').innerHTML = html;
+        }
+
+        function buscarDevolucion() { const f = document.getElementById('buscar').value.trim(); cargarDevoluciones(f); return false; }
+
+        function mostrarFormularioAgregar() {
+            const fechaPrestamoDefault = '2023-06-01';
+            const fechaDevolucionDefault = '2023-06-15';
+            Swal.fire({
+                title: 'Agregar Devolución',
+                html: `
+                <input id="id_estudiante" class="swal2-input" placeholder="ID Estudiante" type="number">
+                <input id="nombre_est" class="swal2-input" placeholder="Nombre Estudiante">
+                <input id="id_libro" class="swal2-input" placeholder="ID Libro" type="number">
+                <input id="titulo_libro" class="swal2-input" placeholder="Título Libro">
+                <input id="fecha_prestamo" class="swal2-input" placeholder="Fecha Préstamo (YYYY-MM-DD)" value="${fechaPrestamoDefault}">
+                <input id="fecha_devolucion" class="swal2-input" placeholder="Fecha Devolución (YYYY-MM-DD)" value="${fechaDevolucionDefault}">
+                <input id="obs_est" class="swal2-input" placeholder="Observación Estudiante">
+                <input id="obs_biblio" class="swal2-input" placeholder="Observación Bibliotecario">
+                <select id="restringir" class="swal2-input">
+                    <option value="No">No</option>
+                    <option value="Si">Sí</option>
+                </select>
+                <input id="comentario" class="swal2-input" placeholder="Comentario Restricción">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                preConfirm: () => {
+                    const id_est = document.getElementById('id_estudiante').value;
+                    const nombre = document.getElementById('nombre_est').value;
+                    const id_lib = document.getElementById('id_libro').value;
+                    const titulo = document.getElementById('titulo_libro').value;
+                    const f_prestamo = document.getElementById('fecha_prestamo').value;
+                    const f_devolucion = document.getElementById('fecha_devolucion').value;
+                    if (!id_est || !nombre || !id_lib || !titulo || !f_prestamo || !f_devolucion) {
+                        Swal.showValidationMessage('ID Estudiante, Nombre, ID Libro, Título y Fechas son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        id_estudiante: parseInt(id_est),
+                        Nombres_estudiante: nombre,
+                        Id_libro: parseInt(id_lib),
+                        Titulo_libro: titulo,
+                        Fecha_prestamo: f_prestamo,
+                        Fecha_devolucion: f_devolucion,
+                        Observacion_Estudiante: document.getElementById('obs_est').value || '',
+                        Observacion_Bibliotecario: document.getElementById('obs_biblio').value || '',
+                        Restringir_Prestamo: document.getElementById('restringir').value,
+                        Comentario_Restriccion: document.getElementById('comentario').value || ''
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let devoluciones = JSON.parse(localStorage.getItem('devoluciones'));
+                    if (devoluciones.some(d => d.id_estudiante === result.value.id_estudiante)) {
+                        Swal.fire('Error', 'El ID de estudiante ya tiene una devolución registrada.', 'error');
+                        return;
+                    }
+                    devoluciones.push(result.value);
+                    localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+                    cargarDevoluciones();
+                    Swal.fire('Guardado', 'Devolución registrada correctamente.', 'success');
+                }
+            });
+        }
+
+        function editarDevolucion(id) {
+            let devoluciones = JSON.parse(localStorage.getItem('devoluciones'));
+            const d = devoluciones.find(dev => dev.id_estudiante === id);
+            if (!d) return;
+            Swal.fire({
+                title: 'Editar Devolución',
+                html: `
+                <input id="edit_nombre" class="swal2-input" value="${d.Nombres_estudiante}" placeholder="Nombre">
+                <input id="edit_id_lib" class="swal2-input" value="${d.Id_libro}" type="number">
+                <input id="edit_titulo" class="swal2-input" value="${d.Titulo_libro}" placeholder="Título">
+                <input id="edit_f_prestamo" class="swal2-input" value="${d.Fecha_prestamo}" placeholder="Fecha Préstamo">
+                <input id="edit_f_devolucion" class="swal2-input" value="${d.Fecha_devolucion}" placeholder="Fecha Devolución">
+                <input id="edit_obs_est" class="swal2-input" value="${d.Observacion_Estudiante || ''}" placeholder="Obs. Estudiante">
+                <input id="edit_obs_biblio" class="swal2-input" value="${d.Observacion_Bibliotecario || ''}" placeholder="Obs. Bibliotecario">
+                <select id="edit_restringir" class="swal2-input">
+                    <option value="No" ${d.Restringir_Prestamo === 'No' ? 'selected' : ''}>No</option>
+                    <option value="Si" ${d.Restringir_Prestamo === 'Si' ? 'selected' : ''}>Sí</option>
+                </select>
+                <input id="edit_comentario" class="swal2-input" value="${d.Comentario_Restriccion || ''}" placeholder="Comentario">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: () => {
+                    const nombre = document.getElementById('edit_nombre').value;
+                    const id_lib = document.getElementById('edit_id_lib').value;
+                    const titulo = document.getElementById('edit_titulo').value;
+                    const f_prestamo = document.getElementById('edit_f_prestamo').value;
+                    const f_devolucion = document.getElementById('edit_f_devolucion').value;
+                    if (!nombre || !id_lib || !titulo || !f_prestamo || !f_devolucion) {
+                        Swal.showValidationMessage('Nombre, ID Libro, Título y Fechas son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        Nombres_estudiante: nombre,
+                        Id_libro: parseInt(id_lib),
+                        Titulo_libro: titulo,
+                        Fecha_prestamo: f_prestamo,
+                        Fecha_devolucion: f_devolucion,
+                        Observacion_Estudiante: document.getElementById('edit_obs_est').value || '',
+                        Observacion_Bibliotecario: document.getElementById('edit_obs_biblio').value || '',
+                        Restringir_Prestamo: document.getElementById('edit_restringir').value,
+                        Comentario_Restriccion: document.getElementById('edit_comentario').value || ''
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = devoluciones.findIndex(dev => dev.id_estudiante === id);
+                    if (idx !== -1) {
+                        devoluciones[idx].Nombres_estudiante = result.value.Nombres_estudiante;
+                        devoluciones[idx].Id_libro = result.value.Id_libro;
+                        devoluciones[idx].Titulo_libro = result.value.Titulo_libro;
+                        devoluciones[idx].Fecha_prestamo = result.value.Fecha_prestamo;
+                        devoluciones[idx].Fecha_devolucion = result.value.Fecha_devolucion;
+                        devoluciones[idx].Observacion_Estudiante = result.value.Observacion_Estudiante;
+                        devoluciones[idx].Observacion_Bibliotecario = result.value.Observacion_Bibliotecario;
+                        devoluciones[idx].Restringir_Prestamo = result.value.Restringir_Prestamo;
+                        devoluciones[idx].Comentario_Restriccion = result.value.Comentario_Restriccion;
+                        localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+                        cargarDevoluciones();
+                        Swal.fire('Actualizado', 'Devolución actualizada.', 'success');
+                    }
+                }
+            });
+        }
+
+        function eliminarDevolucion(id) {
+            Swal.fire({
+                title: '¿Eliminar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let devoluciones = JSON.parse(localStorage.getItem('devoluciones'));
+                    devoluciones = devoluciones.filter(d => d.id_estudiante !== id);
+                    localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+                    cargarDevoluciones();
+                    Swal.fire('Eliminado', 'Devolución eliminada.', 'success');
+                }
+            });
+        }
+
+        cargarDevoluciones();
+    </script>
+</body>
+
+</html>

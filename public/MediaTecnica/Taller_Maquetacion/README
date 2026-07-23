@@ -1,0 +1,136 @@
+<<<<<<< HEAD
+# 📐 Maquetación con CSS – Ejercicios de Layout
+
+Esta carpeta contiene **tres ejercicios de maquetación** con HTML y CSS que utilizan la técnica de `float` para distribuir bloques en una página web. Cada archivo representa un prototipo visual de una estructura de sitio, identificando las secciones principales mediante colores.
+
+---
+
+## 📁 Archivos
+
+| Archivo | Tamaño del contenedor | Distribución de bloques |
+|---------|----------------------|--------------------------|
+| **maqueta1.html** | 750 × 750 px | Cabecera (Banner 500px + Logo 250px + Login 250px en dos filas), navegación, contenido (izquierda 150px + artículo 500px + derecha 100px) y pie. |
+| **maqueta2.html** | 1000 × 800 px | Cabecera (Logo 200px + Banner 800px), navegación, contenido (artículo 700px + aside 300px) y pie. |
+| **maqueta2v2.html** | 1000 × 800 px | Misma estructura que maqueta2, pero con colores más vivos y variados. |
+
+---
+
+## 🎯 ¿Qué aprendí con estos ejercicios?
+
+1. **Maquetación con `float`**  
+   - Uso de `float: left` para colocar elementos en línea horizontal, una técnica clásica antes de Flexbox y Grid.
+   - Uso de `clear: both` en el pie de página para evitar que flote junto a los elementos anteriores (en maqueta2 y maqueta2v2).
+
+2. **Dimensiones fijas**  
+   - Definir `width` y `height` exactos para cada bloque, lo que permite un control preciso pero limita la adaptabilidad a diferentes pantallas.
+
+3. **Estructura de página típica**  
+   - Identificación de las áreas comunes de un sitio web: **cabecera** (header), **navegación** (nav), **contenido principal** (main con article y aside), y **pie de página** (footer).
+
+4. **Organización de secciones**  
+   - Uso de `<section>` con `id` para diferenciar zonas dentro del header (Banner, Logo, Login).
+   - Uso de `<aside>` para barras laterales.
+
+5. **Colores como guía visual**  
+   - Asignar colores de fondo a cada bloque permite visualizar rápidamente la disposición y el tamaño de cada área, facilitando la comprensión del layout.
+
+6. **Comparativa entre tamaños**  
+   - Maqueta1 (750px) vs Maqueta2 (1000px) muestra cómo el tamaño del contenedor afecta la distribución y el espacio disponible.
+
+---
+
+## 🧩 Diferencias clave
+
+| Aspecto | maqueta1 | maqueta2 / maqueta2v2 |
+|---------|----------|------------------------|
+| Ancho total | 750 px | 1000 px |
+| Alto total | 750 px | 800 px |
+| Cabecera | Banner (500px) + Logo (250px) + Login (250px) en dos filas | Logo (200px) + Banner (800px) en una fila |
+| Contenido | 3 columnas: izquierda (150px) + artículo (500px) + derecha (100px) | 2 columnas: artículo (700px) + aside (300px) |
+| Pie de página | Sin `clear: both` (podría solaparse) | Con `clear: both` (bien separado) |
+| Colores | Básicos (rojo, azul, verde, etc.) | Colores más llamativos (en maqueta2v2) |
+
+---
+
+## 🛠️ Tecnologías
+
+- **HTML5** – Estructura semántica con `<header>`, `<nav>`, `<main>`, `<article>`, `<aside>`, `<section>`, `<footer>`.
+- **CSS3** – Estilos con `float`, `width`, `height`, `background-color`, `clear`.
+
+---
+
+## 📝 Nota
+
+Estos ejercicios son **prototipos visuales** y no contienen contenido real (imágenes, textos o interactividad). Están pensados para practicar la distribución de bloques y entender cómo funcionaba el diseño web antes de la llegada de Flexbox y Grid. En proyectos modernos se recomienda usar estas técnicas más flexibles.
+
+---
+
+=======
+# 📐 Maquetación con CSS – Ejercicios de Layout
+
+Esta carpeta contiene **tres ejercicios de maquetación** con HTML y CSS que utilizan la técnica de `float` para distribuir bloques en una página web. Cada archivo representa un prototipo visual de una estructura de sitio, identificando las secciones principales mediante colores.
+
+---
+
+## 📁 Archivos
+
+| Archivo | Tamaño del contenedor | Distribución de bloques |
+|---------|----------------------|--------------------------|
+| **maqueta1.html** | 750 × 750 px | Cabecera (Banner 500px + Logo 250px + Login 250px en dos filas), navegación, contenido (izquierda 150px + artículo 500px + derecha 100px) y pie. |
+| **maqueta2.html** | 1000 × 800 px | Cabecera (Logo 200px + Banner 800px), navegación, contenido (artículo 700px + aside 300px) y pie. |
+| **maqueta2v2.html** | 1000 × 800 px | Misma estructura que maqueta2, pero con colores más vivos y variados. |
+
+---
+
+## 🎯 ¿Qué aprendí con estos ejercicios?
+
+1. **Maquetación con `float`**  
+   - Uso de `float: left` para colocar elementos en línea horizontal, una técnica clásica antes de Flexbox y Grid.
+   - Uso de `clear: both` en el pie de página para evitar que flote junto a los elementos anteriores (en maqueta2 y maqueta2v2).
+
+2. **Dimensiones fijas**  
+   - Definir `width` y `height` exactos para cada bloque, lo que permite un control preciso pero limita la adaptabilidad a diferentes pantallas.
+
+3. **Estructura de página típica**  
+   - Identificación de las áreas comunes de un sitio web: **cabecera** (header), **navegación** (nav), **contenido principal** (main con article y aside), y **pie de página** (footer).
+
+4. **Organización de secciones**  
+   - Uso de `<section>` con `id` para diferenciar zonas dentro del header (Banner, Logo, Login).
+   - Uso de `<aside>` para barras laterales.
+
+5. **Colores como guía visual**  
+   - Asignar colores de fondo a cada bloque permite visualizar rápidamente la disposición y el tamaño de cada área, facilitando la comprensión del layout.
+
+6. **Comparativa entre tamaños**  
+   - Maqueta1 (750px) vs Maqueta2 (1000px) muestra cómo el tamaño del contenedor afecta la distribución y el espacio disponible.
+
+---
+
+## 🧩 Diferencias clave
+
+| Aspecto | maqueta1 | maqueta2 / maqueta2v2 |
+|---------|----------|------------------------|
+| Ancho total | 750 px | 1000 px |
+| Alto total | 750 px | 800 px |
+| Cabecera | Banner (500px) + Logo (250px) + Login (250px) en dos filas | Logo (200px) + Banner (800px) en una fila |
+| Contenido | 3 columnas: izquierda (150px) + artículo (500px) + derecha (100px) | 2 columnas: artículo (700px) + aside (300px) |
+| Pie de página | Sin `clear: both` (podría solaparse) | Con `clear: both` (bien separado) |
+| Colores | Básicos (rojo, azul, verde, etc.) | Colores más llamativos (en maqueta2v2) |
+
+---
+
+## 🛠️ Tecnologías
+
+- **HTML5** – Estructura semántica con `<header>`, `<nav>`, `<main>`, `<article>`, `<aside>`, `<section>`, `<footer>`.
+- **CSS3** – Estilos con `float`, `width`, `height`, `background-color`, `clear`.
+
+---
+
+## 📝 Nota
+
+Estos ejercicios son **prototipos visuales** y no contienen contenido real (imágenes, textos o interactividad). Están pensados para practicar la distribución de bloques y entender cómo funcionaba el diseño web antes de la llegada de Flexbox y Grid. En proyectos modernos se recomienda usar estas técnicas más flexibles.
+
+---
+
+>>>>>>> ede6029599d2f5409989a42b7f2fa58e66e92a67
+*Creado como parte del aprendizaje de maquetación y estructuras de páginas web.*

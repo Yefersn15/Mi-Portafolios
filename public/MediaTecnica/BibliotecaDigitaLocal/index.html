@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frames</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .custom-popup {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .custom-title {
+            color: #333;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .custom-confirm-button {
+            background-color: #3377FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .custom-deny-button {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .custom-cancel-button {
+            background-color: #9e9e9e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .swal2-html-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .swal2-html-container input,
+        .swal2-html-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .swal2-html-container input[type="date"] {
+            width: calc(100% - 22px);
+        }
+
+        .nav-registro {
+            color: #fff;
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .nav-registro:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">
+            <img src="https://img.icons8.com/ios/50/ffffff/home-page.png" alt="Inicio" width="30" height="30">
+            Inicio
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                        href="https://www.google.com/maps/@6.2908346,-75.5818207,3a,28.6y,120.18h,75.77t/data=!3m7!1e1!3m5!1sF2wlc2FNVMmxaeUPDCGXeg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DF2wlc2FNVMmxaeUPDCGXeg%26cb_client%3Dmaps_sv.share%26w%3D900%26h%3D600%26yaw%3D120.18024020733466%26pitch%3D14.226936086306779%26thumbfov%3D90!7i13312!8i6656?coh=205410&entry=ttu">
+                        <img src="https://img.icons8.com/ios/50/ffffff/worldwide-location.png" alt="Ubicación"
+                            width="30" height="30"> Ubicación
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.iek.edu.co/contactenos.php">
+                        <img src="https://img.icons8.com/ios/50/ffffff/contact-card.png" alt="Contacto" width="30"
+                            height="30"> Contacto
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registro.html">
+                        <img src="https://img.icons8.com/ios/50/ffffff/add-user-male.png" alt="Registro" width="30"
+                            height="30"> Registro
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Iniciar Sesión</div>
+                    <div class="card-body">
+                        <form id="loginForm" onsubmit="return verificarInicioSesion()">
+                            <div class="form-group">
+                                <label for="email">Email o ID:</label>
+                                <input type="text" class="form-control" id="login" name="login" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            <div class="mt-2"><a href="recuperar.html">Recuperar contraseña</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Bienvenidos a nuestra biblioteca virtual</div>
+                    <div class="card-body">
+                        <p>Sumérgete en un mundo de conocimiento, descubrimiento y aventura literaria.</p>
+                        <hr>
+                        <p><strong>Usuarios de prueba:</strong></p>
+                        <ul>
+                            <li><strong>Juan Pérez</strong> (Estudiante) - ID: 123456 / Pass: Juan123.</li>
+                            <li><strong>María García</strong> (Estudiante) - ID: 789012 / Pass: Maria456.</li>
+                            <li><strong>Alex Rodríguez</strong> (Estudiante) - ID: 345678 / Pass: Alex789.</li>
+                            <li><strong>Admin</strong> (Bibliotecario) - ID: 999999 / Pass: Admin123.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-white text-center py-3 mt-4">
+        <p>&copy; 2024 Institución Educativa Kennedy. Todos los derechos reservados.</p>
+        <ul class="social-icons list-inline">
+            <li class="list-inline-item"><a href="https://www.facebook.com/tupagina"><img src="img/Facebook.png"
+                        alt="Facebook"></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/tupagina"><img src="img/twitter.png"
+                        alt="Twitter"></a></li>
+            <li class="list-inline-item"><a href=""><img src="img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // ============================================================
+        // 1. INICIALIZACIÓN DE DATOS QUEMADOS EN LOCALSTORAGE
+        // ============================================================
+        function inicializarDatosQuemados() {
+            // ----- USUARIOS -----
+            if (!localStorage.getItem('usuarios')) {
+                const usuarios = [
+                    { tipo: 'Estudiante', Nombres: 'Juan', Apellidos: 'Pérez', Genero: 'Masculino', Grado: '10-1', Email: 'juan@example.com', Id: '123456', Celular: '3001234567', Password: 'Juan123.', Foto: '' },
+                    { tipo: 'Estudiante', Nombres: 'María', Apellidos: 'García', Genero: 'Femenino', Grado: '11-2', Email: 'maria@example.com', Id: '789012', Celular: '3007890123', Password: 'Maria456.', Foto: '' },
+                    { tipo: 'Estudiante', Nombres: 'Alex', Apellidos: 'Rodríguez', Genero: 'Otro', Grado: '9-3', Email: 'alex@example.com', Id: '345678', Celular: '3003456789', Password: 'Alex789.', Foto: '' },
+                    { tipo: 'Bibliotecario/ria', Nombres: 'Carlos', Apellidos: 'López', Genero: 'Masculino', Grado: '', Email: 'admin@biblioteca.com', Id: '999999', Celular: '3009999999', Password: 'Admin123.', Foto: '' }
+                ];
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            }
+
+            // ----- EDITORIALES con imágenes locales -----
+            if (!localStorage.getItem('editoriales')) {
+                const editoriales = [
+                    { id: 1, nombre: 'Emecé Editores', descripcion: 'Editorial argentina fundada en 1939, conocida por obras de Borges.', imagen: 'img/Emcee_Editores.jpg' },
+                    { id: 2, nombre: 'Sur', descripcion: 'Editorial argentina fundada por Victoria Ocampo.', imagen: 'img/Sur.png' },
+                    { id: 3, nombre: 'Francisco de Robles', descripcion: 'Editorial española del siglo XVII, publicó Don Quijote.', imagen: 'img/Francisco_Robles.jpg' },
+                    { id: 4, nombre: 'Editorial Sudamericana', descripcion: 'Editorial argentina, publicó a García Márquez.', imagen: 'img/Sudamericana.png' },
+                    { id: 5, nombre: 'Seix Barral', descripcion: 'Editorial española, publicó a Vargas Llosa.', imagen: 'img/Seix_Barral.png' },
+                    { id: 6, nombre: 'Plaza & Janés', descripcion: 'Editorial española, publicó a Isabel Allende.', imagen: 'img/Plaza_Janés.png' }
+                ];
+                localStorage.setItem('editoriales', JSON.stringify(editoriales));
+            } else {
+                // Actualizar imágenes de editoriales existentes
+                let editoriales = JSON.parse(localStorage.getItem('editoriales'));
+                const logos = {
+                    'Emecé Editores': 'img/Emcee_Editores.jpg',
+                    'Sur': 'img/Sur.png',
+                    'Francisco de Robles': 'img/Francisco_Robles.jpg',
+                    'Editorial Sudamericana': 'img/Sudamericana.png',
+                    'Seix Barral': 'img/Seix_Barral.png',
+                    'Plaza & Janés': 'img/Plaza_Janés.png'
+                };
+                editoriales = editoriales.map(e => {
+                    if (logos[e.nombre]) e.imagen = logos[e.nombre];
+                    return e;
+                });
+                localStorage.setItem('editoriales', JSON.stringify(editoriales));
+            }
+
+            // ----- AUTORES (fotos locales) -----
+            if (!localStorage.getItem('autores')) {
+                const autores = [
+                    { id_autor: 1, nombre: 'Jorge Luis Borges', descripcion: 'Escritor argentino, uno de los más importantes del siglo XX.', foto: 'img/Jorge_Luis_Borges.jpg' },
+                    { id_autor: 2, nombre: 'Gabriel García Márquez', descripcion: 'Escritor colombiano, premio Nobel de Literatura 1982.', foto: 'img/Garcia_Marquez.jpg' },
+                    { id_autor: 3, nombre: 'Miguel de Cervantes', descripcion: 'Escritor español, autor de Don Quijote de la Mancha.', foto: 'img/miguel_cervantes.jpg' },
+                    { id_autor: 4, nombre: 'Mario Vargas Llosa', descripcion: 'Escritor peruano, premio Nobel de Literatura 2010.', foto: 'img/Mario_Vargas_Llosa.jpg' },
+                    { id_autor: 5, nombre: 'Isabel Allende', descripcion: 'Escritora chilena, autora de La casa de los espíritus.', foto: 'img/Isabel_Allende.jpg' }
+                ];
+                localStorage.setItem('autores', JSON.stringify(autores));
+            } else {
+                let autores = JSON.parse(localStorage.getItem('autores'));
+                const fotos = {
+                    'Jorge Luis Borges': 'img/Jorge_Luis_Borges.jpg',
+                    'Gabriel García Márquez': 'img/Garcia_Marquez.jpg',
+                    'Miguel de Cervantes': 'img/miguel_cervantes.jpg',
+                    'Mario Vargas Llosa': 'img/Mario_Vargas_Llosa.jpg',
+                    'Isabel Allende': 'img/Isabel_Allende.jpg'
+                };
+                autores = autores.map(a => {
+                    if (fotos[a.nombre]) a.foto = fotos[a.nombre];
+                    return a;
+                });
+                localStorage.setItem('autores', JSON.stringify(autores));
+            }
+
+            // ----- CATEGORÍAS -----
+            if (!localStorage.getItem('categorias')) {
+                const categorias = [
+                    { id: 1, nombre: 'Ficción', descripcion: 'Obras de ficción literaria', activa: true },
+                    { id: 2, nombre: 'No Ficción', descripcion: 'Obras de no ficción y ensayo', activa: true },
+                    { id: 3, nombre: 'Poesía', descripcion: 'Poesía y lírica', activa: true },
+                    { id: 4, nombre: 'Teatro', descripcion: 'Obras teatrales y dramaturgia', activa: true },
+                    { id: 5, nombre: 'Infantil', descripcion: 'Literatura infantil y juvenil', activa: true }
+                ];
+                localStorage.setItem('categorias', JSON.stringify(categorias));
+            }
+
+            // ----- LIBROS (portadas locales) -----
+            if (!localStorage.getItem('libros')) {
+                const libros = [
+                    { id_libro: 1, titulo_libro: "El Aleph", autores: [1], categorias: [1, 3], editorialId: 1, genero: "Cuentos, Fantasía", descrpcion_libro: "El Aleph es una colección de cuentos que explora conceptos filosóficos, metafísicos y literarios.", portada: "img/El_Aleph.jpg", ejemplares: 5 },
+                    { id_libro: 2, titulo_libro: "Ficciones", autores: [1], categorias: [1, 3], editorialId: 2, genero: "Cuentos, Fantasía", descrpcion_libro: "Ficciones es una colección de cuentos que exploran temas como la realidad, la identidad, el tiempo y el infinito.", portada: "img/Ficciones.jpg", ejemplares: 3 },
+                    { id_libro: 3, titulo_libro: "Don Quijote de la Mancha", autores: [3], categorias: [1, 4], editorialId: 3, genero: "Novela, Clásicos", descrpcion_libro: "Don Quijote de la Mancha es una novela que sigue las aventuras de un noble que decide convertirse en caballero andante.", portada: "img/Don_Quijote.jpg", ejemplares: 2 },
+                    { id_libro: 4, titulo_libro: "Cien años de soledad", autores: [2], categorias: [1], editorialId: 4, genero: "Novela, Realismo mágico", descrpcion_libro: "Cien años de soledad narra la historia de la familia Buendía a lo largo de varias generaciones en Macondo.", portada: "img/Cien_años.jpg", ejemplares: 4 },
+                    { id_libro: 5, titulo_libro: "La ciudad y los perros", autores: [4], categorias: [1], editorialId: 5, genero: "Novela, Drama", descrpcion_libro: "La ciudad y los perros explora la vida en una academia militar en Lima, Perú.", portada: "img/Ciudad_Perros.jpg", ejemplares: 6 },
+                    { id_libro: 6, titulo_libro: "La casa de los espíritus", autores: [5], categorias: [1, 5], editorialId: 6, genero: "Novela, Realismo mágico", descrpcion_libro: "La casa de los espíritus narra la historia de la familia Trueba a lo largo de varias generaciones.", portada: "img/Casa_Espiritus.jpg", ejemplares: 7 }
+                ];
+                localStorage.setItem('libros', JSON.stringify(libros));
+            } else {
+                let libros = JSON.parse(localStorage.getItem('libros'));
+                const portadas = {
+                    'El Aleph': 'img/El_Aleph.jpg',
+                    'Ficciones': 'img/Ficciones.jpg',
+                    'Don Quijote de la Mancha': 'img/Don_Quijote.jpg',
+                    'Cien años de soledad': 'img/Cien_años.jpg',
+                    'La ciudad y los perros': 'img/Ciudad_Perros.jpg',
+                    'La casa de los espíritus': 'img/Casa_Espiritus.jpg'
+                };
+                libros = libros.map(l => {
+                    if (portadas[l.titulo_libro]) l.portada = portadas[l.titulo_libro];
+                    return l;
+                });
+                localStorage.setItem('libros', JSON.stringify(libros));
+            }
+
+            // ----- PRÉSTAMOS (fechas 2023-2024) -----
+            if (!localStorage.getItem('prestamos')) {
+                const prestamos = [
+                    { id_prestamo: 1, id_estudiante: '123456', id_usuario: '123456', id_libro: 1, fechaprestamo: '2023-06-01', fechadevolucion: '2023-06-15', ejemplares: 1, observacionprestamo: 'Préstamo para lectura de verano' },
+                    { id_prestamo: 2, id_estudiante: '789012', id_usuario: '789012', id_libro: 3, fechaprestamo: '2023-06-05', fechadevolucion: '2023-06-20', ejemplares: 1, observacionprestamo: 'Préstamo para trabajo de literatura' },
+                    { id_prestamo: 3, id_estudiante: '345678', id_usuario: '345678', id_libro: 4, fechaprestamo: '2024-06-10', fechadevolucion: '2024-06-25', ejemplares: 1, observacionprestamo: 'Préstamo para investigación' }
+                ];
+                localStorage.setItem('prestamos', JSON.stringify(prestamos));
+            }
+
+            // ----- DEVOLUCIONES -----
+            if (!localStorage.getItem('devoluciones')) {
+                const devoluciones = [
+                    { id_estudiante: '123456', Nombres_estudiante: 'Juan Pérez', Id_libro: 1, Titulo_libro: 'El Aleph', Fecha_prestamo: '2023-06-01', Fecha_devolucion: '2023-06-15', Observacion_Estudiante: 'Libro en buen estado', Observacion_Bibliotecario: 'Devolución en tiempo', Restringir_Prestamo: 'No', Comentario_Restriccion: '' },
+                    { id_estudiante: '789012', Nombres_estudiante: 'María García', Id_libro: 3, Titulo_libro: 'Don Quijote de la Mancha', Fecha_prestamo: '2023-06-05', Fecha_devolucion: '2023-06-20', Observacion_Estudiante: 'Excelente libro', Observacion_Bibliotecario: 'Devolución en tiempo', Restringir_Prestamo: 'No', Comentario_Restriccion: '' },
+                    { id_estudiante: '345678', Nombres_estudiante: 'Alex Rodríguez', Id_libro: 4, Titulo_libro: 'Cien años de soledad', Fecha_prestamo: '2024-06-10', Fecha_devolucion: '2024-06-25', Observacion_Estudiante: 'Muy interesante', Observacion_Bibliotecario: 'Devolución en tiempo', Restringir_Prestamo: 'No', Comentario_Restriccion: '' }
+                ];
+                localStorage.setItem('devoluciones', JSON.stringify(devoluciones));
+            }
+        }
+
+        inicializarDatosQuemados();
+
+        // ============================================================
+        // 2. FUNCIÓN DE LOGIN
+        // ============================================================
+        function verificarInicioSesion() {
+            var login = document.getElementById("login").value.trim();
+            var password = document.getElementById("password").value.trim();
+
+            if (!login || !password) {
+                Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor completa todos los campos.', confirmButtonColor: '#3377FF' });
+                return false;
+            }
+
+            var usuarios = JSON.parse(localStorage.getItem('usuarios'));
+            var usuario = usuarios.find(u => (u.Email === login || u.Id === login) && u.Password === password);
+            if (usuario) {
+                sessionStorage.setItem('usuario_actual', JSON.stringify(usuario));
+                if (usuario.tipo === 'Bibliotecario/ria' || usuario.tipo === 'Directivo') {
+                    window.location.href = 'Admin/dashboard.html';
+                } else {
+                    window.location.href = 'mostrar_libros.html';
+                }
+                return false;
+            } else {
+                Swal.fire({ icon: 'error', title: 'Oops...', text: 'Credenciales incorrectas. Por favor, inténtelo de nuevo.', confirmButtonColor: '#3377FF' });
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

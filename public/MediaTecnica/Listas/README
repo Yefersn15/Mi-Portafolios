@@ -1,0 +1,73 @@
+# 📋 Listas Desplegables y Áreas de Texto
+
+Este proyecto contiene dos ejemplos prácticos del uso de **listas desplegables (`<select>`)** y **áreas de texto (`<textarea>`)** en HTML. Son herramientas fundamentales para la recolección de datos en formularios web.
+
+---
+
+## 📁 Archivos
+
+- **`Lista Despegable De Estudiantes.html`** – Página completa que simula una base de datos de estudiantes de la I.E. Kennedy, con listas de estudiantes y materias, y campos para comentarios.
+- **`Lista desplegable.html`** – Fragmento sencillo con una lista de ciudades y un área de comentarios.
+
+---
+
+## 🎯 ¿Qué aprendí con estos ejercicios?
+
+1. **Uso de `<select>` y `<option>`**  
+   - Creación de listas desplegables para que el usuario elija una opción entre varias predefinidas (estudiantes, materias, ciudades).
+
+2. **Atributos importantes**  
+   - `id` y `name` para identificar y enviar los datos del formulario.
+   - `value` para asignar el valor que se enviará al servidor.
+
+3. **Área de texto (`<textarea>`)**  
+   - Permite escribir comentarios largos. Aprendí a controlar su tamaño con `cols` (ancho) y `rows` (alto).
+   - El atributo `spellcheck="false"` desactiva la corrección ortográfica (útil en ciertos contextos).
+   - `placeholder` para mostrar un texto de ayuda dentro del área.
+
+4. **Etiquetas `<label>`**  
+   - Asociar correctamente la etiqueta con el campo mediante `for` e `id`, mejorando la accesibilidad.
+
+5. **Estructura semántica básica**  
+   - Uso de `<center>` (aunque obsoleto) para centrar el contenido de forma sencilla en el primer archivo.
+   - Organización de la página con encabezados y párrafos descriptivos.
+
+6. **Contexto de aplicación**  
+   - En el primer archivo, el sistema simula una base de datos escolar donde se pueden seleccionar estudiantes y materias, y dejar comentarios (por ejemplo, para registrar notas o faltas).
+
+---
+
+## 🧩 ¿Para qué sirve cada archivo?
+
+### `Lista Despegable De Estudiantes.html`
+- **Propósito**: Simular una interfaz de administración escolar.
+- **Contenido**:
+  - Lista desplegable con 6 nombres de estudiantes.
+  - Área de texto para comentarios sobre el estudiante.
+  - Lista desplegable con 6 materias.
+  - Segunda área de texto para comentarios sobre la materia.
+- **Aprendizaje**: Cómo estructurar un formulario con múltiples selecciones y campos de texto, y cómo presentar información contextual (descripción de la base de datos).
+
+### `Lista desplegable.html`
+- **Propósito**: Fragmento reutilizable para seleccionar una ciudad.
+- **Contenido**:
+  - Lista desplegable con 4 ciudades (Caldas, Itagüí, Bello, Medellín).
+  - Área de texto para comentarios.
+- **Aprendizaje**: Creación rápida de un selector y un campo de comentarios, útil para formularios de contacto, encuestas o registro de usuarios.
+
+---
+
+## 🛠️ Tecnologías
+
+- **HTML4/transicional** – Uso de etiquetas básicas como `<select>`, `<option>`, `<textarea>`, `<label>`.
+- **Atributos HTML** – `id`, `name`, `value`, `cols`, `rows`, `placeholder`, `spellcheck`.
+
+---
+
+## 📝 Nota
+
+Estos ejercicios son **didácticos y funcionales**, aunque no incluyen CSS ni procesamiento del lado del servidor. Su objetivo es practicar la estructura y el comportamiento de los elementos de formulario en HTML. En proyectos reales, estos datos se enviarían a un servidor mediante `POST` o `GET` para ser procesados.
+
+---
+
+*Creado como parte del aprendizaje de formularios y recolección de datos en HTML.*

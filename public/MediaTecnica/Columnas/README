@@ -1,0 +1,66 @@
+# Proyecto Columnas – Exposición de Proyectos de Media Técnica y SENA
+
+Esta carpeta contiene una galería interactiva que muestra información sobre tres proyectos/empresas desarrollados durante la etapa de Media Técnica y el SENA:
+
+- **Tecno Software** – empresa de desarrollo web conformada por estudiantes.
+- **SisGem** – sistema de gestión comercial (e‑commerce) con React + Vite.
+- **EncomiExpress** – panel administrativo para mensajería y logística.
+
+La interfaz está construida con **frames** (IFRAME y FRAMESET) para organizar el contenido en un mosaico redimensionable, emulando un entorno de trabajo tipo dashboard.
+
+## Estructura de archivos
+
+```
+Columnas/
+├── INDEX_IFRAME.html          # Índice con iframes y divisores redimensionables (CSS + JS)
+├── INDEX_FRAMESET.html        # Índice con frameset (etiqueta clásica, sin redimension)
+├── Frames1_1.html             # Descripción de Tecno Software
+├── Frames1_2.html             # Descripción de SisGem
+├── Frames1_3.html             # Descripción de EncomiExpress
+├── Frames2.html               # Logos de los tres proyectos
+├── Frames3.html               # Sección de video con enlaces a YouTube
+├── Frames4_1.html             # Integrantes de Tecno Software
+├── Frames4_2.html             # Integrantes de SisGem
+├── Frames4_3.html             # Integrantes de EncomiExpress
+├── assets/                    # Imágenes (logos, capturas, etc.)
+├── Tecno_Software.PNG
+├── Sisgem.PNG
+├── EncomiExpress.PNG
+├── PELO.JPEG
+└── Inocentes.JPG
+```
+
+## ¿Cómo usar?
+
+1. **Clona o descarga** esta carpeta en tu computadora.
+2. Abre cualquiera de los dos índices en tu navegador:
+   - `INDEX_IFRAME.html` → versión moderna con divisores arrastrables.
+   - `INDEX_FRAMESET.html` → versión clásica con frameset fijo.
+
+Ambos archivos cargan el mismo contenido, pero la versión IFRAME permite redimensionar las columnas y filas arrastrando los separadores.
+
+## Tecnologías utilizadas
+
+- **HTML5** (estructura y contenido de los frames)
+- **CSS3** (estilos básicos y divisores visuales)
+- **JavaScript** (redimensionamiento dinámico en `INDEX_IFRAME.html`)
+- **Imágenes** (formatos PNG y JPEG)
+- **Enlaces externos** a YouTube (en `Frames3.html`)
+
+## Propósito educativo
+
+Este proyecto fue creado como parte del aprendizaje de:
+
+- Uso de frames y iframes para organizar contenido.
+- Creación de interfaces modulares.
+- Presentación visual de proyectos técnicos.
+- Trabajo con enlaces internos y externos.
+
+## Nota sobre compatibilidad
+
+- `INDEX_FRAMESET.html` utiliza la etiqueta `<frameset>`, que está **obsoleta** en HTML5, pero aún funciona en la mayoría de los navegadores.
+- `INDEX_IFRAME.html` es la versión recomendada porque usa `<iframe>` y es compatible con estándares actuales.
+
+---
+
+*Carpeta creada para mostrar la evolución técnica y los proyectos desarrollados desde la Media Técnica hasta el SENA.*

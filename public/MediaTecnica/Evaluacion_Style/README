@@ -1,0 +1,210 @@
+<<<<<<< HEAD
+# Evaluación de Estilos (CSS)
+
+Esta carpeta contiene 13 ejercicios prácticos de **HTML + CSS** enfocados en la aplicación de estilos a elementos comunes: textos, tablas, formularios, listas, enlaces, imágenes, etc.
+
+Cada archivo es autocontenido (todo en un solo `.html`) y muestra una técnica de estilo diferente, desde lo más básico hasta combinaciones de selectores y pseudoclases.
+
+---
+
+## 📁 Estructura de archivos
+Evaluacion style/
+├── INDEX_EVSTYLE.html # Índice visual de todos los ejercicios
+├── 1. imagen url de fondo.html # Fondo con imagen de Pexels (cover)
+├── 2. Tabla con borde de color.html # Tabla con bordes color naranja
+├── 3. Pagina con video.html # Reproductor de video (MP4)
+├── 4. Formulario de contacto.html # Formulario básico (sin estilos)
+├── 5. Lista desplegable.html # Select de frutas
+├── 6. página con enlaces.html # Lista de enlaces a redes sociales
+├── 7. Titulo estilizado.html # Título azul, subrayado, centrado
+├── 8. Párrafo con estilo de fuente.html # Párrafo con Arial, color #333
+├── 9. Lista con estilo de viñetas.html # Viñetas personalizadas con ⦿ rojo
+├── 10. Imagen redondeada.html # Imagen con borde circular (50%)
+├── 11. Enlace estilizado como botón.html # Enlace con apariencia de botón azul
+├── 12. Tabla estilizada.html # Tabla con filas alternadas y encabezado azul
+└── 13. Formulario estilizado.html # Formulario con estilos (campos, botón)
+
+
+---
+
+## 🎯 Propósito educativo
+
+- Practicar la sintaxis de CSS (selectores, propiedades, valores).
+- Aplicar estilos a elementos HTML comunes.
+- Combinar estilos en línea, internos y externos (aquí todos son internos).
+- Entender el modelo de caja, colores, fuentes, bordes, fondos, etc.
+
+---
+
+## 📚 ¿Qué aprendí en esta actividad?
+
+A través de estos 13 ejercicios, he puesto en práctica los fundamentos de CSS y he consolidado los siguientes conceptos:
+
+1. **Fondos con imágenes**  
+   - Uso de `background-image`, `background-repeat: no-repeat` y `background-size: cover` para que una imagen ocupe todo el fondo sin distorsionarse.
+
+2. **Estilizado de tablas**  
+   - Aplicación de bordes de color (`border: 1px solid orangered`), colores de fondo en celdas (`background-color`) y combinación de selectores para encabezados y filas.
+   - Uso de la pseudoclase `:nth-child(even)` para crear filas alternadas (cebra) y mejorar la legibilidad.
+
+3. **Inserción y control de vídeos**  
+   - Uso de la etiqueta `<video>` con atributos `controls`, `width` y `height`, y la correcta especificación del `source` para diferentes formatos.
+
+4. **Formularios básicos y estilizados**  
+   - Creación de formularios con campos de texto, email, área de texto y botón de envío.
+   - Estilizado de `input`, `textarea` y `submit` con propiedades como `width`, `padding`, `margin`, `border`, `border-radius` y `cursor`.
+   - Organización de etiquetas y campos mediante `display: block`.
+
+5. **Listas desplegables**  
+   - Uso de `<select>` y `<option>` para crear menús de selección.
+
+6. **Enlaces y navegación**  
+   - Creación de listas de enlaces a sitios externos (Google, Facebook, Twitter).
+   - Estilizado de un enlace para que parezca un botón (`display: inline-block`, `padding`, `background-color`, `border-radius`, `text-decoration: none`).
+
+7. **Estilos de texto y títulos**  
+   - Aplicación de `color`, `font-size`, `text-align`, `text-decoration` para dar personalidad a los encabezados.
+   - Definición de fuentes, tamaño, color y `line-height` en párrafos para mejorar la legibilidad.
+
+8. **Listas con viñetas personalizadas**  
+   - Eliminación de viñetas por defecto (`list-style-type: none`) y uso del pseudoelemento `::before` con `content` para insertar un símbolo (⦿) con color rojo y peso de fuente.
+
+9. **Imágenes redondeadas**  
+   - Aplicación de `border-radius: 50%` para convertir una imagen en un círculo perfecto.
+
+10. **Selectores y pseudoclases**  
+    - Uso de selectores de etiqueta, clase y atributo (`input[type="text"]`, `tr:nth-child(even)`, `li:before`, etc.) para aplicar estilos de forma precisa y eficiente.
+
+---
+
+## 🚀 Cómo usar
+
+1. Abre `INDEX_EVSTYLE.html` en tu navegador para ver el listado completo.
+2. Haz clic en cualquier ejercicio para abrirlo en una nueva pestaña.
+3. Explora el código fuente de cada archivo para ver cómo se aplican los estilos.
+
+---
+
+## 🧪 Ejercicios destacados
+
+- **Imagen de fondo** – uso de `background-image` con `cover`.
+- **Tablas con bordes** – aplicación de color en bordes y celdas.
+- **Lista con viñetas** – uso de `:before` y contenido generado.
+- **Enlace como botón** – simulación de botón con `display: inline-block`.
+- **Formulario estilizado** – estilos para inputs, textarea y botón de envío.
+
+---
+
+## 🔧 Tecnologías
+
+- HTML5
+- CSS3 (internos en `<style>`)
+
+---
+
+=======
+# Evaluación de Estilos (CSS)
+
+Esta carpeta contiene 13 ejercicios prácticos de **HTML + CSS** enfocados en la aplicación de estilos a elementos comunes: textos, tablas, formularios, listas, enlaces, imágenes, etc.
+
+Cada archivo es autocontenido (todo en un solo `.html`) y muestra una técnica de estilo diferente, desde lo más básico hasta combinaciones de selectores y pseudoclases.
+
+---
+
+## 📁 Estructura de archivos
+Evaluacion style/
+├── INDEX_EVSTYLE.html # Índice visual de todos los ejercicios
+├── 1. imagen url de fondo.html # Fondo con imagen de Pexels (cover)
+├── 2. Tabla con borde de color.html # Tabla con bordes color naranja
+├── 3. Pagina con video.html # Reproductor de video (MP4)
+├── 4. Formulario de contacto.html # Formulario básico (sin estilos)
+├── 5. Lista desplegable.html # Select de frutas
+├── 6. página con enlaces.html # Lista de enlaces a redes sociales
+├── 7. Titulo estilizado.html # Título azul, subrayado, centrado
+├── 8. Párrafo con estilo de fuente.html # Párrafo con Arial, color #333
+├── 9. Lista con estilo de viñetas.html # Viñetas personalizadas con ⦿ rojo
+├── 10. Imagen redondeada.html # Imagen con borde circular (50%)
+├── 11. Enlace estilizado como botón.html # Enlace con apariencia de botón azul
+├── 12. Tabla estilizada.html # Tabla con filas alternadas y encabezado azul
+└── 13. Formulario estilizado.html # Formulario con estilos (campos, botón)
+
+
+---
+
+## 🎯 Propósito educativo
+
+- Practicar la sintaxis de CSS (selectores, propiedades, valores).
+- Aplicar estilos a elementos HTML comunes.
+- Combinar estilos en línea, internos y externos (aquí todos son internos).
+- Entender el modelo de caja, colores, fuentes, bordes, fondos, etc.
+
+---
+
+## 📚 ¿Qué aprendí en esta actividad?
+
+A través de estos 13 ejercicios, he puesto en práctica los fundamentos de CSS y he consolidado los siguientes conceptos:
+
+1. **Fondos con imágenes**  
+   - Uso de `background-image`, `background-repeat: no-repeat` y `background-size: cover` para que una imagen ocupe todo el fondo sin distorsionarse.
+
+2. **Estilizado de tablas**  
+   - Aplicación de bordes de color (`border: 1px solid orangered`), colores de fondo en celdas (`background-color`) y combinación de selectores para encabezados y filas.
+   - Uso de la pseudoclase `:nth-child(even)` para crear filas alternadas (cebra) y mejorar la legibilidad.
+
+3. **Inserción y control de vídeos**  
+   - Uso de la etiqueta `<video>` con atributos `controls`, `width` y `height`, y la correcta especificación del `source` para diferentes formatos.
+
+4. **Formularios básicos y estilizados**  
+   - Creación de formularios con campos de texto, email, área de texto y botón de envío.
+   - Estilizado de `input`, `textarea` y `submit` con propiedades como `width`, `padding`, `margin`, `border`, `border-radius` y `cursor`.
+   - Organización de etiquetas y campos mediante `display: block`.
+
+5. **Listas desplegables**  
+   - Uso de `<select>` y `<option>` para crear menús de selección.
+
+6. **Enlaces y navegación**  
+   - Creación de listas de enlaces a sitios externos (Google, Facebook, Twitter).
+   - Estilizado de un enlace para que parezca un botón (`display: inline-block`, `padding`, `background-color`, `border-radius`, `text-decoration: none`).
+
+7. **Estilos de texto y títulos**  
+   - Aplicación de `color`, `font-size`, `text-align`, `text-decoration` para dar personalidad a los encabezados.
+   - Definición de fuentes, tamaño, color y `line-height` en párrafos para mejorar la legibilidad.
+
+8. **Listas con viñetas personalizadas**  
+   - Eliminación de viñetas por defecto (`list-style-type: none`) y uso del pseudoelemento `::before` con `content` para insertar un símbolo (⦿) con color rojo y peso de fuente.
+
+9. **Imágenes redondeadas**  
+   - Aplicación de `border-radius: 50%` para convertir una imagen en un círculo perfecto.
+
+10. **Selectores y pseudoclases**  
+    - Uso de selectores de etiqueta, clase y atributo (`input[type="text"]`, `tr:nth-child(even)`, `li:before`, etc.) para aplicar estilos de forma precisa y eficiente.
+
+---
+
+## 🚀 Cómo usar
+
+1. Abre `INDEX_EVSTYLE.html` en tu navegador para ver el listado completo.
+2. Haz clic en cualquier ejercicio para abrirlo en una nueva pestaña.
+3. Explora el código fuente de cada archivo para ver cómo se aplican los estilos.
+
+---
+
+## 🧪 Ejercicios destacados
+
+- **Imagen de fondo** – uso de `background-image` con `cover`.
+- **Tablas con bordes** – aplicación de color en bordes y celdas.
+- **Lista con viñetas** – uso de `:before` y contenido generado.
+- **Enlace como botón** – simulación de botón con `display: inline-block`.
+- **Formulario estilizado** – estilos para inputs, textarea y botón de envío.
+
+---
+
+## 🔧 Tecnologías
+
+- HTML5
+- CSS3 (internos en `<style>`)
+
+---
+
+>>>>>>> ede6029599d2f5409989a42b7f2fa58e66e92a67
+*Creado para la evaluación de competencias en maquetación y estilizado CSS.*

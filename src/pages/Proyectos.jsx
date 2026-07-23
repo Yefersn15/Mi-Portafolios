@@ -10,6 +10,15 @@ const proyectosSena = [
     ]
   },
   {
+    titulo: 'EncomiExpress',
+    tag: 'Proyecto general',
+    demo: 'https://encomiexpress-frontend.vercel.app/',
+    branches: [
+      { label: 'FRONT', enlace: 'https://github.com/EncomiExpress/encomiexpress-frontend.git' },
+      { label: 'API', enlace: 'https://github.com/EncomiExpress/encomiexpress-backend.git' }
+    ]
+  },
+  {
     titulo: 'Proyecto Django',
     enlace: 'https://github.com/Yefersn15/ProyectoDJango',
     tag: 'Django · Python'
@@ -102,9 +111,24 @@ const proyectosSena = [
   }
 ];
 
-const mediaTecnicaBaseUrl = 'https://yefersonmoreno-miportafoliotecnico.vercel.app/';
+const mediaTecnicaBaseUrl = `${import.meta.env.BASE_URL}MediaTecnica/`;
 
-const buildMediaTecnicaHref = (ruta) => `${mediaTecnicaBaseUrl}${encodeURI(ruta)}`;
+const mediaTecnicaPathMap = {
+  'Taller Maquetacion/maqueta1.html': 'Taller_Maquetacion/maqueta1.html',
+  'Taller Maquetacion/maqueta2.html': 'Taller_Maquetacion/maqueta2.html',
+  'Taller Maquetacion/maqueta2v2.html': 'Taller_Maquetacion/maqueta2v2.html',
+  'Evaluacion de maquetacion/Evaluacion.html': 'Evaluacion_maquetacion/Evaluacion.html',
+  'Taller evaluativo/INDEX_EVALUATIVO.html': 'Taller_Evaluativo/INDEX_EVALUATIVO.html',
+  'Evaluacion style/INDEX_EVSTYLE.html': 'Evaluacion_Style/INDEX_EVSTYLE.html',
+  'Biblioteca Digital Local/index.html': 'BibliotecaDigitaLocal/index.html',
+  'Prototipo De Pagina/Prototipo.html': 'Prototipo_Pagina/Prototipo.html',
+  'Tienda Deportiva/INDEX1.HTML': 'Tienda_Deportiva/INDEX1.HTML'
+};
+
+const buildMediaTecnicaHref = (ruta) => {
+  const rutaReal = mediaTecnicaPathMap[ruta] || ruta;
+  return `${mediaTecnicaBaseUrl}${encodeURI(rutaReal.replace(/^\/+/, ''))}`;
+};
 
 const proyectosMediaTecnica = [
   {
@@ -112,24 +136,24 @@ const proyectosMediaTecnica = [
     tag: 'CSS',
     clickableMain: false,
     branches: [
-      { label: 'V1', enlace: buildMediaTecnicaHref('Taller Maquetacion/maqueta1.html') },
-      { label: 'V2', enlace: buildMediaTecnicaHref('Taller Maquetacion/maqueta2.html') },
-      { label: 'V2.2', enlace: buildMediaTecnicaHref('Taller Maquetacion/maqueta2v2.html') }
+      { label: 'V1', enlace: buildMediaTecnicaHref('Taller_Maquetacion/maqueta1.html') },
+      { label: 'V2', enlace: buildMediaTecnicaHref('Taller_Maquetacion/maqueta2.html') },
+      { label: 'V2.2', enlace: buildMediaTecnicaHref('Taller_Maquetacion/maqueta2v2.html') }
     ]
   },
-  { titulo: 'Evaluación maquetación', tag: 'CSS', enlace: buildMediaTecnicaHref('Evaluacion de maquetacion/Evaluacion.html') },
-  { titulo: 'Taller evaluativo HTML', tag: 'HTML', enlace: buildMediaTecnicaHref('Taller evaluativo/INDEX_EVALUATIVO.html') },
+  { titulo: 'Evaluación maquetación', tag: 'CSS', enlace: buildMediaTecnicaHref('Evaluacion_maquetacion/Evaluacion.html') },
+  { titulo: 'Taller evaluativo HTML', tag: 'HTML', enlace: buildMediaTecnicaHref('Taller_Evaluativo/INDEX_EVALUATIVO.html') },
   { titulo: 'Práctica de Frames', tag: 'Frames', enlace: buildMediaTecnicaHref('HTML/Frame.html') },
   { titulo: 'Índice de Frames', tag: 'Frames', enlace: buildMediaTecnicaHref('Frames/Index_Frames.html') },
-  { titulo: 'Evaluación de estilos CSS', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Evaluacion style/INDEX_EVSTYLE.html') },
-  { titulo: 'Biblioteca Digital Local', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Biblioteca Digital Local/index.html') },
+  { titulo: 'Evaluación de estilos CSS', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Evaluacion_Style/INDEX_EVSTYLE.html') },
+  { titulo: 'Biblioteca Digital Local', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('BibliotecaDigitaLocal/index.html') },
   { titulo: 'Base de Datos HTML', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/INDEX_BDDHTML.html') },
-  { titulo: 'Prototipo página', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Prototipo De Pagina/Prototipo.html') },
+  { titulo: 'Prototipo página', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('Prototipo_Pagina/Prototipo.html') },
   { titulo: 'TransMarimba', tag: 'HTML', enlace: buildMediaTecnicaHref('Transmarimba/transmarimba-protopagina.html') },
   { titulo: 'Lista desplegable', tag: 'HTML', enlace: buildMediaTecnicaHref('Listas/Lista desplegable.html') },
   { titulo: 'Lista estudiantes', tag: 'HTML', enlace: buildMediaTecnicaHref('Listas/Lista Despegable De Estudiantes.html') },
   { titulo: 'Página con imágenes', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('HTML/Pagina.HTML') },
-  { titulo: 'Tienda deportiva', tag: 'HTML', enlace: buildMediaTecnicaHref('Tienda Deportiva/INDEX1.HTML') },
+  { titulo: 'Tienda deportiva', tag: 'HTML', enlace: buildMediaTecnicaHref('Tienda_Deportiva/INDEX1.HTML') },
   { titulo: 'Frameset', tag: 'Frames', enlace: buildMediaTecnicaHref('Columnas/INDEX_FRAMESET.html') },
   { titulo: 'IFrame con JS', tag: 'Frames/JS', enlace: buildMediaTecnicaHref('Columnas/INDEX_IFRAME.html') },
   { titulo: 'Noticias (política/deportes)', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/5.1ejercicio.html') },
@@ -398,30 +422,57 @@ const Proyectos = () => {
             <div className="sub">2025 – 2026 · Proyectos y actividades</div>
           </div>
 
-          <div className="featured-project reveal">
-            <div className="thumb">
-              <img src="https://placehold.co/600x338/1c1c16/edede3?text=SISGEM" alt="SISGEM" />
+          <div className="featured-duo reveal">
+            <div className="featured-project featured-compact">
+              <div className="thumb">
+                <img src="https://placehold.co/600x338/1c1c16/edede3?text=EncomiExpress" alt="EncomiExpress" />
+              </div>
+              <div className="info">
+                <span className="tag">Proyecto destacado</span>
+                <h3>EncomiExpress</h3>
+                <p>
+                  Plataforma de gestión de envíos desarrollada en equipo, con frontend y API separados
+                  y demo desplegada en producción.
+                </p>
+                <div className="branch-buttons featured-branches">
+                  <a className="branch-button" href="https://github.com/EncomiExpress/encomiexpress-frontend.git" target="_blank" rel="noopener noreferrer">
+                    FRONT
+                  </a>
+                  <a className="branch-button" href="https://github.com/EncomiExpress/encomiexpress-backend.git" target="_blank" rel="noopener noreferrer">
+                    API
+                  </a>
+                  <a className="branch-button" href="https://encomiexpress-frontend.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    Demo
+                  </a>
+                </div>
+              </div>
             </div>
-            <div className="info">
-              <span className="tag">Proyecto destacado</span>
-              <h3>SISGEM</h3>
-              <p>
-                Plataforma web con una doble ruta de desarrollo: frontend y API, pensada para cubrir la
-                experiencia de venta y la lógica del negocio en una sola solución.
-              </p>
-              <div className="branch-buttons featured-branches">
-                <a className="branch-button" href="https://github.com/Yefersn15/Sisgem-FRONT" target="_blank" rel="noopener noreferrer">
-                  FRONT
-                </a>
-                <a className="branch-button" href="https://github.com/Yefersn15/Sisgem-API" target="_blank" rel="noopener noreferrer">
-                  API
-                </a>
+
+            <div className="featured-project featured-compact">
+              <div className="thumb">
+                <img src="https://placehold.co/600x338/1c1c16/edede3?text=SISGEM" alt="SISGEM" />
+              </div>
+              <div className="info">
+                <span className="tag">Proyecto en solitario</span>
+                <h3>SISGEM</h3>
+                <p>
+                  Plataforma web con una doble ruta de desarrollo: frontend y API, pensada para cubrir la
+                  experiencia de venta y la lógica del negocio en una sola solución.
+                </p>
+                <div className="branch-buttons featured-branches">
+                  <a className="branch-button" href="https://github.com/Yefersn15/Sisgem-FRONT" target="_blank" rel="noopener noreferrer">
+                    FRONT
+                  </a>
+                  <a className="branch-button" href="https://github.com/Yefersn15/Sisgem-API" target="_blank" rel="noopener noreferrer">
+                    API
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="reveal">
-            <InfiniteCarousel items={proyectosSena.filter((_, index) => index > 0)} />
+            <InfiniteCarousel items={proyectosSena.filter((_, index) => index > 1)} />
           </div>
         </div>
       </section>
@@ -446,7 +497,7 @@ const Proyectos = () => {
                 Desarrollada con HTML, CSS, JavaScript y almacenamiento local (localStorage).
                 Incluye módulos de autenticación, gestión de usuarios, editoriales, autores, categorías y préstamos.
               </p>
-              <a href="https://yefersonmoreno-miportafoliotecnico.vercel.app/Biblioteca%20Digital%20Local/index.html" className="btn primary" target="_blank" rel="noopener noreferrer">
+              <a href={buildMediaTecnicaHref('BibliotecaDigitaLocal/index.html')} className="btn primary" target="_blank" rel="noopener noreferrer">
                 Ver proyecto →
               </a>
             </div>

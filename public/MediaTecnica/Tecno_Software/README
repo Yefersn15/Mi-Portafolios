@@ -1,0 +1,70 @@
+# 🖼️ Mi Primera Imagen En La Red – Marco de Imágenes
+
+Este proyecto es un **ejercicio experimental** de maquetación con HTML y CSS. El objetivo es rodear un texto con imágenes que se tocan entre sí, formando un **marco continuo**, como si fuera un collage o un borde decorativo.
+
+---
+
+## 📁 Archivo
+
+- **`Index.html`** – Página única que contiene una tabla de 3×3. Las celdas de los bordes contienen imágenes, y la celda central contiene texto.
+
+---
+
+## 🎯 ¿Qué aprendí con este ejercicio?
+
+1. **Uso de tablas para maquetación**  
+   - Aunque hoy se usan más `flex` o `grid`, las tablas siguen siendo útiles para estructuras rígidas como esta, donde necesito que cada celda ocupe exactamente el espacio que le asigno.
+
+2. **Eliminación de espacios entre celdas**  
+   - Con `border-collapse: collapse`, `padding: 0` y `border: 0` logro que las imágenes estén pegadas, sin separaciones, creando un efecto de marco continuo.
+
+3. **Control del tamaño de las imágenes**  
+   - Uso `width: 100%` y `height: 100%` en cada imagen, y `object-fit: cover` para que la imagen se recorte y llene la celda sin deformarse. Esto es clave para que el marco sea uniforme.
+
+4. **Celdas con dimensiones fijas**  
+   - Las clases `.cell-wide` (para imágenes horizontales, altura fija de 120px) y `.cell-tall` (para imágenes verticales, ancho fijo de 120px) me permiten controlar qué tipo de imagen va en cada posición.
+
+5. **Diseño responsivo básico**  
+   - Con `@media` reduzco los tamaños de las celdas en pantallas pequeñas, para que el marco no se salga de la pantalla.
+
+6. **Fondo semitransparente para el texto**  
+   - El texto central tiene `background-color: rgba(255,255,204,0.92)`, lo que permite que se vea nítido sobre las imágenes que pueda asomarse detrás, sin perder el efecto de marco.
+
+7. **Combinación de imágenes variadas**  
+   - Utilizo 8 imágenes (2 largas/verticales y 6 anchas/horizontales) para que el marco tenga ritmo visual y no sea monótono.
+
+---
+
+## 🛠️ ¿Para qué sirve este diseño?
+
+- **Demostración creativa** – Es un ejemplo de cómo se pueden colocar imágenes alrededor de un contenido sin usar herramientas avanzadas.
+- **Práctica de CSS básico** – Sirve para entender propiedades como `object-fit`, `display: block`, `border-collapse`, y el comportamiento de las tablas.
+- **Inspiración para portafolios** – Aunque no es un diseño profesional, es una base para crear marcos decorativos en galerías, tarjetas de presentación o secciones destacadas.
+- **Ejercicio de adaptabilidad** – Al incluir `@media queries`, aprendo a ajustar un diseño fijo a diferentes tamaños de pantalla.
+
+---
+
+## 🧪 ¿Cómo funciona?
+
+- La página tiene una tabla de 3 filas y 3 columnas.
+- **Primera y tercera fila**: tres imágenes horizontales (anchas) ocupan todo el ancho.
+- **Segunda fila**: una imagen vertical (larga) a la izquierda, el texto en el centro, y otra imagen vertical a la derecha.
+- Las imágenes se recortan para ajustarse exactamente al tamaño de la celda, sin dejar espacios.
+- El texto está centrado y su fondo amarillo suave lo hace legible.
+
+---
+
+## 🔧 Tecnologías
+
+- HTML5
+- CSS3 (con `object-fit`, `@media`, `rgba`, etc.)
+
+---
+
+## 📝 Nota
+
+Este es un ejercicio **experimental y educativo**, no busca ser un diseño profesional. Está pensado para practicar conceptos de maquetación y entender cómo se comportaban las tablas en los inicios del diseño web.
+
+---
+
+*Creado como parte de un aprendizaje práctico de HTML y CSS.*

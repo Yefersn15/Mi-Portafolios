@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Préstamos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Mismo estilo que dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .sidebar {
+            background-color: #222;
+            min-height: 100vh;
+            padding: 20px;
+            color: #ccc;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3377FF;
+            color: #fff;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .contenedor {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .input__text {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn__nuevo {
+            background-color: #007bff;
+        }
+
+        .btn__update {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn__delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Biblioteca Admin</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="../index.html">Inicio</a>
+                        <a href="../mostrar_libros.html">Ver Biblioteca</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="../perfil.html">Mi perfil</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h6 class="text-uppercase text-muted mb-3">Menú Admin</h6>
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="libros.html"><i class="fas fa-book"></i> Libros</a>
+                <a href="autores.html"><i class="fas fa-user-edit"></i> Autores</a>
+                <a href="categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+                <a href="editoriales.html"><i class="fas fa-building"></i> Editoriales</a>
+                <a href="prestamos.html" class="active"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+                <a href="devoluciones.html"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+                <a href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a>
+                <hr class="bg-secondary">
+                <a href="../mostrar_libros.html"><i class="fas fa-eye"></i> Ver Biblioteca</a>
+            </div>
+
+            <div class="col-md-10 main-content">
+                <div class="contenedor">
+                    <h1>Gestión de Préstamos</h1>
+                    <form class="formulario" method="post" onsubmit="return buscarPrestamo()">
+                        <input type="text" name="buscar" id="buscar" placeholder="Buscar por ID, estudiante, libro..."
+                            class="input__text">
+                        <input type="submit" class="btn" value="Buscar">
+                        <a href="#" class="btn btn__nuevo" onclick="mostrarFormularioAgregar()">Nuevo</a>
+                        <a href="dashboard.html" class="btn btn__nuevo">Volver</a>
+                    </form>
+                    <div id="tablaPrestamos"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy — Panel de Administración</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = '../index.html'; }
+        if (usuarioActual.tipo !== 'Bibliotecario/ria' && usuarioActual.tipo !== 'Directivo') {
+            Swal.fire({ icon: 'error', title: 'Acceso denegado' }).then(() => { window.location.href = '../mostrar_libros.html'; });
+        }
+
+        function cerrarSesion() { sessionStorage.removeItem('usuario_actual'); window.location.href = '../index.html'; }
+
+        function cargarPrestamos(filtro = '') {
+            let prestamos = JSON.parse(localStorage.getItem('prestamos')) || [];
+            if (filtro) {
+                filtro = filtro.toLowerCase();
+                prestamos = prestamos.filter(p =>
+                    p.id_prestamo.toString().includes(filtro) ||
+                    p.id_estudiante.toString().includes(filtro) ||
+                    p.id_libro.toString().includes(filtro)
+                );
+            }
+            let html = `<table><tr><th>ID</th><th>Fecha</th><th>ID Estudiante</th><th>ID Usuario</th><th>ID Libro</th><th>Ejemplares</th><th>Fecha Devolución</th><th>Observación</th><th>Acciones</th></tr>`;
+            if (prestamos.length === 0) html += `<tr><td colspan="9" class="text-center">No hay préstamos</td></tr>`;
+            else {
+                prestamos.forEach(p => {
+                    html += `<tr>
+                    <td>${p.id_prestamo}</td>
+                    <td>${p.fechaprestamo}</td>
+                    <td>${p.id_estudiante}</td>
+                    <td>${p.id_usuario}</td>
+                    <td>${p.id_libro}</td>
+                    <td>${p.ejemplares}</td>
+                    <td>${p.fechadevolucion}</td>
+                    <td>${p.observacionprestamo || ''}</td>
+                    <td>
+                        <a href="#" class="btn__update" onclick="editarPrestamo(${p.id_prestamo})">Editar</a>
+                        <a href="#" class="btn__delete" onclick="eliminarPrestamo(${p.id_prestamo})">Eliminar</a>
+                    </td>
+                </tr>`;
+                });
+            }
+            html += '</table>';
+            document.getElementById('tablaPrestamos').innerHTML = html;
+        }
+
+        function buscarPrestamo() { const f = document.getElementById('buscar').value.trim(); cargarPrestamos(f); return false; }
+
+        function mostrarFormularioAgregar() {
+            const fechaDefault = '2023-06-01';
+            const fechaDevolucionDefault = '2023-06-15';
+            Swal.fire({
+                title: 'Agregar Préstamo',
+                html: `
+                <input id="id_prestamo" class="swal2-input" placeholder="ID Préstamo" type="number">
+                <input id="fechaprestamo" class="swal2-input" placeholder="Fecha Préstamo (YYYY-MM-DD)" value="${fechaDefault}">
+                <input id="id_estudiante" class="swal2-input" placeholder="ID Estudiante" type="number">
+                <input id="id_usuario" class="swal2-input" placeholder="ID Usuario" type="number">
+                <input id="id_libro" class="swal2-input" placeholder="ID Libro" type="number">
+                <input id="ejemplares" class="swal2-input" placeholder="Ejemplares" type="number">
+                <input id="fechadevolucion" class="swal2-input" placeholder="Fecha Devolución (YYYY-MM-DD)" value="${fechaDevolucionDefault}">
+                <input id="observacion" class="swal2-input" placeholder="Observación (opcional)">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                preConfirm: () => {
+                    const id = document.getElementById('id_prestamo').value;
+                    const fecha = document.getElementById('fechaprestamo').value;
+                    const id_est = document.getElementById('id_estudiante').value;
+                    const id_usr = document.getElementById('id_usuario').value;
+                    const id_lib = document.getElementById('id_libro').value;
+                    const ejemplares = document.getElementById('ejemplares').value;
+                    const fechaDev = document.getElementById('fechadevolucion').value;
+                    const obs = document.getElementById('observacion').value;
+                    if (!id || !fecha || !id_est || !id_usr || !id_lib || !ejemplares || !fechaDev) {
+                        Swal.showValidationMessage('Todos los campos excepto observación son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        id_prestamo: parseInt(id),
+                        fechaprestamo: fecha,
+                        id_estudiante: parseInt(id_est),
+                        id_usuario: parseInt(id_usr),
+                        id_libro: parseInt(id_lib),
+                        ejemplares: parseInt(ejemplares),
+                        fechadevolucion: fechaDev,
+                        observacionprestamo: obs || ''
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let prestamos = JSON.parse(localStorage.getItem('prestamos'));
+                    if (prestamos.some(p => p.id_prestamo === result.value.id_prestamo)) {
+                        Swal.fire('Error', 'El ID de préstamo ya existe.', 'error');
+                        return;
+                    }
+                    prestamos.push(result.value);
+                    localStorage.setItem('prestamos', JSON.stringify(prestamos));
+                    cargarPrestamos();
+                    Swal.fire('Guardado', 'Préstamo registrado correctamente.', 'success');
+                }
+            });
+        }
+
+        function editarPrestamo(id) {
+            let prestamos = JSON.parse(localStorage.getItem('prestamos'));
+            const p = prestamos.find(pr => pr.id_prestamo === id);
+            if (!p) return;
+            Swal.fire({
+                title: 'Editar Préstamo',
+                html: `
+                <input id="edit_fecha" class="swal2-input" value="${p.fechaprestamo}" placeholder="Fecha Préstamo">
+                <input id="edit_id_est" class="swal2-input" value="${p.id_estudiante}" type="number">
+                <input id="edit_id_usr" class="swal2-input" value="${p.id_usuario}" type="number">
+                <input id="edit_id_lib" class="swal2-input" value="${p.id_libro}" type="number">
+                <input id="edit_ejemplares" class="swal2-input" value="${p.ejemplares}" type="number">
+                <input id="edit_fechadev" class="swal2-input" value="${p.fechadevolucion}" placeholder="Fecha Devolución">
+                <input id="edit_obs" class="swal2-input" value="${p.observacionprestamo || ''}" placeholder="Observación">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: () => {
+                    const fecha = document.getElementById('edit_fecha').value;
+                    const id_est = document.getElementById('edit_id_est').value;
+                    const id_usr = document.getElementById('edit_id_usr').value;
+                    const id_lib = document.getElementById('edit_id_lib').value;
+                    const ejemplares = document.getElementById('edit_ejemplares').value;
+                    const fechadev = document.getElementById('edit_fechadev').value;
+                    const obs = document.getElementById('edit_obs').value;
+                    if (!fecha || !id_est || !id_usr || !id_lib || !ejemplares || !fechadev) {
+                        Swal.showValidationMessage('Todos los campos excepto observación son obligatorios.');
+                        return false;
+                    }
+                    return {
+                        fechaprestamo: fecha,
+                        id_estudiante: parseInt(id_est),
+                        id_usuario: parseInt(id_usr),
+                        id_libro: parseInt(id_lib),
+                        ejemplares: parseInt(ejemplares),
+                        fechadevolucion: fechadev,
+                        observacionprestamo: obs || ''
+                    };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = prestamos.findIndex(pr => pr.id_prestamo === id);
+                    if (idx !== -1) {
+                        prestamos[idx].fechaprestamo = result.value.fechaprestamo;
+                        prestamos[idx].id_estudiante = result.value.id_estudiante;
+                        prestamos[idx].id_usuario = result.value.id_usuario;
+                        prestamos[idx].id_libro = result.value.id_libro;
+                        prestamos[idx].ejemplares = result.value.ejemplares;
+                        prestamos[idx].fechadevolucion = result.value.fechadevolucion;
+                        prestamos[idx].observacionprestamo = result.value.observacionprestamo;
+                        localStorage.setItem('prestamos', JSON.stringify(prestamos));
+                        cargarPrestamos();
+                        Swal.fire('Actualizado', 'Préstamo actualizado.', 'success');
+                    }
+                }
+            });
+        }
+
+        function eliminarPrestamo(id) {
+            Swal.fire({
+                title: '¿Eliminar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let prestamos = JSON.parse(localStorage.getItem('prestamos'));
+                    prestamos = prestamos.filter(p => p.id_prestamo !== id);
+                    localStorage.setItem('prestamos', JSON.stringify(prestamos));
+                    cargarPrestamos();
+                    Swal.fire('Eliminado', 'Préstamo eliminado.', 'success');
+                }
+            });
+        }
+
+        cargarPrestamos();
+    </script>
+</body>
+
+</html>

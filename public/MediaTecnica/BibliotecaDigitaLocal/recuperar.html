@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperación de Contraseña</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            background-color: lightblue;
+        }
+
+        header {
+            background-color: #3377FF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            position: absolute;
+            left: 10px;
+        }
+
+        .logo img {
+            height: 70px;
+        }
+
+        #header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        main {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 150px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            background-color: #3377FF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <section class="logo">
+            <a href="https://www.iek.edu.co/"><img src="img/IEKennedy.jpg" alt="Escudo La IEKennedy"></a>
+        </section>
+        <h1>Recuperación de Contraseña</h1>
+        <a href="index.html" id="inicio">
+            <img src="https://img.icons8.com/ios/50/000000/home-page.png" alt="Inicio" width="30" height="30">
+            <br>Inicio
+        </a>
+        <a
+            href="https://www.google.com/maps/@6.2908346,-75.5818207,3a,28.6y,120.18h,75.77t/data=!3m7!1e1!3m5!1sF2wlc2FNVMmxaeUPDCGXeg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DF2wlc2FNVMmxaeUPDCGXeg%26cb_client%3Dmaps_sv.share%26w%3D900%26h%3D600%26yaw%3D120.18024020733466%26pitch%3D14.226936086306779%26thumbfov%3D90!7i13312!8i6656?coh=205410&entry=ttu">
+            <img src="https://img.icons8.com/ios/50/000000/worldwide-location.png" alt="Ubicación" width="30"
+                height="30">
+            <br>Ubicación
+        </a>
+        <a href="https://www.iek.edu.co/contactenos.php">
+            <img src="https://img.icons8.com/ios/50/000000/contact-card.png" alt="Contacto" width="30" height="30">
+            <br>Contacto
+        </a>
+    </header>
+    <main>
+        <form id="recuperacionForm" onsubmit="return enviarRecuperacion()">
+            <label for="metodoRecuperacion">Seleccione un método de recuperación:</label>
+            <select id="metodoRecuperacion" name="metodoRecuperacion" onchange="mostrarCampo()" required>
+                <option value="">Seleccionar</option>
+                <option value="email">Correo Electrónico</option>
+                <option value="celular">Número de Celular</option>
+            </select><br>
+
+            <div id="campoEmail" style="display: none;">
+                <label for="emailRecuperacion">Ingrese su email para recuperar la contraseña:</label>
+                <input type="email" id="emailRecuperacion" name="emailRecuperacion">
+            </div>
+
+            <div id="campoCelular" style="display: none;">
+                <label for="celularRecuperacion">Ingrese su número de celular para recuperar la contraseña:</label>
+                <input type="text" id="celularRecuperacion" name="celularRecuperacion"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+
+            <div id="codigo_recuperacion" style="display: none;">
+                <label for="codigo_recuperacion">Ingrese el código recibido para cambiar la contraseña:</label>
+                <input type="number" id="codigo_recuperacion" name="codigo_recuperacion">
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy. Todos los derechos reservados.</p>
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/tupagina"><img src="img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/tupagina"><img src="img/twitter.png" alt="Twitter"></a></li>
+            <li><a href=""><img src="img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script>
+        function mostrarCampo() {
+            var metodo = document.getElementById('metodoRecuperacion').value;
+            document.getElementById('campoEmail').style.display = metodo === 'email' ? 'block' : 'none';
+            document.getElementById('campoCelular').style.display = metodo === 'celular' ? 'block' : 'none';
+        }
+
+        function enviarRecuperacion() {
+            var metodo = document.getElementById('metodoRecuperacion').value;
+            var email = document.getElementById('emailRecuperacion').value;
+            var celular = document.getElementById('celularRecuperacion').value;
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (metodo === 'email' && !emailPattern.test(email)) {
+                Swal.fire({ icon: 'error', title: 'Correo electrónico no válido', text: 'Por favor, ingrese un correo electrónico válido.' });
+                return false;
+            }
+            if (metodo === 'celular' && (celular.length < 10 || isNaN(celular))) {
+                Swal.fire({ icon: 'error', title: 'Número de celular no válido', text: 'Por favor, ingrese un número de celular válido.' });
+                return false;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Solicitud enviada',
+                text: 'Se ha enviado un enlace de recuperación de contraseña a través del método seleccionado.',
+            });
+            return false;
+        }
+    </script>
+</body>
+
+</html>

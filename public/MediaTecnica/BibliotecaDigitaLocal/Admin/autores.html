@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Autores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .sidebar {
+            background-color: #222;
+            min-height: 100vh;
+            padding: 20px;
+            color: #ccc;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3377FF;
+            color: #fff;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .contenedor {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .input__text {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn__nuevo {
+            background-color: #007bff;
+        }
+
+        .btn__update {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn__delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-primary {
+            background-color: #3377FF;
+            border-color: #3377FF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .swal2-textarea {
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Biblioteca Admin</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="../index.html">Inicio</a>
+                        <a href="../mostrar_libros.html">Ver Biblioteca</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="../perfil.html">Mi perfil</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h6 class="text-uppercase text-muted mb-3">Menú Admin</h6>
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="libros.html"><i class="fas fa-book"></i> Libros</a>
+                <a href="autores.html" class="active"><i class="fas fa-user-edit"></i> Autores</a>
+                <a href="categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+                <a href="editoriales.html"><i class="fas fa-building"></i> Editoriales</a>
+                <a href="prestamos.html"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+                <a href="devoluciones.html"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+                <a href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a>
+                <hr class="bg-secondary">
+                <a href="../mostrar_libros.html"><i class="fas fa-eye"></i> Ver Biblioteca</a>
+            </div>
+
+            <!-- Contenido -->
+            <div class="col-md-10 main-content">
+                <div class="contenedor">
+                    <h1>Gestión de Autores</h1>
+                    <form class="formulario" method="post" onsubmit="return buscarAutor()">
+                        <input type="text" name="buscar" id="buscar" placeholder="Buscar por ID o nombre"
+                            class="input__text">
+                        <input type="submit" class="btn" value="Buscar">
+                        <a href="#" class="btn btn__nuevo" onclick="mostrarFormularioAgregar()">Nuevo</a>
+                        <a href="dashboard.html" class="btn btn__nuevo">Volver</a>
+                    </form>
+                    <div id="tablaAutores"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy — Panel de Administración</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = '../index.html'; }
+        if (usuarioActual.tipo !== 'Bibliotecario/ria' && usuarioActual.tipo !== 'Directivo') {
+            Swal.fire({ icon: 'error', title: 'Acceso denegado' }).then(() => { window.location.href = '../mostrar_libros.html'; });
+        }
+
+        function cerrarSesion() { sessionStorage.removeItem('usuario_actual'); window.location.href = '../index.html'; }
+
+        function normalizarAutores() {
+            const raw = JSON.parse(localStorage.getItem('autores')) || [];
+            const autores = raw.map(a => ({
+                id_autor: Number(a.id_autor ?? a.id ?? a.idAutor ?? 0),
+                nombre: a.nombre ?? a.nombre_autor ?? a.Nombre ?? a.name ?? a.autor ?? '',
+                descripcion: a.descripcion ?? a.descripcion_autor ?? a.Descripcion ?? a.description ?? '',
+                foto: a.foto ?? a.imagen ?? a.foto_autor ?? a.image ?? a.img ?? ''
+            })).filter(a => a.id_autor || a.nombre);
+            localStorage.setItem('autores', JSON.stringify(autores));
+            return autores;
+        }
+
+        function obtenerRutaImagen(ruta) {
+            if (!ruta) return '';
+            // Si es una URL absoluta (http, https, data) o ya tiene '../' la dejamos igual
+            if (ruta.startsWith('http://') || ruta.startsWith('https://') || ruta.startsWith('data:') || ruta.startsWith('../')) {
+                return ruta;
+            }
+            // Si es una ruta relativa que empieza con 'img/' le agregamos '../'
+            if (ruta.startsWith('img/')) {
+                return '../' + ruta;
+            }
+            // Si no, simplemente agregamos '../' por si acaso
+            return '../' + ruta;
+        }
+
+        function cargarAutores(filtro = '') {
+            let autores = normalizarAutores();
+            if (filtro) {
+                filtro = filtro.toLowerCase();
+                autores = autores.filter(a =>
+                    String(a.id_autor).includes(filtro) ||
+                    (a.nombre || '').toLowerCase().includes(filtro) ||
+                    (a.descripcion || '').toLowerCase().includes(filtro)
+                );
+            }
+            let html = `<table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Foto</th>
+                <th>Acciones</th>
+            </tr>`;
+            if (autores.length === 0) html += '<tr><td colspan="5" class="text-center">No hay autores</td></tr>';
+            else {
+                autores.forEach(a => {
+                    const fotoSrc = a.foto ? obtenerRutaImagen(a.foto) : '';
+                    const fotoHtml = fotoSrc ? `<img src="${fotoSrc}" alt="${a.nombre}" style="width:60px; height:60px; object-fit:cover; border-radius:50%;">` : 'Sin foto';
+                    html += `<tr>
+                    <td>${a.id_autor}</td>
+                    <td>${a.nombre}</td>
+                    <td>${a.descripcion || ''}</td>
+                    <td>${fotoHtml}</td>
+                    <td>
+                        <a href="#" class="btn__update" onclick="editarAutor(${a.id_autor})">Editar</a>
+                        <a href="#" class="btn__delete" onclick="eliminarAutor(${a.id_autor})">Eliminar</a>
+                    </td>
+                </tr>`;
+                });
+            }
+            html += '</table>';
+            document.getElementById('tablaAutores').innerHTML = html;
+        }
+
+        function buscarAutor() { const f = document.getElementById('buscar').value.trim(); cargarAutores(f); return false; }
+
+        function leerArchivoComoDataUrl(input) {
+            return new Promise((resolve, reject) => {
+                const archivo = input.files && input.files[0];
+                if (!archivo) {
+                    resolve('');
+                    return;
+                }
+                const lector = new FileReader();
+                lector.onload = () => resolve(lector.result);
+                lector.onerror = () => reject(new Error('No se pudo leer el archivo'));
+                lector.readAsDataURL(archivo);
+            });
+        }
+
+        function mostrarFormularioAgregar() {
+            Swal.fire({
+                title: 'Agregar Autor',
+                html: `
+                <input id="id_autor" class="swal2-input" placeholder="ID Autor" type="number">
+                <input id="nombre_autor" class="swal2-input" placeholder="Nombre">
+                <textarea id="descripcion_autor" class="swal2-textarea" placeholder="Descripción"></textarea>
+                <input id="foto_autor_url" class="swal2-input" placeholder="URL de la foto (opcional)">
+                <input id="foto_autor_archivo" class="swal2-input" type="file" accept="image/*">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                preConfirm: async () => {
+                    const id = document.getElementById('id_autor').value;
+                    const nombre = document.getElementById('nombre_autor').value;
+                    const descripcion = document.getElementById('descripcion_autor').value;
+                    const fotoUrl = document.getElementById('foto_autor_url').value;
+                    const fotoArchivo = document.getElementById('foto_autor_archivo');
+                    if (!id || !nombre) {
+                        Swal.showValidationMessage('ID y Nombre son obligatorios.');
+                        return false;
+                    }
+                    const foto = await leerArchivoComoDataUrl(fotoArchivo);
+                    return { id_autor: parseInt(id), nombre, descripcion, foto: foto || fotoUrl };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let autores = JSON.parse(localStorage.getItem('autores'));
+                    if (autores.some(a => a.id_autor === result.value.id_autor)) {
+                        Swal.fire('Error', 'El ID de autor ya existe.', 'error');
+                        return;
+                    }
+                    autores.push(result.value);
+                    localStorage.setItem('autores', JSON.stringify(autores));
+                    cargarAutores();
+                    Swal.fire('Guardado', 'Autor agregado correctamente.', 'success');
+                }
+            });
+        }
+
+        function editarAutor(id) {
+            let autores = JSON.parse(localStorage.getItem('autores'));
+            const autor = autores.find(a => a.id_autor === id);
+            if (!autor) return;
+            Swal.fire({
+                title: 'Editar Autor',
+                html: `
+                <input id="edit_id_autor" class="swal2-input" value="${autor.id_autor}" type="number" readonly>
+                <input id="edit_nombre_autor" class="swal2-input" value="${autor.nombre}" placeholder="Nombre">
+                <textarea id="edit_descripcion_autor" class="swal2-textarea" placeholder="Descripción">${autor.descripcion || ''}</textarea>
+                <input id="edit_foto_autor_url" class="swal2-input" value="${autor.foto || ''}" placeholder="URL de la foto (opcional)">
+                <input id="edit_foto_autor_archivo" class="swal2-input" type="file" accept="image/*">
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: async () => {
+                    const nombre = document.getElementById('edit_nombre_autor').value;
+                    const descripcion = document.getElementById('edit_descripcion_autor').value;
+                    const fotoUrl = document.getElementById('edit_foto_autor_url').value;
+                    const fotoArchivo = document.getElementById('edit_foto_autor_archivo');
+                    if (!nombre) {
+                        Swal.showValidationMessage('El nombre es obligatorio.');
+                        return false;
+                    }
+                    const foto = await leerArchivoComoDataUrl(fotoArchivo);
+                    return { nombre, descripcion, foto: foto || fotoUrl };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = autores.findIndex(a => a.id_autor === id);
+                    if (idx !== -1) {
+                        autores[idx].nombre = result.value.nombre;
+                        autores[idx].descripcion = result.value.descripcion;
+                        autores[idx].foto = result.value.foto;
+                        localStorage.setItem('autores', JSON.stringify(autores));
+                        cargarAutores();
+                        Swal.fire('Actualizado', 'Autor actualizado.', 'success');
+                    }
+                }
+            });
+        }
+
+        function eliminarAutor(id) {
+            Swal.fire({
+                title: '¿Eliminar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let autores = JSON.parse(localStorage.getItem('autores'));
+                    autores = autores.filter(a => a.id_autor !== id);
+                    localStorage.setItem('autores', JSON.stringify(autores));
+                    cargarAutores();
+                    Swal.fire('Eliminado', 'Autor eliminado.', 'success');
+                }
+            });
+        }
+
+        cargarAutores();
+    </script>
+</body>
+
+</html>

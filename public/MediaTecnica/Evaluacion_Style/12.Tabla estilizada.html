@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <title>Tabla estilizada</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: lightblue;
+    }
+
+    tr:nth-child(even) {
+      background-color: lightgray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Mi tabla personalizada</h1>
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+    </tr>
+    <tr>
+      <td>Juan</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>María</td>
+      <td>30</td>
+    </tr>
+  </table>
+</body>
+
+</html>

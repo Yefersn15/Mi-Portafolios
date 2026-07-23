@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Categorías</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Mismo estilo que dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .sidebar {
+            background-color: #222;
+            min-height: 100vh;
+            padding: 20px;
+            color: #ccc;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3377FF;
+            color: #fff;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .contenedor {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .input__text {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn__nuevo {
+            background-color: #007bff;
+        }
+
+        .btn__update {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn__delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            background-color: #3377FF;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-primary {
+            background-color: #3377FF;
+            border-color: #3377FF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Biblioteca Admin</h1>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Menú &#9776;</a>
+                    <div class="dropdown-content">
+                        <a href="../index.html">Inicio</a>
+                        <a href="../mostrar_libros.html">Ver Biblioteca</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="../perfil.html">Mi perfil</a>
+                        <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <h6 class="text-uppercase text-muted mb-3">Menú Admin</h6>
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="libros.html"><i class="fas fa-book"></i> Libros</a>
+                <a href="autores.html"><i class="fas fa-user-edit"></i> Autores</a>
+                <a href="categorias.html" class="active"><i class="fas fa-tags"></i> Categorías</a>
+                <a href="editoriales.html"><i class="fas fa-building"></i> Editoriales</a>
+                <a href="prestamos.html"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+                <a href="devoluciones.html"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+                <a href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a>
+                <hr class="bg-secondary">
+                <a href="../mostrar_libros.html"><i class="fas fa-eye"></i> Ver Biblioteca</a>
+            </div>
+
+            <div class="col-md-10 main-content">
+                <div class="contenedor">
+                    <h1>Gestión de Categorías</h1>
+                    <form class="formulario" method="post" onsubmit="return buscarCategoria()">
+                        <input type="text" name="buscar" id="buscar" placeholder="Buscar por ID o nombre"
+                            class="input__text">
+                        <input type="submit" class="btn" value="Buscar">
+                        <a href="#" class="btn btn__nuevo" onclick="mostrarFormularioAgregar()">Nueva Categoría</a>
+                        <a href="dashboard.html" class="btn btn__nuevo">Volver</a>
+                    </form>
+                    <div id="tablaCategorias"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institución Educativa Kennedy — Panel de Administración</p>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../img/Facebook.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../img/twitter.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../img/YouTube.png" alt="Youtube"></a></li>
+        </ul>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_actual'));
+        if (!usuarioActual) { window.location.href = '../index.html'; }
+        if (usuarioActual.tipo !== 'Bibliotecario/ria' && usuarioActual.tipo !== 'Directivo') {
+            Swal.fire({ icon: 'error', title: 'Acceso denegado' }).then(() => { window.location.href = '../mostrar_libros.html'; });
+        }
+
+        function cerrarSesion() { sessionStorage.removeItem('usuario_actual'); window.location.href = '../index.html'; }
+
+        // Inicializar categorías si no existen
+        if (!localStorage.getItem('categorias')) {
+            const categoriasDefault = [
+                { id: 1, nombre: 'Ficción', descripcion: 'Obras de ficción literaria', activa: true },
+                { id: 2, nombre: 'No Ficción', descripcion: 'Obras de no ficción y ensayo', activa: true },
+                { id: 3, nombre: 'Poesía', descripcion: 'Poesía y lírica', activa: true },
+                { id: 4, nombre: 'Teatro', descripcion: 'Obras teatrales y dramaturgia', activa: true },
+                { id: 5, nombre: 'Infantil', descripcion: 'Literatura infantil y juvenil', activa: true }
+            ];
+            localStorage.setItem('categorias', JSON.stringify(categoriasDefault));
+        }
+
+        function cargarCategorias(filtro = '') {
+            let categorias = JSON.parse(localStorage.getItem('categorias')) || [];
+            if (filtro) {
+                filtro = filtro.toLowerCase();
+                categorias = categorias.filter(c =>
+                    c.id.toString().includes(filtro) ||
+                    c.nombre.toLowerCase().includes(filtro) ||
+                    (c.descripcion || '').toLowerCase().includes(filtro)
+                );
+            }
+            categorias.sort((a, b) => b.id - a.id);
+            let html = `<table><tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Estado</th><th>Acciones</th></tr>`;
+            if (categorias.length === 0) html += `<tr><td colspan="5" class="text-center">No hay categorías.</td></tr>`;
+            else {
+                categorias.forEach(c => {
+                    const estado = c.activa !== false ? 'Activa' : 'Inactiva';
+                    const badgeClass = c.activa !== false ? 'badge-success' : 'badge-secondary';
+                    html += `<tr>
+                    <td>${c.id}</td>
+                    <td>${c.nombre}</td>
+                    <td>${c.descripcion || ''}</td>
+                    <td><span class="badge ${badgeClass}">${estado}</span></td>
+                    <td>
+                        <a href="#" class="btn__update" onclick="editarCategoria(${c.id})">Editar</a>
+                        <a href="#" class="btn__delete" onclick="eliminarCategoria(${c.id})">Eliminar</a>
+                        <a href="#" class="btn btn-sm btn-outline-info" onclick="toggleEstado(${c.id})">
+                            ${c.activa !== false ? 'Desactivar' : 'Activar'}
+                        </a>
+                    </td>
+                </tr>`;
+                });
+            }
+            html += '</table>';
+            document.getElementById('tablaCategorias').innerHTML = html;
+        }
+
+        function buscarCategoria() { const f = document.getElementById('buscar').value.trim(); cargarCategorias(f); return false; }
+
+        function mostrarFormularioAgregar() {
+            Swal.fire({
+                title: 'Nueva Categoría',
+                html: `
+                <input id="nombre_cat" class="swal2-input" placeholder="Nombre *">
+                <textarea id="desc_cat" class="swal2-textarea" placeholder="Descripción (opcional)"></textarea>
+                <label style="display:block;text-align:left;padding-left:20px;">
+                    <input type="checkbox" id="activa_cat" checked> Activa
+                </label>
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                preConfirm: () => {
+                    const nombre = document.getElementById('nombre_cat').value.trim();
+                    const desc = document.getElementById('desc_cat').value.trim();
+                    const activa = document.getElementById('activa_cat').checked;
+                    if (!nombre) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
+                    return { nombre, descripcion: desc, activa };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const categorias = JSON.parse(localStorage.getItem('categorias'));
+                    const nuevoId = categorias.length > 0 ? Math.max(...categorias.map(c => c.id)) + 1 : 1;
+                    const nueva = { id: nuevoId, nombre: result.value.nombre, descripcion: result.value.descripcion, activa: result.value.activa };
+                    categorias.push(nueva);
+                    localStorage.setItem('categorias', JSON.stringify(categorias));
+                    cargarCategorias();
+                    Swal.fire('Guardado', 'Categoría agregada correctamente.', 'success');
+                }
+            });
+        }
+
+        function editarCategoria(id) {
+            const categorias = JSON.parse(localStorage.getItem('categorias'));
+            const cat = categorias.find(c => c.id === id);
+            if (!cat) return;
+            Swal.fire({
+                title: 'Editar Categoría',
+                html: `
+                <input id="edit_nombre" class="swal2-input" value="${cat.nombre}" placeholder="Nombre *">
+                <textarea id="edit_desc" class="swal2-textarea" placeholder="Descripción">${cat.descripcion || ''}</textarea>
+                <label style="display:block;text-align:left;padding-left:20px;">
+                    <input type="checkbox" id="edit_activa" ${cat.activa !== false ? 'checked' : ''}> Activa
+                </label>
+            `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: () => {
+                    const nombre = document.getElementById('edit_nombre').value.trim();
+                    const desc = document.getElementById('edit_desc').value.trim();
+                    const activa = document.getElementById('edit_activa').checked;
+                    if (!nombre) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
+                    return { nombre, descripcion: desc, activa };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = categorias.findIndex(c => c.id === id);
+                    if (idx !== -1) {
+                        categorias[idx].nombre = result.value.nombre;
+                        categorias[idx].descripcion = result.value.descripcion;
+                        categorias[idx].activa = result.value.activa;
+                        localStorage.setItem('categorias', JSON.stringify(categorias));
+                        cargarCategorias();
+                        Swal.fire('Actualizado', 'Categoría actualizada.', 'success');
+                    }
+                }
+            });
+        }
+
+        function eliminarCategoria(id) {
+            Swal.fire({
+                title: '¿Eliminar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let categorias = JSON.parse(localStorage.getItem('categorias'));
+                    categorias = categorias.filter(c => c.id !== id);
+                    localStorage.setItem('categorias', JSON.stringify(categorias));
+                    cargarCategorias();
+                    Swal.fire('Eliminado', 'Categoría eliminada.', 'success');
+                }
+            });
+        }
+
+        function toggleEstado(id) {
+            const categorias = JSON.parse(localStorage.getItem('categorias'));
+            const idx = categorias.findIndex(c => c.id === id);
+            if (idx !== -1) {
+                categorias[idx].activa = categorias[idx].activa !== false ? false : true;
+                localStorage.setItem('categorias', JSON.stringify(categorias));
+                cargarCategorias();
+            }
+        }
+
+        cargarCategorias();
+    </script>
+</body>
+
+</html>

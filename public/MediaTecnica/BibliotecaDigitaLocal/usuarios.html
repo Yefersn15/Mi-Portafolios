@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .input__text {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn__nuevo {
+            background-color: #007bff;
+        }
+
+        .btn__update {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn__delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Gestión de Usuarios</h1>
+        <form class="formulario" method="post" onsubmit="return buscarUsuario()">
+            <input type="text" name="buscar" id="buscar" placeholder="Buscar por nombre, email, ID..."
+                class="input__text">
+            <input type="submit" class="btn" value="Buscar">
+            <a href="perfil.html" class="btn btn__nuevo">Volver</a>
+        </form>
+
+        <div id="tablaUsuarios"></div>
+    </div>
+
+    <script>
+        function cargarUsuarios(filtro = '') {
+            var usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            if (filtro) {
+                filtro = filtro.toLowerCase();
+                usuarios = usuarios.filter(u =>
+                    u.Nombres.toLowerCase().includes(filtro) ||
+                    u.Apellidos.toLowerCase().includes(filtro) ||
+                    u.Email.toLowerCase().includes(filtro) ||
+                    u.Id.toString().includes(filtro)
+                );
+            }
+            var html = '<table><tr><th>ID</th><th>Nombres</th><th>Apellidos</th><th>Género</th><th>Grado</th><th>Email</th><th>Celular</th><th>Tipo</th><th>Acciones</th></tr>';
+            usuarios.forEach(u => {
+                html += `<tr>
+                    <td>${u.Id}</td>
+                    <td>${u.Nombres}</td>
+                    <td>${u.Apellidos}</td>
+                    <td>${u.Genero}</td>
+                    <td>${u.Grado || ''}</td>
+                    <td>${u.Email}</td>
+                    <td>${u.Celular}</td>
+                    <td>${u.tipo}</td>
+                    <td>
+                        <a href="#" class="btn__update" onclick="editarUsuario('${u.Id}')">Editar</a>
+                        <a href="#" class="btn__delete" onclick="eliminarUsuario('${u.Id}')">Eliminar</a>
+                    </td>
+                </tr>`;
+            });
+            html += '</table>';
+            document.getElementById('tablaUsuarios').innerHTML = html;
+        }
+
+        function buscarUsuario() {
+            var filtro = document.getElementById('buscar').value.trim();
+            cargarUsuarios(filtro);
+            return false;
+        }
+
+        function editarUsuario(id) {
+            var usuarios = JSON.parse(localStorage.getItem('usuarios'));
+            var u = usuarios.find(u => u.Id === id);
+            if (!u) return;
+            Swal.fire({
+                title: 'Editar Usuario',
+                html: `
+                    <input id="edit_nombres" class="swal2-input" value="${u.Nombres}" placeholder="Nombres">
+                    <input id="edit_apellidos" class="swal2-input" value="${u.Apellidos}" placeholder="Apellidos">
+                    <select id="edit_genero" class="swal2-input">
+                        <option value="Masculino" ${u.Genero === 'Masculino' ? 'selected' : ''}>Masculino</option>
+                        <option value="Femenino" ${u.Genero === 'Femenino' ? 'selected' : ''}>Femenino</option>
+                        <option value="Otro" ${u.Genero === 'Otro' ? 'selected' : ''}>Otro</option>
+                    </select>
+                    <input id="edit_grado" class="swal2-input" value="${u.Grado || ''}" placeholder="Grado">
+                    <input id="edit_email" class="swal2-input" value="${u.Email}" placeholder="Email">
+                    <input id="edit_celular" class="swal2-input" value="${u.Celular}" placeholder="Celular">
+                    <select id="edit_tipo" class="swal2-input">
+                        <option value="Estudiante" ${u.tipo === 'Estudiante' ? 'selected' : ''}>Estudiante</option>
+                        <option value="Profesor/a" ${u.tipo === 'Profesor/a' ? 'selected' : ''}>Profesor/a</option>
+                        <option value="Bibliotecario/ria" ${u.tipo === 'Bibliotecario/ria' ? 'selected' : ''}>Bibliotecario/ria</option>
+                        <option value="Personal" ${u.tipo === 'Personal' ? 'selected' : ''}>Personal</option>
+                        <option value="Directivo" ${u.tipo === 'Directivo' ? 'selected' : ''}>Directivo</option>
+                    </select>
+                    <input id="edit_foto" class="swal2-input" value="${u.Foto || ''}" placeholder="Foto (URL)">
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Actualizar',
+                preConfirm: () => {
+                    var nombres = document.getElementById('edit_nombres').value;
+                    var apellidos = document.getElementById('edit_apellidos').value;
+                    var genero = document.getElementById('edit_genero').value;
+                    var grado = document.getElementById('edit_grado').value;
+                    var email = document.getElementById('edit_email').value;
+                    var celular = document.getElementById('edit_celular').value;
+                    var tipo = document.getElementById('edit_tipo').value;
+                    var foto = document.getElementById('edit_foto').value;
+                    if (!nombres || !apellidos || !email || !celular) {
+                        Swal.showValidationMessage('Nombres, Apellidos, Email y Celular son obligatorios.');
+                        return false;
+                    }
+                    return { Nombres: nombres, Apellidos: apellidos, Genero: genero, Grado: grado, Email: email, Celular: celular, tipo: tipo, Foto: foto };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var idx = usuarios.findIndex(usr => usr.Id === id);
+                    if (idx !== -1) {
+                        usuarios[idx].Nombres = result.value.Nombres;
+                        usuarios[idx].Apellidos = result.value.Apellidos;
+                        usuarios[idx].Genero = result.value.Genero;
+                        usuarios[idx].Grado = result.value.Grado;
+                        usuarios[idx].Email = result.value.Email;
+                        usuarios[idx].Celular = result.value.Celular;
+                        usuarios[idx].tipo = result.value.tipo;
+                        usuarios[idx].Foto = result.value.Foto;
+                        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                        cargarUsuarios();
+                        Swal.fire('Actualizado', 'Usuario actualizado correctamente.', 'success');
+                    }
+                }
+            });
+        }
+
+        function eliminarUsuario(id) {
+            Swal.fire({
+                title: '¿Eliminar?',
+                text: 'Esta acción no se puede deshacer.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var usuarios = JSON.parse(localStorage.getItem('usuarios'));
+                    usuarios = usuarios.filter(u => u.Id !== id);
+                    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                    cargarUsuarios();
+                    Swal.fire('Eliminado', 'Usuario eliminado.', 'success');
+                }
+            });
+        }
+
+        cargarUsuarios();
+    </script>
+</body>
+
+</html>

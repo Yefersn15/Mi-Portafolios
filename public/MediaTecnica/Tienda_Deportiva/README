@@ -1,0 +1,69 @@
+# 🏋️ Tienda Deportiva THENEW (El Nuevo)
+
+Este proyecto es una **página web sencilla** que muestra una colección de conjuntos deportivos de la marca **adidas** en diferentes colores. Está diseñada como un catálogo básico para practicar la estructura de HTML y el uso de etiquetas como `img`, `p`, `h1`, `h2`, `font` y `center`.
+
+---
+
+## 📁 Archivo
+
+- **`INDEX1.HTML`** – Página principal que contiene los conjuntos deportivos con imágenes y descripciones.
+
+---
+
+## 🛍️ ¿Qué contiene?
+
+La página muestra **5 conjuntos deportivos** de adidas, cada uno con:
+
+- **Título del conjunto** (con color personalizado mediante `<font>`).
+- **Imagen** del conjunto (con ancho de 350 píxeles).
+- **Descripción** del producto, destacando su estilo, comodidad, calidad y el logotipo de adidas.
+
+### Colores disponibles:
+
+1. **Negro** – elegancia y rendimiento.
+2. **Blanco** – pureza y versatilidad.
+3. **Gris** – elegancia moderna.
+4. **Azul** – dinamismo y estilo.
+5. **Rojo** – energía y desempeño.
+
+---
+
+## 🎯 ¿Qué aprendí con este ejercicio?
+
+1. **Estructura básica de HTML**  
+   - Uso de `<!DOCTYPE>`, `<html>`, `<head>`, `<body>` y etiquetas de título.
+
+2. **Encabezados y jerarquía**  
+   - Aplicación de `<h1>` para el título principal de la tienda y `<h2>` para cada conjunto, creando una jerarquía visual clara.
+
+3. **Inserción de imágenes**  
+   - Uso de la etiqueta `<img>` con el atributo `src` para mostrar imágenes locales, y `width` para controlar su tamaño (350 píxeles).
+
+4. **Párrafos descriptivos**  
+   - Creación de textos atractivos para cada producto, usando `<p>` y aplicando énfasis en características clave.
+
+5. **Colores y estilo inline**  
+   - Utilización de la etiqueta `<font color="...">` para personalizar el color de los títulos de los conjuntos (aunque esta etiqueta está obsoleta, se usa aquí con fines educativos para practicar cómo se aplicaban estilos en el HTML antiguo).
+
+6. **Centrado de contenido**  
+   - Uso de la etiqueta `<Center>` (también obsoleta) para centrar todo el contenido de la página, entendiendo cómo se alineaban los elementos antes de CSS moderno.
+
+7. **Organización de contenido**  
+   - Estructura de la página para que sea fácil de leer y navegar, con una separación clara entre cada conjunto.
+
+---
+
+## 🛠️ Tecnologías
+
+- **HTML4/transicional** – Etiquetas como `<font>`, `<center>`, atributos `width` en píxeles.
+- **Imágenes locales** – Las imágenes deben estar en la misma carpeta que el archivo HTML.
+
+---
+
+## 📝 Nota
+
+Este es un ejercicio **introductorio y didáctico**. Aunque las etiquetas `<font>` y `<center>` ya no se recomiendan en HTML5, se utilizan aquí para comprender la evolución del lenguaje y practicar conceptos básicos de maquetación y estilo. En proyectos modernos se usarían **CSS** para aplicar colores y alineación.
+
+---
+
+*Creado como parte del aprendizaje de fundamentos de HTML.*

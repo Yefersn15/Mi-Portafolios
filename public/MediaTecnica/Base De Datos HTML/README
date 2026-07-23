@@ -1,0 +1,87 @@
+# Portafolio personal + Ejercicios HTML
+
+Este repositorio contiene dos partes:
+
+1. **Portafolio profesional** – página personal con secciones: inicio, sobre mí, proyectos y contacto. Diseño con tema oscuro/claro, tipografía y animaciones.
+
+2. **Índice de ejercicios HTML** – colección de 27 archivos de práctica creados durante el aprendizaje inicial de HTML. El índice (`INDEX_BDDHTML.html`) sigue el mismo diseño del portafolio y agrupa los ejercicios por categorías.
+
+## Tecnologías
+
+- HTML5
+- CSS3 (variables, grid, flexbox)
+- JavaScript (cambio de tema, revelado al scroll)
+- Fuentes: Fraunces, Space Grotesk, IBM Plex Mono
+
+## Cómo usar
+
+- Abre `index.html` para ver el portafolio.
+- Navega a `ejercicios.html` (o directamente a `MediaTecnica/Base De Datos HTML/INDEX_BDDHTML.html`) para explorar todos los ejercicios.
+- Cada ejercicio se abre en una nueva pestaña.
+
+## Estructura de la carpeta `Base De Datos HTML/`
+
+Base De Datos HTML/
+├── INDEX_BDDHTML.html # Índice principal de ejercicios
+├── 1.Estructura interna de un pagina.html
+├── 2.Salto de linea.html
+├── 3.Parrafo.html # Unifica algoritmo + SQL
+├── 4.Titulos H1 a H6.html
+├── 5.Enfasis.html # Unifica definiciones comunes + tipos de datos
+├── 6.Hypervinculo/
+│ ├── Pagina1.html
+│ └── pagina2.html
+├── 7.Otra pagina.html
+├── 8.HV cliente de correo.html
+├── 9.Anclas de pagina.html
+├── 10.Imagenes dentro de una pagina/
+│ ├── 10.Imagens en una pagina.html
+│ └── geometria1.png
+├── 11.Hypervinculo mediante imagenes/
+│ ├── pagina1.html
+│ ├── Pagina2.html
+│ ├── pagina3.html
+│ ├── geometria1.png
+│ └── geometria2.png
+├── 12.LISTAS ORDENADAS.html
+├── 13.Lista no ordenada.html
+├── 14.Listas Anidadas.html
+├── 15.Tablas.html
+├── 16. Tablas con celdas no uniformes.html
+├── 17.Tabla con rowspan.html # Nuevo ejercicio
+└── Propuestas/
+├── 5.1ejercicio.html
+├── comentarios.html
+├── cultura.html
+├── deportes.html
+├── Ejercicio 2.html
+├── Promociones.html
+├── Propuesta 5.html
+└── Propuesta 6.html
+
+
+### Categorías de ejercicios
+
+| Categoría               | Archivos                                                                 |
+|-------------------------|--------------------------------------------------------------------------|
+| Estructura y texto      | 1, 2, 3, 4, 5                                                            |
+| Listas                  | 12, 13, 14, Propuesta 5                                                  |
+| Tablas                  | 15, 16, 17, Propuesta 6                                                  |
+| Enlaces                 | 6, 7, 8, 9                                                               |
+| Imágenes                | 10, 11                                                                   |
+| Páginas temáticas       | Propuestas: 5.1ejercicio, cultura, deportes, Ejercicio 2, Promociones    |
+| Formularios             | comentarios                                                              |
+
+## Aprendizajes clave
+
+- Estructura de documentos HTML.
+- Listas ordenadas, no ordenadas y anidadas.
+- Tablas simples y con combinación de celdas (`colspan`, `rowspan`).
+- Enlaces a páginas externas, internas y correos electrónicos.
+- Inserción de imágenes y uso como enlaces.
+- Formularios básicos con `textarea`.
+- Organización de un sitio web con múltiples páginas.
+
+---
+
+*Proyecto personal para mostrar evolución en desarrollo web.*

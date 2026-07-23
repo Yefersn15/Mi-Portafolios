@@ -1,0 +1,69 @@
+# 🚌 TransMarimba – Transporte InterMunicipal
+
+Sitio web estático para la empresa de transporte **TransMarimba**, que ofrece servicios de transporte de pasajeros, encomiendas y carga entre municipios. El sitio está compuesto por cuatro páginas interconectadas mediante un menú de navegación común.
+
+---
+
+## 📁 Estructura de archivos
+transmarimba-protopagina.html # Página principal (Inicio)
+Transmarimba-lista.html # Servicios ofrecidos
+Transmarimba-InfoEmpresa.html # Misión, Visión, Políticas
+4.Formulario de contacto.html # Formulario de contacto
+
+---
+
+## 🧭 Navegación
+
+Todas las páginas comparten un **encabezado** con el nombre de la empresa y un **menú de navegación** horizontal con los siguientes enlaces:
+
+- **Inicio** – Página principal
+- **Servicios** – Lista de servicios ofrecidos
+- **Empresa** – Información (misión, visión, políticas)
+- **Contacto** – Formulario para enviar mensajes
+
+El menú está presente en todas las páginas y resalta el enlace de la página actual.
+
+---
+
+## 📄 Descripción de cada página
+
+### `transmarimba-protopagina.html` (Inicio)
+- Presenta la empresa y enlaces rápidos a las secciones principales (Servicios, Empresa, Contacto).
+- Contiene un resumen visual de la página.
+
+### `Transmarimba-lista.html` (Servicios)
+- Muestra una lista de 10 servicios que ofrece la empresa (transporte de pasajeros, encomiendas, carga, mensajería, logística, etc.).
+
+### `Transmarimba-InfoEmpresa.html` (Empresa)
+- Contiene la **Misión**, **Visión** y las **Políticas** de calidad, sostenibilidad, atención al cliente, seguridad y mejora continua.
+
+### `4.Formulario de contacto.html` (Contacto)
+- Formulario con campos: nombre, correo electrónico y mensaje.
+- Botón de envío (simulado, apunta a `enviar.php`).
+
+---
+
+## 🎯 ¿Qué aprendí con este proyecto?
+
+- **Estructura de un sitio web multipágina** – Organización de contenido en diferentes archivos y cómo interconectarlos.
+- **Navegación consistente** – Creación de un menú común para todas las páginas, mejorando la usabilidad.
+- **Uso de enlaces relativos** – Enlaces entre páginas dentro de la misma carpeta.
+- **Maquetación con CSS** – Estilos básicos, colores, fuentes y disposición de elementos.
+- **Formularios** – Creación de campos y área de texto, con atributos para envío.
+
+---
+
+## 🛠️ Tecnologías
+
+- HTML5
+- CSS3 (estilos en línea en `<style>`)
+
+---
+
+## 📝 Nota
+
+Este sitio es un prototipo educativo. El formulario no procesa datos realmente (apunta a `enviar.php`), pero muestra la estructura correcta para ser integrado con un backend en el futuro.
+
+---
+
+*Creado como ejercicio de maquetación y navegación entre páginas.*

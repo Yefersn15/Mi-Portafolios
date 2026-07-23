@@ -612,6 +612,8 @@ a.email:hover {
   font-size: 13px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
 /* ===== Proyectos ===== */
 .project-section {
   padding: 60px 0 80px;
@@ -731,6 +733,32 @@ a.email:hover {
 
   .featured-project .info p {
     max-width: 100%;
+  }
+}
+
+.featured-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.featured-duo .featured-project {
+  margin-bottom: 0;
+  grid-template-columns: 1fr;
+}
+
+.featured-duo .featured-project.featured-compact {
+  padding: 24px;
+}
+
+.featured-duo .featured-project .info p {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .featured-duo {
+    grid-template-columns: 1fr;
   }
 }
 

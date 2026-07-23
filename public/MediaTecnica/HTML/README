@@ -1,0 +1,38 @@
+
+---
+
+## 🖥️ ¿Qué hace cada archivo?
+
+- **`Frame.html`** – Define un `frameset` con dos columnas (40% y 60% de la pantalla). En el marco izquierdo carga `Pagina.HTML` y en el derecho `Practica.HTML`. Además, establece un borde de color verde y ajusta los márgenes.
+
+- **`Pagina.HTML`** – Contiene una guía introductoria sobre HTML básico: encabezados, listas ordenadas y desordenadas, elementos en línea (`<em>`, `<strong>`), elementos vacíos (`<br>`) y texto de ejemplo. Es una página didáctica que muestra conceptos fundamentales.
+
+- **`Practica.HTML`** – Muestra información de una empresa ficticia llamada **Tecno Software**, integrada por 3 ingenieras y 1 ingeniero. Destaca frases con colores usando la etiqueta `<font>` (obsoleta, pero utilizada aquí con fines demostrativos). También incluye un título con color verde y un encabezado de nivel 2.
+
+---
+
+## 🚀 Cómo visualizarlo
+
+1. Abre el archivo `Frame.html` en tu navegador.
+2. Verás dos marcos verticales:
+   - **Izquierdo**: contenido educativo (`Pagina.HTML`).
+   - **Derecho**: presentación de la empresa (`Practica.HTML`).
+3. Puedes hacer clic en enlaces internos (si los hubiera) dentro de cada marco, y se cargarán en el mismo marco.
+
+---
+
+## ⚠️ Nota importante
+
+- Los **frames** (`<frameset>`, `<frame>`) están **obsoletos en HTML5** y no se recomiendan para proyectos actuales. Se utilizan aquí exclusivamente con fines educativos para entender cómo funcionaban las páginas web en versiones anteriores.
+- Hoy en día se usan técnicas alternativas como **CSS Grid**, **Flexbox** o **iframes** para lograr diseños similares de forma más accesible y responsive.
+
+---
+
+## 🔧 Tecnologías
+
+- HTML (versión 4 / transicional)
+- Atributos de frameset (cols, bordercolor, marginwidth, marginheight)
+
+---
+
+*Creado como ejemplo didáctico para comprender la evolución del diseño web.*

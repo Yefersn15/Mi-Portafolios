@@ -1,0 +1,77 @@
+# 🏫 Prototipo de Página Institucional – I.E. Kennedy
+
+Este proyecto es un **prototipo de maquetación** para una página web institucional. Muestra una estructura básica con cabecera, navegación, contenido principal y pie de página, utilizando técnicas clásicas de CSS como `float` para distribuir los elementos en filas y columnas.
+
+---
+
+## 📁 Archivo
+
+- **`Prototipo.html`** – Página principal que contiene el diseño de la institución educativa con imágenes, videos y bloques de colores.
+
+---
+
+## 🧱 Estructura del prototipo
+
+El diseño tiene un ancho fijo de **750 píxeles** y una altura de **750 píxeles**, con los siguientes bloques:
+
+| Elemento        | Tamaño (px)      | Color / Contenido |
+|-----------------|------------------|-------------------|
+| `<header>`      | 750 × 250        | Blanco            |
+| `<nav>`         | 750 × 50         | Cielo claro (skyblue) |
+| `<main>`        | 750 × 400        | Verde             |
+| `<footer>`      | 750 × 50         | Cielo claro (skyblue) |
+
+Dentro del `header` hay tres secciones flotantes:
+
+- **`#Banner`** – 500 × 250 (rojo) – contiene una imagen de estudiantes.
+- **`#Logo`** – 250 × 125 (blanco) – contiene el escudo de la I.E. Kennedy.
+- **`#Login`** – 250 × 125 (blanco) – contiene un enlace a `PaginaLogin.html` (aunque la página destino está vacía).
+
+Dentro del `main` hay tres áreas flotantes:
+
+- **`#Left`** – 150 × 400 (verde oscuro) – contiene un video en bucle.
+- **`<article>`** – 500 × 400 (celeste) – espacio reservado para contenido (actualmente vacío).
+- **`#Right`** – 100 × 400 (negro) – contiene un video publicitario en bucle.
+
+---
+
+## 🎯 ¿Qué aprendí con este ejercicio?
+
+1. **Maquetación con `float`**  
+   - Uso de `float: left` y `float: right` para colocar elementos en una misma fila, una técnica clásica de CSS antes de la llegada de Flexbox y Grid.
+
+2. **Dimensiones fijas**  
+   - Asignar `width` y `height` específicos a cada contenedor, lo que permite un control preciso del diseño, aunque no sea responsive.
+
+3. **Uso de etiquetas semánticas**  
+   - Empleo de `<header>`, `<nav>`, `<main>`, `<article>`, `<aside>`, `<section>` y `<footer>` para organizar el contenido de forma significativa.
+
+4. **Inserción de imágenes**  
+   - Uso de `<img>` con `style` para definir tamaño y alineación, y enlace de una imagen con `<a>` para simular un acceso a login.
+
+5. **Inserción de videos**  
+   - Empleo de `<video>` con atributos `controls` y `loop` para reproducir automáticamente en bucle, incrustando contenido multimedia en la página.
+
+6. **Estilos en línea vs. bloque de estilos**  
+   - Combinación de reglas CSS en el `<style>` para el layout general y atributos `style` en elementos específicos para ajustes puntuales.
+
+7. **Organización visual**  
+   - Creación de un esquema visual claro de colores que diferencia cada bloque, facilitando la identificación de las áreas de la página.
+
+---
+
+## 🛠️ Tecnologías
+
+- **HTML5** – Estructura con etiquetas semánticas.
+- **CSS3** – Estilos con `float`, dimensiones fijas y colores.
+- **Elementos multimedia** – Imágenes (`<img>`) y videos (`<video>`).
+
+---
+
+## 📝 Nota
+
+Este es un **prototipo inicial** y no incluye contenido real en el artículo central ni en el pie de página. Está pensado como un ejercicio de maquetación para entender la disposición de bloques y el uso de `float`. En proyectos modernos se recomienda Flexbox o Grid para lograr diseños más flexibles y adaptables.
+
+---
+
+*Creado como parte del aprendizaje de diseño y maquetación web.*
