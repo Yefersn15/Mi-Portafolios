@@ -118,19 +118,11 @@ const mediaTecnicaPathMap = {
   'Taller Maquetacion/maqueta2.html': 'Taller_Maquetacion/maqueta2.html',
   'Taller Maquetacion/maqueta2v2.html': 'Taller_Maquetacion/maqueta2v2.html',
   'Evaluacion de maquetacion/Evaluacion.html': 'Evaluacion_maquetacion/Evaluacion.html',
-  'Taller evaluativo/INDEX_EVALUATIVO.html': 'Taller_Evaluativo/INDEX_EVALUATIVO.html',
-  'Evaluacion style/INDEX_EVSTYLE.html': 'Evaluacion_Style/INDEX_EVSTYLE.html',
   'Biblioteca Digital Local/index.html': 'BibliotecaDigitaLocal/index.html',
   'Prototipo De Pagina/Prototipo.html': 'Prototipo_Pagina/Prototipo.html',
   'Tienda Deportiva/INDEX1.HTML': 'Tienda_Deportiva/INDEX1.HTML',
   'Listas/Lista desplegable.html': 'Listas/ListaDesplegable.html',
-  'Listas/Lista Despegable De Estudiantes.html': 'Listas/ListaDesplegable_Estudiantes.html',
-  'Base De Datos HTML/Propuestas/5.1ejercicio.html': 'Base_DatosHTML/Propuestas/5.1ejercicio.html',
-  'Base De Datos HTML/Propuestas/cultura.html': 'Base_DatosHTML/Propuestas/cultura.html',
-  'Base De Datos HTML/Propuestas/deportes.html': 'Base_DatosHTML/Propuestas/deportes.html',
-  'Base De Datos HTML/Propuestas/Ejercicio 2.html': 'Base_DatosHTML/Propuestas/Ejercicio 2.html',
-  'Base De Datos HTML/Propuestas/Promociones.html': 'Base_DatosHTML/Propuestas/Promociones.html',
-  'Base De Datos HTML/Propuestas/comentarios.html': 'Base_DatosHTML/Propuestas/comentarios.html'
+  'Listas/Lista Despegable De Estudiantes.html': 'Listas/ListaDesplegable_Estudiantes.html'
 };
 
 const buildMediaTecnicaHref = (ruta) => {
@@ -163,13 +155,7 @@ const proyectosMediaTecnica = [
   { titulo: 'Página con imágenes', tag: 'HTML/CSS', enlace: buildMediaTecnicaHref('HTML/Pagina.HTML') },
   { titulo: 'Tienda deportiva', tag: 'HTML', enlace: buildMediaTecnicaHref('Tienda_Deportiva/INDEX1.HTML') },
   { titulo: 'Frameset', tag: 'Frames', enlace: buildMediaTecnicaHref('Columnas/INDEX_FRAMESET.html') },
-  { titulo: 'IFrame con JS', tag: 'Frames/JS', enlace: buildMediaTecnicaHref('Columnas/INDEX_IFRAME.html') },
-  { titulo: 'Noticias (política/deportes)', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/5.1ejercicio.html') },
-  { titulo: 'Cultura', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/cultura.html') },
-  { titulo: 'Deportes', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/deportes.html') },
-  { titulo: 'Página principal ejercicios', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/Ejercicio 2.html') },
-  { titulo: 'Promociones pizzas', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/Promociones.html') },
-  { titulo: 'Formulario comentarios', tag: 'HTML', enlace: buildMediaTecnicaHref('Base De Datos HTML/Propuestas/comentarios.html') }
+  { titulo: 'IFrame con JS', tag: 'Frames/JS', enlace: buildMediaTecnicaHref('Columnas/INDEX_IFRAME.html') }
 ];
 
 const getProjectHref = (proyecto) => {
